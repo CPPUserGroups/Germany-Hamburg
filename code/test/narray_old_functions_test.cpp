@@ -17,31 +17,43 @@
 // Expression Templates Talk.  If not, see <http://www.gnu.org/licenses/>.
 //
 // ===========================================================================
-#pragma once
 
 #include <cstdlib>
-#include "../narray.hpp"
+#include "narray_test_common.hpp"
+#include "../include/old_operators/functions.hpp"
 
-//----------------------------------------------------------------------------
-template<typename StorageT>
-narray<StorageT> sin(const narray<StorageT> &arg)
+struct old_function_fixture
 {
-    size_t size = arg.size();
-    narray<StorageT> temp(size);
+    array_type a;
 
-    for(size_t index=0;index<size;++index) temp[index] = std::sin(arg[index]);
+    old_function_fixture():
+        a(array_type{1.0,2.0,3.0,4.0})
+    {}
+};
 
-    return temp;
+static const double tolerance = 1.e-8;
+
+BOOST_FIXTURE_TEST_SUITE(old_functions_test,old_function_fixture)
+
+BOOST_AUTO_TEST_CASE(test_sin)
+{
+    array_type r = sin(a);
+    BOOST_CHECK_EQUAL(r.size(),a.size());
+    
+    BOOST_CHECK_CLOSE(r[0],std::sin(1.0),tolerance);
+    BOOST_CHECK_CLOSE(r[1],std::sin(2.0),tolerance);
+    BOOST_CHECK_CLOSE(r[2],std::sin(3.0),tolerance);
+    BOOST_CHECK_CLOSE(r[3],std::sin(4.0),tolerance);
 }
 
-//----------------------------------------------------------------------------
-template<typename StorageT>
-narray<StorageT> exp(const narray<StorageT> &arg)
+BOOST_AUTO_TEST_CASE(test_exp)
 {
-    size_t size = arg.size();
-    narray<StorageT> temp(size);
-
-    for(size_t index=0;index<size;++index) temp[index] = std::exp(arg[index]);
-
-    return temp;
+    array_type r = exp(a);
+    
+    BOOST_CHECK_CLOSE(r[0],std::exp(1),tolerance);
+    BOOST_CHECK_CLOSE(r[1],std::exp(2),tolerance);
+    BOOST_CHECK_CLOSE(r[2],std::exp(3),tolerance);
+    BOOST_CHECK_CLOSE(r[3],std::exp(4),tolerance);
 }
+
+BOOST_AUTO_TEST_SUITE_END()
