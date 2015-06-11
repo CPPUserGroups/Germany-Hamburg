@@ -17,45 +17,10 @@
 // Expression Templates Talk.  If not, see <http://www.gnu.org/licenses/>.
 //
 // ===========================================================================
+#pragma once
+#include <vector>
+#include <boost/test/unit_test.hpp>
+#include "../include/narray.hpp"
 
-#include "narray_test_common.hpp"
-
-BOOST_AUTO_TEST_SUITE(construction_test)
-
-BOOST_AUTO_TEST_CASE(test_default)
-{
-    array_type a;
-    BOOST_CHECK_EQUAL(a.size(),0);
-}
-
-BOOST_AUTO_TEST_CASE(test_size)
-{
-    array_type a(100);
-    BOOST_CHECK_EQUAL(a.size(),100);
-}
-
-BOOST_AUTO_TEST_CASE(test_initializer)
-{
-    array_type a{1,2,3,4};
-    BOOST_CHECK_EQUAL(a.size(),4);
-}
-
-BOOST_AUTO_TEST_CASE(test_copy)
-{
-    array_type a(100);
-    array_type b(a);
-    
-    BOOST_CHECK_EQUAL(a.size(),100);
-    BOOST_CHECK_EQUAL(b.size(),100);
-}
-
-BOOST_AUTO_TEST_CASE(test_move)
-{
-    array_type a(100);
-    array_type b(std::move(a));
-    
-    BOOST_CHECK_EQUAL(a.size(),0);
-    BOOST_CHECK_EQUAL(b.size(),100);
-}
-
-BOOST_AUTO_TEST_SUITE_END()
+typedef std::vector<double> storage_type;
+typedef narray<storage_type> array_type;

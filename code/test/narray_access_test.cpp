@@ -20,42 +20,16 @@
 
 #include "narray_test_common.hpp"
 
-BOOST_AUTO_TEST_SUITE(construction_test)
+BOOST_AUTO_TEST_SUITE(access_test)
 
-BOOST_AUTO_TEST_CASE(test_default)
+BOOST_AUTO_TEST_CASE(test_rw_access)
 {
-    array_type a;
-    BOOST_CHECK_EQUAL(a.size(),0);
+
 }
 
-BOOST_AUTO_TEST_CASE(test_size)
+BOOST_AUTO_TEST_CASE(test_const_access)
 {
-    array_type a(100);
-    BOOST_CHECK_EQUAL(a.size(),100);
-}
 
-BOOST_AUTO_TEST_CASE(test_initializer)
-{
-    array_type a{1,2,3,4};
-    BOOST_CHECK_EQUAL(a.size(),4);
-}
-
-BOOST_AUTO_TEST_CASE(test_copy)
-{
-    array_type a(100);
-    array_type b(a);
-    
-    BOOST_CHECK_EQUAL(a.size(),100);
-    BOOST_CHECK_EQUAL(b.size(),100);
-}
-
-BOOST_AUTO_TEST_CASE(test_move)
-{
-    array_type a(100);
-    array_type b(std::move(a));
-    
-    BOOST_CHECK_EQUAL(a.size(),0);
-    BOOST_CHECK_EQUAL(b.size(),100);
 }
 
 BOOST_AUTO_TEST_SUITE_END()
