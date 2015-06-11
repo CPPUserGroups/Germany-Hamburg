@@ -31,24 +31,23 @@ struct access_fixture
 
 static const double tolerance = 1.e-8;
 
-BOOST_FIXTURE_TEST_SUITE(access_test,access_fixture)
+BOOST_FIXTURE_TEST_SUITE(assignment_test,access_fixture)
 
-BOOST_AUTO_TEST_CASE(test_rw_access)
+BOOST_AUTO_TEST_CASE(test_copy_assignment)
 {
-    BOOST_CHECK_CLOSE(a[0],1,tolerance);
-    BOOST_CHECK_CLOSE(a[1],2,tolerance);
-    BOOST_CHECK_CLOSE(a[2],3,tolerance);
-    BOOST_CHECK_CLOSE(a[3],4,tolerance);
+    array_type b;
+
+    b = a; 
+    BOOST_CHECK_EQUAL(b.size(),4);
+    BOOST_CHECK_EQUAL(a.size(),4);
 }
 
-BOOST_AUTO_TEST_CASE(test_const_access)
+BOOST_AUTO_TEST_CASE(test_move_assignment)
 {
-    const array_type &ca=a;
-
-    BOOST_CHECK_CLOSE(a[0],1,tolerance);
-    BOOST_CHECK_CLOSE(a[1],2,tolerance);
-    BOOST_CHECK_CLOSE(a[2],3,tolerance);
-    BOOST_CHECK_CLOSE(a[3],4,tolerance);
+    array_type b;
+    b = std::move(a);
+    BOOST_CHECK_EQUAL(b.size(),4);
+    BOOST_CHECK_EQUAL(a.size(),0);
 }
 
 BOOST_AUTO_TEST_SUITE_END()

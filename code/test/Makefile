@@ -1,4 +1,6 @@
-NARRAYTESTSRC=narray_test.cpp narray_construction_test.cpp
+NARRAYTESTSRC=narray_test.cpp narray_construction_test.cpp \
+			  narray_access_test.cpp narray_assignment_test.cpp
+
 NARRAYTESTOBJ=$(patsubst %.cpp,%.o,$(NARRAYTESTSRC))
 
 CXXFLAGS=-std=c++11 -O3 -g
@@ -10,8 +12,12 @@ narray_test: $(NARRAYTESTOBJ)
 $(NARRAYTESTOBJ):%.o:%.cpp
 	$(CXX) $(CXXFLAGS) -c $< 
 
-.PHONY: clean
+.PHONY: clean test
 
 clean:
 	rm -rf *.o
 	rm -rf narray_test
+
+
+test: narray_test
+	./narray_test

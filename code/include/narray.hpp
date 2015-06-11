@@ -56,7 +56,7 @@ template<typename StorageT> class narray
         //! copy assignment
         array_type &operator=(const array_type &a)
         {
-            if(this != &a) return *this;
+            if(this == &a) return *this;
 
             _storage = a._storage;
             return *this;
@@ -65,7 +65,7 @@ template<typename StorageT> class narray
         //! move assignment
         array_type &operator=(array_type &&a)
         {
-            if(this != &a) return *this;
+            if(this == &a) return *this;
 
             std::swap(_storage,a._storage);
             return *this;
