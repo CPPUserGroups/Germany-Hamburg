@@ -1,0 +1,11 @@
+CXXFLAGS=-std=c++11 -O3 -g
+
+all:
+	cd src && make $@
+	cd test && make $@
+
+.PHONY: clean
+
+clean:
+	cd src && make $@
+	cd test && make $@

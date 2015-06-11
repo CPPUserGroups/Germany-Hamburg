@@ -19,6 +19,8 @@
 // ===========================================================================
 #pragma once
 
+#include <initializer_list>
+
 template<typename StorageT> class narray
 {
     public:
@@ -40,7 +42,7 @@ template<typename StorageT> class narray
         narray(const array_type &a):_storage(a._storage) {}
 
         //! move constructor
-        narray(narray_type &&a):
+        narray(array_type &&a):
             _storage(std::move(a._storage))
         {}
 
@@ -82,8 +84,8 @@ template<typename StorageT> class narray
         value_type &operator[](size_t index) { return _storage[index]; }
 
         //! get element value
-        value_type operator[](size_t index) { return _storage[index]; }
-}
+        value_type operator[](size_t index) const { return _storage[index]; }
+};
 
 
 
