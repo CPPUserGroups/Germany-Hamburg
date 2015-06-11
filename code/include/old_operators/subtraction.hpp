@@ -54,5 +54,11 @@ template<typename StorageT>
 narray<StorageT> operator-(typename StorageT::value_type lhs,
                            const narray<StorageT> &rhs)
 {
-    return -(rhs-lhs);
+    size_t size = rhs.size();
+    narray<StorageT> temp(size);
+    
+    for(size_t index=0;index<size;index++)
+        temp[index] = lhs-rhs[index];
+
+    return temp;
 }
