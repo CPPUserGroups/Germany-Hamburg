@@ -20,6 +20,7 @@
 #pragma once
 
 #include <initializer_list>
+#include "earray.hpp"
 
 template<typename StorageT> class narray
 {
@@ -46,9 +47,28 @@ template<typename StorageT> class narray
             _storage(std::move(a._storage))
         {}
 
+        //! initializer list constructor
         narray(const std::initializer_list<value_type> &ilist):
             _storage(ilist)
         {}
+
+        //! construct from an earray
+        template<typename ArgT>
+        narray(const earray<ArgT> &expression):
+            _storage(expression.size())
+        {
+            size_t s = _storage.size();
+            for(size_t index=0;index<s;++index)
+                _storage[index] = expression[index];
+        }
+
+        //--------------------------------------------------------------------
+        // conversion operator
+        //--------------------------------------------------------------------
+        operator earray<array_type> () const
+        {
+            return earray<array_type>(*this);
+        }
 
         //--------------------------------------------------------------------
         //              assignment operators
@@ -68,6 +88,19 @@ template<typename StorageT> class narray
             if(this == &a) return *this;
 
             std::swap(_storage,a._storage);
+            return *this;
+        }
+        
+        //! assignment from an earray
+        template<typename ArgT> 
+        array_type &operator=(const earray<ArgT> &expression) 
+        {
+            assert(size() == expression.size());
+
+            size_t s = size();
+            for(size_t index = 0;index<s;++index)
+                (*this)[index] = expression[index];
+
             return *this;
         }
         

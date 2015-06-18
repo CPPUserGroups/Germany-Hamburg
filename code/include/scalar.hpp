@@ -19,38 +19,40 @@
 // ===========================================================================
 #pragma once
 
-#include <initializer_list>
-
-template<typename ExpT> class earray
+template<typename T> class scalar
 {
     public:
-        typedef earray<ExpT>              expression_type;
-        typedef typename ExpT::value_type value_type;
+        typedef T value_type;
+        typedef scalar<value_type> scalar_type;
     private:
-        ExpT _expression;
+        T _value;
     public:
         //--------------------------------------------------------------------
         //              constructors and destructors
         //--------------------------------------------------------------------
+        scalar(T value):_value(value) {}
+
+        scalar(const scalar_type &s):_value(s._value) {}
+
+        scalar(scalar_type &&s):_value(s._value) {}
+
+        //--------------------------------------------------------------------
+        //              conversoin operator
+        //--------------------------------------------------------------------
+        operator T() const
+        {
+            return _value;
+        }
         
-        //! copy constructor
-        earray(const expression_type &a):
-            _expression(a._expression) 
-        {}
-
-        earray(const ExpT &e):
-            _expression(e) 
-        {}
-
         //--------------------------------------------------------------------
         //              assignment operators
         //--------------------------------------------------------------------
         //! copy assignment
-        expression_type &operator=(const expression_type &a)
+        scalar_type &operator=(const scalar_type &a)
         {
             if(this == &a) return *this;
 
-            _expression = a._expression;
+            _value = a._value;
             return *this;
         }
 
@@ -58,16 +60,10 @@ template<typename ExpT> class earray
         //              other member functions
         //--------------------------------------------------------------------
         //! get size
-        size_t size() const
-        {
-            return _expression.size();
-        }
+        size_t size() const { return 1; }
 
         //! get element value
-        value_type operator[](size_t index) const 
-        { 
-            return _expression[index]; 
-        }
+        value_type operator[](size_t index) const { return _value; }
 };
 
 

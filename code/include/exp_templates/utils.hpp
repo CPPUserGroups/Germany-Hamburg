@@ -19,36 +19,34 @@
 // ===========================================================================
 #pragma once
 
-#include <cstdlib>
-#include <cmath>
+//!
+//! \brief remove reference and const-nes
+//! 
+//! Removes reference and constnes from a given template parameter.
+//!
+template<typename T>
+using remove_all = std::remove_reference<
+                   typename std::remove_const<T>::type  
+                   >;
 
-#include "utils.hpp"
 
-template<typename ArgT> class sin_functor
+//!
+//! \brief reference type for arguments
+//! 
+//! 
+template<
+         typename T,
+         bool is_lref=false
+        >
+struct arg_ref_type
 {
-    public:
-        typedef typename remove_all<ArgT>::type    argument_type;
-        typedef typename argument_type::value_type value_type;
-        typedef sin_functor<argument_type>         expression_type;
-    private:
-        const argument_type &_arg;
-    public:
-        sin_functor(const argument_type &arg):
-            _arg(arg) 
-        { }
-
-        sin_functor(const expression_type &e):
-            _arg(e._arg) 
-        {}
-
-
-        size_t size() const 
-        { 
-            return _arg.size(); 
-        } 
-
-        value_type operator[](size_t index) const
-        {
-            return std::sin(_arg[index]);
-        }
+    typedef T reference_type;
 };
+
+template<typename T>
+struct arg_ref_type<T,true>
+{
+    typedef const T& reference_type;
+};
+
+
