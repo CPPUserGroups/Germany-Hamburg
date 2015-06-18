@@ -6,7 +6,7 @@ NARRAYTESTSRC=narray_test.cpp narray_construction_test.cpp \
 
 NARRAYTESTOBJ=$(patsubst %.cpp,%.o,$(NARRAYTESTSRC))
 
-CXXFLAGS=-std=c++11 -O3 -g
+CXXFLAGS=-std=c++11 -O3 -g -Wall -pedantic -Wextra
 all: narray_test
 
 narray_test: $(NARRAYTESTOBJ)

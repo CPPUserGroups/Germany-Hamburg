@@ -40,13 +40,17 @@ template<
         >
 struct arg_ref_type
 {
-    typedef T reference_type;
+    typedef T type;
 };
 
 template<typename T>
 struct arg_ref_type<T,true>
 {
-    typedef const T& reference_type;
+    typedef const T& type;
 };
+
+template<typename T>
+using get_reference = arg_ref_type<typename remove_all<T>::type,
+                                   std::is_lvalue_reference<T>::value>;
 
 

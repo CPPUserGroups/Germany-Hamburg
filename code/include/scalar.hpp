@@ -32,12 +32,14 @@ template<typename T> class scalar
         //--------------------------------------------------------------------
         scalar(T value):_value(value) {}
 
+        //--------------------------------------------------------------------
         scalar(const scalar_type &s):_value(s._value) {}
 
+        //--------------------------------------------------------------------
         scalar(scalar_type &&s):_value(s._value) {}
 
         //--------------------------------------------------------------------
-        //              conversoin operator
+        //              conversion operator
         //--------------------------------------------------------------------
         operator T() const
         {
@@ -60,10 +62,20 @@ template<typename T> class scalar
         //              other member functions
         //--------------------------------------------------------------------
         //! get size
-        size_t size() const { return 1; }
+        size_t size() const 
+        { 
+            return 1; 
+        }
 
+        //--------------------------------------------------------------------
         //! get element value
-        value_type operator[](size_t index) const { return _value; }
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wunused-parameter"
+        value_type operator[](size_t index) const 
+        { 
+            return _value; 
+        }
+#pragma GCC diagnostic pop
 };
 
 

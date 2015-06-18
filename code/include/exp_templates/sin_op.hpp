@@ -24,29 +24,45 @@
 
 #include "utils.hpp"
 
-template<typename ArgT> class sin_functor
+//!
+//! \brief sin operation
+//!
+//! Unary operation computing the sin on every element of its argument.
+//! The argument type can be either an rvalue or lvalue reference.
+//!
+//! \tparam ArgT argument type
+template<typename ArgT> class sin_op
 {
     public:
+        //! argument type 
         typedef typename remove_all<ArgT>::type    argument_type;
+        //! reference type used to store the argument
+        typedef typename get_reference<ArgT>::type reference_type;
+        //! value type of the argument and thus of the operatoin
         typedef typename argument_type::value_type value_type;
-        typedef sin_functor<argument_type>         expression_type;
+        //! the total expression tpye
+        typedef sin_op<ArgT>                       expression_type;
     private:
-        const argument_type &_arg;
+        //! 'reference' to the argument
+        reference_type _arg;
     public:
-        sin_functor(const argument_type &arg):
+        //! constructor
+        sin_op(ArgT arg):
             _arg(arg) 
         { }
 
-        sin_functor(const expression_type &e):
+        //--------------------------------------------------------------------
+        sin_op(const expression_type &e):
             _arg(e._arg) 
         {}
 
-
+        //--------------------------------------------------------------------
         size_t size() const 
         { 
             return _arg.size(); 
         } 
 
+        //--------------------------------------------------------------------
         value_type operator[](size_t index) const
         {
             return std::sin(_arg[index]);
