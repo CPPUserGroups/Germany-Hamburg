@@ -39,9 +39,8 @@ void compute_result(double lambda,const array_type &omega,const array_type &tth,
 
     for(size_t index=0;index<nelements;++index)
     {
-        double domega = omega[index]-0.5*tth[index];
-        qx[index] = 2.*k*std::sin(0.5*tth[index])*std::sin(domega);
-        qz[index] = 2.*k*std::sin(0.5*tth[index])*std::cos(domega);
+        qx[index] = 2.*k*std::sin(0.5*tth[index])*std::sin(omega[index]-0.5*tth[index]);
+        qz[index] = 2.*k*std::sin(0.5*tth[index])*std::cos(omega[index]-0.5*tth[index]);
     }
 }
 

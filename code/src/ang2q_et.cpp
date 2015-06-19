@@ -24,17 +24,19 @@
 #include <vector>
 #include <chrono>
 #include "../include/narray.hpp"
-#include "../include/old_operators/operators.hpp"
-#include "../include/old_operators/functions.hpp"
+#include "../include/exp_templates/functions.hpp"
+#include "../include/exp_templates/binary_operators.hpp"
 
 typedef std::vector<double>   storage_type;
 typedef narray<storage_type>  array_type;
 
 typedef std::chrono::high_resolution_clock clock_type;
 
-void compute_result(double lambda,const array_type &omega,const array_type &tth,
-                    array_type qx,array_type &qz)
+void compute_result(double lambda,const array_type &omega,
+                    const array_type &tth,
+                    array_type &qx,array_type &qz)
 {
+    using namespace et;
     double k = 2.*3.41/lambda;
     qx = 2.*k*sin(0.5*tth)*sin(omega-0.5*tth);
     qz = 2.*k*sin(0.5*tth)*cos(omega-0.5*tth);
@@ -55,10 +57,9 @@ int main(int argc,char **argv)
 
     //generate input data
     auto start_time = clock_type::now();
-    for(size_t run=0;run<nruns;++run)
-    {
-        compute_result(lambda,omega,tth,qx,qz);
-    }
+
+    for(size_t run=0;run<nruns;++run) compute_result(lambda,omega,tth,qx,qz);
+
     auto stop_time = clock_type::now();
     auto delta = stop_time-start_time;
     auto elapsed_time =

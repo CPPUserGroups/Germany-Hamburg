@@ -29,6 +29,8 @@ struct add_fixture
 {
     array_type arhs;
     array_type alhs;
+    const array_type &carhs;
+    const array_type &calhs;
     array_type agen;
     double srhs;
     double slhs;
@@ -36,6 +38,8 @@ struct add_fixture
     add_fixture():
         arhs(array_type{1,2,3,4,5}),
         alhs(array_type{6,7,8,9,10}),
+        carhs(arhs),
+        calhs(alhs),
         agen(array_type{10,9,8,7,6}),
         srhs(12.),
         slhs(13.)
@@ -60,6 +64,12 @@ BOOST_AUTO_TEST_CASE(test_lvalue_array_array_lvalue_array)
     BOOST_CHECK_CLOSE(r[3],alhs[3]+arhs[3],tolerance);
     BOOST_CHECK_CLOSE(r[4],alhs[4]+arhs[4],tolerance);
 
+    auto r2 = calhs+carhs;
+    BOOST_CHECK_CLOSE(r2[0],alhs[0]+arhs[0],tolerance);
+    BOOST_CHECK_CLOSE(r2[1],alhs[1]+arhs[1],tolerance);
+    BOOST_CHECK_CLOSE(r2[2],alhs[2]+arhs[2],tolerance);
+    BOOST_CHECK_CLOSE(r2[3],alhs[3]+arhs[3],tolerance);
+    BOOST_CHECK_CLOSE(r2[4],alhs[4]+arhs[4],tolerance);
 }
 
 //----------------------------------------------------------------------------
@@ -72,6 +82,13 @@ BOOST_AUTO_TEST_CASE(test_rvalue_array_lvalue_array)
     BOOST_CHECK_CLOSE(r[2],agen[2]+arhs[2],tolerance);
     BOOST_CHECK_CLOSE(r[3],agen[3]+arhs[3],tolerance);
     BOOST_CHECK_CLOSE(r[4],agen[4]+arhs[4],tolerance);
+    
+    auto r2 = generate()+carhs;
+    BOOST_CHECK_CLOSE(r2[0],agen[0]+arhs[0],tolerance);
+    BOOST_CHECK_CLOSE(r2[1],agen[1]+arhs[1],tolerance);
+    BOOST_CHECK_CLOSE(r2[2],agen[2]+arhs[2],tolerance);
+    BOOST_CHECK_CLOSE(r2[3],agen[3]+arhs[3],tolerance);
+    BOOST_CHECK_CLOSE(r2[4],agen[4]+arhs[4],tolerance);
 }
 
 //----------------------------------------------------------------------------
@@ -84,6 +101,13 @@ BOOST_AUTO_TEST_CASE(test_lvalue_array_rvalue_array)
     BOOST_CHECK_CLOSE(r[2],alhs[2]+agen[2],tolerance);
     BOOST_CHECK_CLOSE(r[3],alhs[3]+agen[3],tolerance);
     BOOST_CHECK_CLOSE(r[4],alhs[4]+agen[4],tolerance);
+    
+    auto r2 = calhs + generate();
+    BOOST_CHECK_CLOSE(r2[0],alhs[0]+agen[0],tolerance);
+    BOOST_CHECK_CLOSE(r2[1],alhs[1]+agen[1],tolerance);
+    BOOST_CHECK_CLOSE(r2[2],alhs[2]+agen[2],tolerance);
+    BOOST_CHECK_CLOSE(r2[3],alhs[3]+agen[3],tolerance);
+    BOOST_CHECK_CLOSE(r2[4],alhs[4]+agen[4],tolerance);
 }
 
 //----------------------------------------------------------------------------
@@ -108,6 +132,13 @@ BOOST_AUTO_TEST_CASE(test_lvalue_scalar_lvalue_array)
     BOOST_CHECK_CLOSE(r[2],slhs+arhs[2],tolerance);
     BOOST_CHECK_CLOSE(r[3],slhs+arhs[3],tolerance);
     BOOST_CHECK_CLOSE(r[4],slhs+arhs[4],tolerance);
+    
+    auto r2 = slhs + carhs;
+    BOOST_CHECK_CLOSE(r2[0],slhs+arhs[0],tolerance);
+    BOOST_CHECK_CLOSE(r2[1],slhs+arhs[1],tolerance);
+    BOOST_CHECK_CLOSE(r2[2],slhs+arhs[2],tolerance);
+    BOOST_CHECK_CLOSE(r2[3],slhs+arhs[3],tolerance);
+    BOOST_CHECK_CLOSE(r2[4],slhs+arhs[4],tolerance);
 }
 
 //----------------------------------------------------------------------------
@@ -119,6 +150,13 @@ BOOST_AUTO_TEST_CASE(test_lvalue_array_lvalue_scalar)
     BOOST_CHECK_CLOSE(r[2],alhs[2]+srhs,tolerance);
     BOOST_CHECK_CLOSE(r[3],alhs[3]+srhs,tolerance);
     BOOST_CHECK_CLOSE(r[4],alhs[4]+srhs,tolerance);
+    
+    auto r2 = calhs + srhs;
+    BOOST_CHECK_CLOSE(r2[0],alhs[0]+srhs,tolerance);
+    BOOST_CHECK_CLOSE(r2[1],alhs[1]+srhs,tolerance);
+    BOOST_CHECK_CLOSE(r2[2],alhs[2]+srhs,tolerance);
+    BOOST_CHECK_CLOSE(r2[3],alhs[3]+srhs,tolerance);
+    BOOST_CHECK_CLOSE(r2[4],alhs[4]+srhs,tolerance);
 }
 
 //----------------------------------------------------------------------------
@@ -130,6 +168,13 @@ BOOST_AUTO_TEST_CASE(test_rvalue_scalar_lvalue_array)
     BOOST_CHECK_CLOSE(r[2],1.2+arhs[2],tolerance);
     BOOST_CHECK_CLOSE(r[3],1.2+arhs[3],tolerance);
     BOOST_CHECK_CLOSE(r[4],1.2+arhs[4],tolerance);
+    
+    auto r2 = 1.2 + carhs;
+    BOOST_CHECK_CLOSE(r2[0],1.2+arhs[0],tolerance);
+    BOOST_CHECK_CLOSE(r2[1],1.2+arhs[1],tolerance);
+    BOOST_CHECK_CLOSE(r2[2],1.2+arhs[2],tolerance);
+    BOOST_CHECK_CLOSE(r2[3],1.2+arhs[3],tolerance);
+    BOOST_CHECK_CLOSE(r2[4],1.2+arhs[4],tolerance);
 }
 
 //----------------------------------------------------------------------------
@@ -141,6 +186,13 @@ BOOST_AUTO_TEST_CASE(test_lvalue_array_rvalue_scalar)
     BOOST_CHECK_CLOSE(r[2],alhs[2]+1.4,tolerance);
     BOOST_CHECK_CLOSE(r[3],alhs[3]+1.4,tolerance);
     BOOST_CHECK_CLOSE(r[4],alhs[4]+1.4,tolerance);
+    
+    auto r2 = calhs + 1.4;
+    BOOST_CHECK_CLOSE(r2[0],alhs[0]+1.4,tolerance);
+    BOOST_CHECK_CLOSE(r2[1],alhs[1]+1.4,tolerance);
+    BOOST_CHECK_CLOSE(r2[2],alhs[2]+1.4,tolerance);
+    BOOST_CHECK_CLOSE(r2[3],alhs[3]+1.4,tolerance);
+    BOOST_CHECK_CLOSE(r2[4],alhs[4]+1.4,tolerance);
 }
 
 
