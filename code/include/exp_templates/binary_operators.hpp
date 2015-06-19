@@ -30,7 +30,7 @@ namespace et
             >
     earray<add_op<typename get_scalar<ArgTLHS>::type,
                   typename get_scalar<ArgTRHS>::type>>
-    operator+(ArgTLHS lhs,ArgTRHS rhs)
+    operator+(ArgTLHS &&lhs,ArgTRHS &&rhs)
     {
         typedef typename get_scalar<ArgTLHS>::type lhs_type;
         typedef typename get_scalar<ArgTRHS>::type rhs_type;

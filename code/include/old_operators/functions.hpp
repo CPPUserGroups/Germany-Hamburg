@@ -20,6 +20,7 @@
 #pragma once
 
 #include <cstdlib>
+#include <cmath>
 #include "../narray.hpp"
 
 //----------------------------------------------------------------------------
