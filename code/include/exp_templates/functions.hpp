@@ -22,23 +22,35 @@
 #include <iostream>
 #include <type_traits>
 #include "sin_op.hpp"
+#include "cos_op.hpp"
 #include "../earray.hpp"
 #include "utils.hpp"
 #include <boost/current_function.hpp>
 
 namespace et{
 
-template<typename ArgT>
-earray<sin_op<typename get_scalar<ArgT>::type>> sin(ArgT &&arg)
-{
-    //std::cerr<<BOOST_CURRENT_FUNCTION<<std::endl;
-    typedef typename get_scalar<ArgT>::type scalar_type;
-    typedef sin_op<scalar_type> operation_type;
-    typedef earray<operation_type> expression_type;
+    template<typename ArgT>
+    earray<sin_op<typename get_scalar<ArgT>::type>> sin(ArgT &&arg)
+    {
+        //std::cerr<<BOOST_CURRENT_FUNCTION<<std::endl;
+        typedef typename get_scalar<ArgT>::type scalar_type;
+        typedef sin_op<scalar_type> operation_type;
+        typedef earray<operation_type> expression_type;
 
-    return expression_type(operation_type(scalar_type(arg)));
-}
+        return expression_type(operation_type(scalar_type(arg)));
+    }
 
+    //------------------------------------------------------------------------
+    template<typename ArgT>
+    earray<cos_op<typename get_scalar<ArgT>::type>> cos(ArgT &&arg)
+    {
+        //std::cerr<<BOOST_CURRENT_FUNCTION<<std::endl;
+        typedef typename get_scalar<ArgT>::type scalar_type;
+        typedef cos_op<scalar_type> operation_type;
+        typedef earray<operation_type> expression_type;
+
+        return expression_type(operation_type(scalar_type(arg)));
+    }
 //end of namespace
 }
 
