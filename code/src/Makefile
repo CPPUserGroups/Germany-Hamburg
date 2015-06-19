@@ -2,7 +2,8 @@ F90=gfortran
 F90FLAGS=-O3 
 BMFLAGS=-std=c++11 -O3 -g -Wall -pedantic -Wextra
 
-all: fortran_test check_types bm_cstyle bm_classic bm_et
+all: fortran_test check_types bm_cstyle bm_classic bm_et \
+	ang2q_cstyle
 
 fortran_test:fortran_test.f90
 	$(F90) $(F90FLAGS) -o$@ $<
@@ -19,6 +20,9 @@ bm_classic: bm_classic.cpp
 bm_et:bm_et.cpp
 	c++ $(BMFLAGS) -o$@ $<
 
+ang2q_cstyle: ang2q_cstyle.cpp
+	c++ $(BMFLAGS) -o$@ $<
+
 
 
 .PHONY: clean
@@ -30,3 +34,4 @@ clean:
 	rm -rf bm_cstyle
 	rm -rf bm_classic
 	rm -rf bm_et
+	rm -rf ang2q_cstyle
