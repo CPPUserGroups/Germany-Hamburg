@@ -27,12 +27,18 @@
 
 namespace et{
 
+template<typename ArgT>
+using is_scalar = std::is_same<typename remove_all<ArgT>::type,double>;
+
+template<typename ArgT>
+using get_scalar = std::conditional<is_scalar<ArgT>::value,
+                                    scalar<typename remove_all<ArgT>::type>,
+                                    ArgT>;
+                            
+
 template<
          typename ArgT,
-         typename = typename std::enable_if<
-             std::is_same<
-             typename remove_all<ArgT>::type,double>::value
-             >::type
+         typename = typename std::enable_if<is_scalar<ArgT>::value>::type
         >
 earray<sin_op<scalar<typename remove_all<ArgT>::type>>> sin(ArgT arg)
 {
@@ -46,10 +52,7 @@ earray<sin_op<scalar<typename remove_all<ArgT>::type>>> sin(ArgT arg)
 
 template<
          typename ArgT,
-         typename = typename
-             std::enable_if<!
-             std::is_same<typename remove_all<ArgT>::type,double>::value
-             >::type
+         typename = typename std::enable_if<!is_scalar<ArgT>::value>::type
         >
 earray<sin_op<typename remove_all<ArgT>::type>> sin(ArgT arg)
 {
