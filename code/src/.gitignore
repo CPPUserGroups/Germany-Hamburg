@@ -2,3 +2,4 @@ fortran_test
 *.swp
 bm_classic
 bm_cstyle
+bm_et

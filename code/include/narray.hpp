@@ -21,6 +21,7 @@
 
 #include <initializer_list>
 #include <cstddef>
+#include <cassert>
 #include "earray.hpp"
 
 template<typename StorageT> class narray
