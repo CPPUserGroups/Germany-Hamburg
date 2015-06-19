@@ -20,6 +20,7 @@
 #pragma once
 
 #include <initializer_list>
+#include <cstddef>
 #include "earray.hpp"
 
 template<typename StorageT> class narray

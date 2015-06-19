@@ -20,6 +20,7 @@
 #pragma once
 
 #include <initializer_list>
+#include <cstddef>
 
 template<typename ExpT> class earray
 {

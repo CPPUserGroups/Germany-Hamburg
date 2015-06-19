@@ -17,27 +17,24 @@
 // Expression Templates Talk.  If not, see <http://www.gnu.org/licenses/>.
 //
 // ===========================================================================
-#pragma once
 
-#include <type_traits>
-#include "sin_op.hpp"
-#include "../earray.hpp"
-#include "utils.hpp"
+#include <vector>
+#include "../include/narray.hpp"
+#include "../include/exp_templates/functions.hpp"
 
-namespace et{
+typedef std::vector<double>   storage_type;
+typedef narray<storage_type> array_type;
 
-template<typename ArgT>
-earray<sin_op<typename get_scalar<ArgT>::type>> sin(ArgT &&arg)
+int main(int argc,char **argv)
 {
-    typedef typename get_scalar<ArgT>::type scalar_type;
-    typedef sin_op<scalar_type> operation_type;
-    typedef earray<operation_type> expression_type;
+    array_type a{1,2,3,4,5};
 
-    return expression_type(operation_type(scalar_type(arg)));
+    auto r1 = et::sin(a);
+
+    auto r2 = et::sin(array_type{1,2,3,4,5});
+
+    const array_type &r = a;
+    auto r3 = et::sin(r);
+
+    return 0;
 }
-
-//end of namespace
-}
-
-
-
