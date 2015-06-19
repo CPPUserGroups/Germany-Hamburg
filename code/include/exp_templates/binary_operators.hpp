@@ -21,6 +21,7 @@
 
 #include "add_op.hpp"
 #include "sub_op.hpp"
+#include "mult_op.hpp"
 #include "utils.hpp"
 
 namespace et
@@ -56,6 +57,24 @@ namespace et
         typedef typename get_scalar<ArgTRHS>::type rhs_type;
 
         typedef sub_op<lhs_type,rhs_type> operation_type;
+        typedef earray<operation_type> expression_type;
+
+        return expression_type(operation_type(lhs_type(lhs),rhs_type(rhs)));
+    }
+    
+    //------------------------------------------------------------------------
+    template<
+             typename ArgTLHS,
+             typename ArgTRHS
+            >
+    earray<mult_op<typename get_scalar<ArgTLHS>::type,
+                  typename get_scalar<ArgTRHS>::type>>
+    operator*(ArgTLHS &&lhs,ArgTRHS &&rhs)
+    {
+        typedef typename get_scalar<ArgTLHS>::type lhs_type;
+        typedef typename get_scalar<ArgTRHS>::type rhs_type;
+
+        typedef mult_op<lhs_type,rhs_type> operation_type;
         typedef earray<operation_type> expression_type;
 
         return expression_type(operation_type(lhs_type(lhs),rhs_type(rhs)));
