@@ -37,6 +37,17 @@ narray<StorageT> sin(const narray<StorageT> &arg)
 
 //----------------------------------------------------------------------------
 template<typename StorageT>
+narray<StorageT> cos(const narray<StorageT> &arg)
+{
+    size_t size = arg.size();
+    narray<StorageT> temp(size);
+
+    for(size_t index=0;index<size;++index) temp[index] = std::cos(arg[index]);
+
+    return temp;
+}
+//----------------------------------------------------------------------------
+template<typename StorageT>
 narray<StorageT> exp(const narray<StorageT> &arg)
 {
     size_t size = arg.size();

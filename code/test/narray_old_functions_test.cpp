@@ -46,6 +46,19 @@ BOOST_AUTO_TEST_CASE(test_sin)
     BOOST_CHECK_CLOSE(r[3],std::sin(4.0),tolerance);
 }
 
+//----------------------------------------------------------------------------
+BOOST_AUTO_TEST_CASE(test_cos)
+{
+    array_type r = cos(a);
+    BOOST_CHECK_EQUAL(r.size(),a.size());
+    
+    BOOST_CHECK_CLOSE(r[0],std::cos(1.0),tolerance);
+    BOOST_CHECK_CLOSE(r[1],std::cos(2.0),tolerance);
+    BOOST_CHECK_CLOSE(r[2],std::cos(3.0),tolerance);
+    BOOST_CHECK_CLOSE(r[3],std::cos(4.0),tolerance);
+}
+
+//----------------------------------------------------------------------------
 BOOST_AUTO_TEST_CASE(test_exp)
 {
     array_type r = exp(a);
