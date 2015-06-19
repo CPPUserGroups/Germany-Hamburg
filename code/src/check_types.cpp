@@ -36,5 +36,10 @@ int main(int argc,char **argv)
     const array_type &r = a;
     auto r3 = et::sin(r);
 
+    auto r4 = et::sin(1.2);
+
+    double s=10.2;
+    auto r5 = et::sin(s);
+
     return 0;
 }

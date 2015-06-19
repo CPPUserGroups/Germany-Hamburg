@@ -3,7 +3,8 @@ NARRAYTESTSRC=narray_test.cpp narray_construction_test.cpp \
 			  narray_old_functions_test.cpp \
 			  narray_old_operators_test.cpp \
 			  earray_sin_test.cpp \
-			  earray_add_test.cpp
+			  earray_add_test.cpp \
+			  earray_sub_test.cpp
 
 NARRAYTESTOBJ=$(patsubst %.cpp,%.o,$(NARRAYTESTSRC))
 

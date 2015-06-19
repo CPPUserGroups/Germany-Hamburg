@@ -19,16 +19,19 @@
 // ===========================================================================
 #pragma once
 
+#include <iostream>
 #include <type_traits>
 #include "sin_op.hpp"
 #include "../earray.hpp"
 #include "utils.hpp"
+#include <boost/current_function.hpp>
 
 namespace et{
 
 template<typename ArgT>
 earray<sin_op<typename get_scalar<ArgT>::type>> sin(ArgT &&arg)
 {
+    //std::cerr<<BOOST_CURRENT_FUNCTION<<std::endl;
     typedef typename get_scalar<ArgT>::type scalar_type;
     typedef sin_op<scalar_type> operation_type;
     typedef earray<operation_type> expression_type;
