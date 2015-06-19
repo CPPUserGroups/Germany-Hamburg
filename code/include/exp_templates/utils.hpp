@@ -19,6 +19,8 @@
 // ===========================================================================
 #pragma once
 
+#include "../scalar.hpp"
+
 //!
 //! \brief remove reference and const-nes
 //! 
@@ -53,4 +55,10 @@ template<typename T>
 using get_reference = arg_ref_type<typename remove_all<T>::type,
                                    std::is_lvalue_reference<T>::value>;
 
+template<typename ArgT>
+using is_scalar = std::is_same<typename remove_all<ArgT>::type,double>;
 
+template<typename ArgT>
+using get_scalar = std::conditional<is_scalar<ArgT>::value,
+                                    scalar<typename remove_all<ArgT>::type>,
+                                    ArgT>;

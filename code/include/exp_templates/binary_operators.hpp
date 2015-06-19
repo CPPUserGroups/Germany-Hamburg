@@ -19,25 +19,27 @@
 // ===========================================================================
 #pragma once
 
-#include <type_traits>
-#include "sin_op.hpp"
-#include "../earray.hpp"
+#include "add_op.hpp"
 #include "utils.hpp"
 
-namespace et{
-
-template<typename ArgT>
-earray<sin_op<typename get_scalar<ArgT>::type>> sin(ArgT arg)
+namespace et
 {
-    typedef typename get_scalar<ArgT>::type scalar_type;
-    typedef sin_op<scalar_type> operation_type;
-    typedef earray<operation_type> expression_type;
+    template<
+             typename ArgTLHS,
+             typename ArgTRHS
+            >
+    earray<add_op<typename get_scalar<ArgTLHS>::type,
+                  typename get_scalar<ArgTRHS>::type>>
+    operator+(ArgTLHS lhs,ArgTRHS rhs)
+    {
+        typedef typename get_scalar<ArgTLHS>::type lhs_type;
+        typedef typename get_scalar<ArgTRHS>::type rhs_type;
 
-    return expression_type(operation_type(scalar_type(arg)));
+        typedef add_op<lhs_type,rhs_type> operation_type;
+        typedef earray<operation_type> expression_type;
+
+        return expression_type(operation_type(lhs_type(lhs),rhs_type(rhs)));
+    }
 }
-
-//end of namespace
-}
-
 
 
