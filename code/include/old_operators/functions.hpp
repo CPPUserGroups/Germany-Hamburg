@@ -24,6 +24,22 @@
 #include "../narray.hpp"
 
 //----------------------------------------------------------------------------
+//! 
+//! \ingroup old_style_operators 
+//! \brief sin function
+//! 
+//! Overload of the sin() function for instances of narray
+/*!
+\f[
+  \forall i\in\{0\dots N-1\}:  \mathbf{r}_i = \sin\left(\mathbf{a}_i\right)
+\f]
+*/ 
+//! 
+//! \tparam StorageT storage type for the narray
+//! \param lhs reference to the LHS array
+//! \param rhs reference to the RHS array
+//! \return narray instance with the result
+//!
 template<typename StorageT>
 narray<StorageT> sin(const narray<StorageT> &arg)
 {
@@ -36,6 +52,22 @@ narray<StorageT> sin(const narray<StorageT> &arg)
 }
 
 //----------------------------------------------------------------------------
+//! 
+//! \ingroup old_style_operators 
+//! \brief cos function
+//! 
+//! Overload of the cos() function for instances of narray
+/*!
+\f[
+  \forall i\in\{0\dots N-1\}:  \mathbf{r}_i = \cos\left(\mathbf{a}_i\right)
+\f]
+*/ 
+//! 
+//! \tparam StorageT storage type for the narray
+//! \param lhs reference to the LHS array
+//! \param rhs reference to the RHS array
+//! \return narray instance with the result
+//!
 template<typename StorageT>
 narray<StorageT> cos(const narray<StorageT> &arg)
 {
@@ -47,6 +79,22 @@ narray<StorageT> cos(const narray<StorageT> &arg)
     return temp;
 }
 //----------------------------------------------------------------------------
+//! 
+//! \ingroup old_style_operators 
+//! \brief exp function
+//! 
+//! Overload of the exp() function for instances of narray
+/*!
+\f[
+  \forall i\in\{0\dots N-1\}:  \mathbf{r}_i = \exp\left(\mathbf{a}_i\right)
+\f]
+*/ 
+//! 
+//! \tparam StorageT storage type for the narray
+//! \param lhs reference to the LHS array
+//! \param rhs reference to the RHS array
+//! \return narray instance with the result
+//!
 template<typename StorageT>
 narray<StorageT> exp(const narray<StorageT> &arg)
 {

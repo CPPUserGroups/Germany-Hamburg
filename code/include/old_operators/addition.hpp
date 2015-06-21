@@ -22,6 +22,24 @@
 #include "../narray.hpp"
 
 //----------------------------------------------------------------------------
+//! 
+//! \ingroup old_style_operators 
+//! \brief addition operator 
+//! 
+//! This version of the addition operator is used for situations where the LHS
+//! and the RHS of the operator are instances of narray.  The 
+//! operator computes
+/*!
+\f[
+  \forall i\in\{0\dots N-1\}:  \mathbf{r}_i = \mathbf{a}_i+\mathbf{b}_i
+\f]
+*/ 
+//! 
+//! \tparam StorageT storage type for the narray
+//! \param lhs reference to the LHS array
+//! \param rhs reference to the RHS array
+//! \return narray instance with the result
+//!
 template<typename StorageT>
 narray<StorageT> operator+(const narray<StorageT> &lhs,
                            const narray<StorageT> &rhs)
@@ -36,6 +54,23 @@ narray<StorageT> operator+(const narray<StorageT> &lhs,
 }
 
 //----------------------------------------------------------------------------
+//! 
+//! \ingroup old_style_operators
+//! \brief addition operator
+//! 
+//! Overload of the addition operator where the LHS of the + operation is an 
+//! instance of narray and the RHS is a scalar. The operator computes
+/*!
+\f[
+  \forall i\in\{0\dots N-1\}:  \mathbf{r}_i = s+\mathbf{b}_i
+\f]
+*/
+//!
+//! \tparam StorageT storage type of the narray instance
+//! \param lhs reference to the array on the LHS
+//! \param rhs scalar value on the RHS of the operator
+//! \return narray instance with the result
+//!
 template<typename StorageT>
 narray<StorageT> operator+(const narray<StorageT> &lhs,
                            typename StorageT::value_type rhs)
@@ -50,6 +85,23 @@ narray<StorageT> operator+(const narray<StorageT> &lhs,
 }
 
 //----------------------------------------------------------------------------
+//!
+//! \ingroup old_style_operators
+//! \brief addition operator
+//! 
+//! Overload of the addition operator where the LHS of the + operation is 
+//! a scalar value and the RHS an instance of narray. The operator computes
+/*!
+\f[
+  \forall i\in\{0\dots N-1\}:  \mathbf{r}_i = \mathbf{a}_i+s
+\f]
+*/ 
+//! 
+//! \tparam StorageT storage type of the narray instance
+//! \param lhs scalar value on the LHS of the operator
+//! \param rhs reference to the narray instance on the RHS of the operator
+//! \return narray instance with the result of the operation
+//!
 template<typename StorageT>
 narray<StorageT> operator+(typename StorageT::value_type lhs,
                            const narray<StorageT> &rhs)

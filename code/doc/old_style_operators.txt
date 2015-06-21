@@ -1,0 +1,8 @@
+/*!
+\defgroup old_style_operators Old style C++ operators
+
+For the documentation we assume that \f$\mathbf{a}\f$, \f$\mathbf{b}\f$, and
+\f$\mathbf{r}\f$ denote the LHS, RHS, and the result array of the operation. 
+\f$s\f$ denotes a scalar value. \f$i\f$ denotes the array index ranging from
+\f$0\dots N-1\f$ for an array of \f$N\f$ elements.
+*/!
