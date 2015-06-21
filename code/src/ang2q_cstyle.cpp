@@ -71,5 +71,7 @@ int main(int argc,char **argv)
     std::cout<<"Array size:     "<<nelements<<std::endl;
     std::cout<<"Elapsed time:   "<<elapsed_time.count()/nruns<<std::endl;
 
+    std::cout<<qx[0]<<"\t"<<qz[0]<<std::endl;
+    std::cout<<qx[100]<<"\t"<<qz[100]<<std::endl;
     return 0;
 }
