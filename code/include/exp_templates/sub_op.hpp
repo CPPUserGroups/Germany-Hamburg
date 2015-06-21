@@ -25,6 +25,7 @@
 #include "utils.hpp"
 
 //!
+//! \ingroup expression_templates
 //! \brief binary substraction
 //!
 //! \tparam ArgTLHS argument type left handside
@@ -56,18 +57,21 @@ class sub_op
         { }
 
         //--------------------------------------------------------------------
+        //! copy constructor
         sub_op(const expression_type &e):
             _lhs(e._lhs),
             _rhs(e._rhs)
         {}
 
         //--------------------------------------------------------------------
+        //! get size
         size_t size() const 
         { 
             return std::max(_lhs.size(),_rhs.size());
         } 
 
         //--------------------------------------------------------------------
+        //! compute value
         value_type operator[](size_t index) const
         {
             return _lhs[index]-_rhs[index];

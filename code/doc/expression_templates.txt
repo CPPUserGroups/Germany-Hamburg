@@ -2,3 +2,9 @@
 \defgroup expression_templates C++ expression templates
 
 */!
+
+/*!
+\ingroup expression_templates
+\defgroup exp_temp_utilities Utility classes for expression templates
+
+*/!

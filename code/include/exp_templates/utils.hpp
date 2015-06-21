@@ -22,6 +22,7 @@
 #include "../scalar.hpp"
 
 //!
+//! \ingroup exp_temp_utilities
 //! \brief remove reference and const-nes
 //! 
 //! Removes reference and constnes from a given template parameter.
@@ -32,9 +33,16 @@ using remove_all = std::remove_reference<
                    >;
 
 
+//----------------------------------------------------------------------------
 //!
+//! \ingroup exp_temp_utilities
 //! \brief reference type for arguments
 //! 
+//! This specialization is used when T is not an lvalue reference. In this case
+//! a copy of the object will be stored.
+//! 
+//! \tparam T argument type
+//! \tparam is_lref falg indicating that T is an lvalue reference
 //! 
 template<
          typename T,
@@ -45,19 +53,56 @@ struct arg_ref_type
     typedef T type;
 };
 
+//----------------------------------------------------------------------------
+//!
+//! \ingroup exp_temp_utilities
+//! \brief reference type for arguments
+//! 
+//! This specialization is used when T is an lvalue reference. In this case
+//! a reference to the argument is stored.
+//! 
+//! \tparam T argument type
+//! \tparam is_lref falg indicating that T is an lvalue reference
+//! 
 template<typename T>
 struct arg_ref_type<T,true>
 {
     typedef const T& type;
 };
 
+//----------------------------------------------------------------------------
+//!
+//! \ingroup exp_temp_utilities
+//! \brief get the reference type for an argument
+//! 
 template<typename T>
 using get_reference = arg_ref_type<typename remove_all<T>::type,
                                    std::is_lvalue_reference<T>::value>;
 
+//----------------------------------------------------------------------------
+//! 
+//! \ingroup exp_temp_utilities
+//! \brief determine scalar type
+//! 
+//! This template indicates whether or not an argument type referes to a
+//! scalar type. Currently only double values are considered scalars. 
+//! This might be changed in future to include other types (using MPL).
+//! 
+//! \tparam ArgT argument type
+//! 
 template<typename ArgT>
 using is_scalar = std::is_same<typename remove_all<ArgT>::type,double>;
 
+//----------------------------------------------------------------------------
+//!
+//! \ingroup exp_temp_utilites
+//! \brief return scalar type for an argument
+//! 
+//! If ArgT refers to a scalar type an instance of the scalar template is 
+//! returned. Otherwise the original type is returned.
+//! 
+//! \tparam ArgT argument type
+//! 
 template<typename ArgT>
 using get_scalar = std::conditional<is_scalar<ArgT>::value,
                                     scalar<typename remove_all<ArgT>::type>,

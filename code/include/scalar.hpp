@@ -19,28 +19,42 @@
 // ===========================================================================
 #pragma once
 
+//!
+//! \ingroup expression_templates
+//! \brief sclar container
+//!
+//! A special container for scalar values. Scalar values would be
+//! \li POD types
+//! \li complex<T> types
+//!
+//! \tparam T scalar type
+//! 
 template<typename T> class scalar
 {
     public:
         typedef T value_type;
         typedef scalar<value_type> scalar_type;
     private:
+        //! local storage
         T _value;
     public:
         //--------------------------------------------------------------------
         //              constructors and destructors
         //--------------------------------------------------------------------
+        //! 
+        //! constructor
+        //! 
+        //! Construct an instance of scalar<T> from a simple scalar vlaue.
         scalar(T value):_value(value) {}
 
         //--------------------------------------------------------------------
+        //! copy constructor
         scalar(const scalar_type &s):_value(s._value) {}
-
-        //--------------------------------------------------------------------
-        scalar(scalar_type &&s):_value(s._value) {}
 
         //--------------------------------------------------------------------
         //              conversion operator
         //--------------------------------------------------------------------
+        //! conversion operator
         operator T() const
         {
             return _value;
@@ -77,11 +91,3 @@ template<typename T> class scalar
         }
 #pragma GCC diagnostic pop
 };
-
-
-
-
-
-
-
-

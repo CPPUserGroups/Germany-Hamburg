@@ -25,10 +25,10 @@
 #include "utils.hpp"
 
 //!
-//! \brief cos operation
+//! \ingroup expression_templates
+//! \brief cosine operation
 //!
-//! Unary operation computing the sin on every element of its argument.
-//! The argument type can be either an rvalue or lvalue reference.
+//! Unary operation computing the cosine on every element of its argument.
 //!
 //! \tparam ArgT argument type
 template<typename ArgT> class cos_op
@@ -52,17 +52,20 @@ template<typename ArgT> class cos_op
         { }
 
         //--------------------------------------------------------------------
+        //! constructor
         cos_op(const expression_type &e):
             _arg(e._arg) 
         {}
 
         //--------------------------------------------------------------------
+        //! return size
         size_t size() const 
         { 
             return _arg.size(); 
         } 
 
         //--------------------------------------------------------------------
+        //! return computation result
         value_type operator[](size_t index) const
         {
             return std::cos(_arg[index]);

@@ -22,6 +22,13 @@
 #include <initializer_list>
 #include <cstddef>
 
+//!
+//! \ingroup expression_templates
+//! \brief expression array template
+//! 
+//! This class provides an array wrapper for an expressions.
+//!
+//! \tparam ExpT expression type
 template<typename ExpT> class earray
 {
     public:
@@ -39,6 +46,14 @@ template<typename ExpT> class earray
             _expression(a._expression) 
         {}
 
+        //--------------------------------------------------------------------
+        //! 
+        //! \brief constructor
+        //!
+        //! Construct array from an expression.
+        //!
+        //! \param reference to the expression
+        //!
         earray(const ExpT &e):
             _expression(e) 
         {}
@@ -64,17 +79,10 @@ template<typename ExpT> class earray
             return _expression.size();
         }
 
+        //--------------------------------------------------------------------
         //! get element value
         value_type operator[](size_t index) const 
         { 
             return _expression[index]; 
         }
 };
-
-
-
-
-
-
-
-

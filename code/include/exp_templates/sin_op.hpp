@@ -25,6 +25,7 @@
 #include "utils.hpp"
 
 //!
+//! \ingroup expression_template
 //! \brief sin operation
 //!
 //! Unary operation computing the sin on every element of its argument.

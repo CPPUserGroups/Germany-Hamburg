@@ -29,6 +29,17 @@
 
 namespace et{
 
+    //!
+    //! \ingroup expression_templates
+    //! \brief compute sine function
+    //! 
+    //! Function template returns an expression array for computing the 
+    //! sine function on each of its arguments.
+    //!
+    //! \tparam ArgT argument type
+    //! \param arg xvalue reference to the argument
+    //! \return expression array to compute the sine function
+    //! 
     template<typename ArgT>
     earray<sin_op<typename get_scalar<ArgT>::type>> sin(ArgT &&arg)
     {
@@ -41,6 +52,17 @@ namespace et{
     }
 
     //------------------------------------------------------------------------
+    //! 
+    //! \ingroup expression_templates
+    //! \brief compute cosine function
+    //! 
+    //! Function template to return an expression array computing the 
+    //! cosine function on each of its arguments.
+    //! 
+    //! \tparam ArgT argument type
+    //! \param arg xvalue reference to the argument
+    //! \return expression array to compute the cosine function
+    //! 
     template<typename ArgT>
     earray<cos_op<typename get_scalar<ArgT>::type>> cos(ArgT &&arg)
     {

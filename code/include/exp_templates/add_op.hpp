@@ -25,6 +25,7 @@
 #include "utils.hpp"
 
 //!
+//! \ingroup expression_templates
 //! \brief binary add operation
 //!
 //! Binary addition operation operation computing the sin on every element of
@@ -60,18 +61,21 @@ class add_op
         { }
 
         //--------------------------------------------------------------------
+        //! copy constructor
         add_op(const expression_type &e):
             _lhs(e._lhs),
             _rhs(e._rhs)
         {}
 
         //--------------------------------------------------------------------
+        //! get size
         size_t size() const 
         { 
             return std::max(_lhs.size(),_rhs.size());
         } 
 
         //--------------------------------------------------------------------
+        //! return computed value
         value_type operator[](size_t index) const
         {
             return _lhs[index]+_rhs[index];
