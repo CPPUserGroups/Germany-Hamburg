@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.0//EN" "http://www.w3.org/TR/2001/PR-SVG-20010719/DTD/svg10.dtd">
+<svg width="65cm" height="31cm" viewBox="-304 110 1287 619" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <g>
+    <rect style="fill: #ffffff" x="-302.2" y="173" width="341.1" height="28"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 0.2; stroke: #000000" x="-302.2" y="173" width="341.1" height="28"/>
+    <text font-size="16" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:700" x="-131.65" y="192">narray</text>
+    <rect style="fill: #ffffff" x="-302.2" y="201" width="341.1" height="20"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 0.2; stroke: #000000" x="-302.2" y="201" width="341.1" height="20"/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="-300.1" y="215">-_storage: StorageT</text>
+    <rect style="fill: #ffffff" x="-302.2" y="221" width="341.1" height="84"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 0.2; stroke: #000000" x="-302.2" y="221" width="341.1" height="84"/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="-300.1" y="235">+size(): size_t</text>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="-300.1" y="251">+operator[] const(index:size_t): value_type</text>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="-300.1" y="267"/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="-300.1" y="283">+data const(): const value_type*</text>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="-300.1" y="299">+data(): value_type *</text>
+    <rect style="fill: #ffffff" x="-7.1" y="159" width="77.3" height="20"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 0.2; stroke-dasharray: 6; stroke: #000000" x="-7.1" y="159" width="77.3" height="20"/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="-1.1" y="173">StorageT:</text>
+  </g>
+  <g>
+    <rect style="fill: #ffffff" x="197.5" y="165.7" width="256.4" height="28"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 0.2; stroke: #000000" x="197.5" y="165.7" width="256.4" height="28"/>
+    <text font-size="16" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:700" x="325.7" y="184.7">earray</text>
+    <rect style="fill: #ffffff" x="197.5" y="193.7" width="256.4" height="20"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 0.2; stroke: #000000" x="197.5" y="193.7" width="256.4" height="20"/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="199.6" y="207.7">-_expression: ExpressionT</text>
+    <rect style="fill: #ffffff" x="197.5" y="213.7" width="256.4" height="36"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 0.2; stroke: #000000" x="197.5" y="213.7" width="256.4" height="36"/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="199.6" y="227.7">+size const(): size_t</text>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="199.6" y="243.7">+operator[] const(): value_type </text>
+    <rect style="fill: #ffffff" x="407.9" y="151.7" width="100.4" height="20"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 0.2; stroke-dasharray: 6; stroke: #000000" x="407.9" y="151.7" width="100.4" height="20"/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="413.9" y="165.7">ExpressionT:</text>
+  </g>
+  <g>
+    <rect style="fill: #ffffff" x="608.9" y="125.2" width="341.1" height="28"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 0.2; stroke: #000000" x="608.9" y="125.2" width="341.1" height="28"/>
+    <text font-size="16" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:700" x="779.45" y="144.2">unary_op</text>
+    <rect style="fill: #ffffff" x="608.9" y="153.2" width="341.1" height="20"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 0.2; stroke: #000000" x="608.9" y="153.2" width="341.1" height="20"/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="611" y="167.2">+_arg: ArgT</text>
+    <rect style="fill: #ffffff" x="608.9" y="173.2" width="341.1" height="36"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 0.2; stroke: #000000" x="608.9" y="173.2" width="341.1" height="36"/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="611" y="187.2">+size const(): size_t</text>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="611" y="203.2">+operator const[](index:size_t): value_type</text>
+    <rect style="fill: #ffffff" x="904" y="111.2" width="54" height="20"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 0.2; stroke-dasharray: 6; stroke: #000000" x="904" y="111.2" width="54" height="20"/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="910" y="125.2">ArgT:</text>
+  </g>
+  <g>
+    <rect style="fill: #ffffff" x="610" y="287.2" width="348.8" height="28"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 0.2; stroke: #000000" x="610" y="287.2" width="348.8" height="28"/>
+    <text font-size="16" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:700" x="784.4" y="306.2">binar_op</text>
+    <rect style="fill: #ffffff" x="610" y="315.2" width="348.8" height="36"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 0.2; stroke: #000000" x="610" y="315.2" width="348.8" height="36"/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="612.1" y="329.2">-_arglhs: ArgTLHS</text>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="612.1" y="345.2">-_argrhs: ArgTRHS</text>
+    <rect style="fill: #ffffff" x="610" y="351.2" width="348.8" height="36"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 0.2; stroke: #000000" x="610" y="351.2" width="348.8" height="36"/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="612.1" y="365.2">+size const(): size_t</text>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="612.1" y="381.2">+operator const [](index:size_t): value_type</text>
+    <rect style="fill: #ffffff" x="912.8" y="257.2" width="69.6" height="36"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 0.2; stroke-dasharray: 6; stroke: #000000" x="912.8" y="257.2" width="69.6" height="36"/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="918.8" y="271.2">ArgTLHS:</text>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="918.8" y="287.2">ArgTRHS:</text>
+  </g>
+  <g>
+    <rect style="fill: #ffffff" x="-126.65" y="588.5" width="202.5" height="28"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 0.2; stroke: #000000" x="-126.65" y="588.5" width="202.5" height="28"/>
+    <text font-size="16" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:700" x="-25.4" y="607.5">earray</text>
+    <rect style="fill: #ffffff" x="-126.65" y="616.5" width="202.5" height="20"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 0.2; stroke: #000000" x="-126.65" y="616.5" width="202.5" height="20"/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="-124.55" y="630.5">-_expression: ExpressionT</text>
+    <rect style="fill: #ffffff" x="29.85" y="574.5" width="100.4" height="20"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 0.2; stroke-dasharray: 6; stroke: #000000" x="29.85" y="574.5" width="100.4" height="20"/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="35.85" y="588.5">ExpressionT:</text>
+  </g>
+  <g>
+    <rect style="fill: #ffffff" x="237.35" y="524.5" width="94.7" height="28"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 0.2; stroke: #000000" x="237.35" y="524.5" width="94.7" height="28"/>
+    <text font-size="16" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:700" x="284.7" y="543.5">unary_op</text>
+    <rect style="fill: #ffffff" x="237.35" y="552.5" width="94.7" height="20"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 0.2; stroke: #000000" x="237.35" y="552.5" width="94.7" height="20"/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="239.45" y="566.5">+_arg: ArgT</text>
+    <rect style="fill: #ffffff" x="286.05" y="510.5" width="54" height="20"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 0.2; stroke-dasharray: 6; stroke: #000000" x="286.05" y="510.5" width="54" height="20"/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="292.05" y="524.5">ArgT:</text>
+  </g>
+  <g>
+    <rect style="fill: #ffffff" x="237.45" y="663.5" width="140.9" height="28"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 0.2; stroke: #000000" x="237.45" y="663.5" width="140.9" height="28"/>
+    <text font-size="16" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:700" x="307.9" y="682.5">binar_op</text>
+    <rect style="fill: #ffffff" x="237.45" y="691.5" width="140.9" height="36"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 0.2; stroke: #000000" x="237.45" y="691.5" width="140.9" height="36"/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="239.55" y="705.5">-_arglhs: ArgTLHS</text>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="239.55" y="721.5">-_argrhs: ArgTRHS</text>
+    <rect style="fill: #ffffff" x="332.35" y="633.5" width="69.6" height="36"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 0.2; stroke-dasharray: 6; stroke: #000000" x="332.35" y="633.5" width="69.6" height="36"/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="338.35" y="647.5">ArgTLHS:</text>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="338.35" y="663.5">ArgTRHS:</text>
+  </g>
+  <g>
+    <polyline style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="101.022,626.5 163.6,626.5 163.6,538.5 237.35,538.5 "/>
+    <polygon style="fill: #ffffff" points="75.85,626.5 89.85,621.7 103.85,626.5 89.85,631.3 "/>
+    <polygon style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="75.85,626.5 89.85,621.7 103.85,626.5 89.85,631.3 "/>
+    <text font-size="12.7998" style="fill: #000000;text-anchor:end;font-family:monospace;font-style:normal;font-weight:normal" x="233.35" y="526.5"> 1</text>
+  </g>
+  <g>
+    <polyline style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="101.022,626.5 163.65,626.5 163.65,677.5 237.45,677.5 "/>
+    <polygon style="fill: #ffffff" points="75.85,626.5 89.85,621.7 103.85,626.5 89.85,631.3 "/>
+    <polygon style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="75.85,626.5 89.85,621.7 103.85,626.5 89.85,631.3 "/>
+    <text font-size="12.7998" style="fill: #000000;text-anchor:start;font-family:monospace;font-style:normal;font-weight:normal" x="107.85" y="623.5">1</text>
+    <text font-size="12.7998" style="fill: #000000;text-anchor:end;font-family:monospace;font-style:normal;font-weight:normal" x="233.45" y="674.5">1</text>
+  </g>
+</svg>
