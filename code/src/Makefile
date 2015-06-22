@@ -20,14 +20,14 @@ bm_classic: bm_classic.cpp
 bm_et:bm_et.cpp
 	c++ $(BMFLAGS) -o$@ $<
 
-ang2q_cstyle: ang2q_cstyle.cpp
-	c++ $(BMFLAGS) -o$@ $<
+ang2q_cstyle: ang2q.cpp
+	c++ $(BMFLAGS) -DCSTYLE -o$@ $<
 
-ang2q_classic: ang2q_classic.cpp
-	c++ $(BMFLAGS) -o$@ $<
+ang2q_classic: ang2q.cpp
+	c++ $(BMFLAGS) -DCLASSICOPERATORS -o$@ $<
 
-ang2q_et: ang2q_et.cpp
-	c++ $(BMFLAGS) -o$@ $<
+ang2q_et: ang2q.cpp
+	c++ $(BMFLAGS) -DEXPTOPERATORS -o$@ $<
 
 .PHONY: clean
 

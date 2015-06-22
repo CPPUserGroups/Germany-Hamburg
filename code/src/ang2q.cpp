@@ -24,12 +24,36 @@
 #include <vector>
 #include <chrono>
 #include "../include/narray.hpp"
+#ifdef EXPTOPERATORS
+#include "../include/exp_templates/functions.hpp"
+#include "../include/exp_templates/binary_operators.hpp"
+#endif
+
+#ifdef CLASSICOPERATORS
+#include "../include/old_operators/operators.hpp"
+#include "../include/old_operators/functions.hpp"
+#endif
 
 typedef std::vector<double>   storage_type;
 typedef narray<storage_type>  array_type;
 
 typedef std::chrono::high_resolution_clock clock_type;
 
+#if defined EXPTOPERATORS || defined CLASSICOPERATORS
+void compute_result(double lambda,const array_type &omega,
+                    const array_type &tth,
+                    array_type &qx,array_type &qz)
+{
+#ifdef EXPTOPERATORS
+    using namespace et;
+#endif
+    double k = 2.*3.41/lambda;
+    qx = 2.*k*sin(0.5*tth)*sin(omega-0.5*tth);
+    qz = 2.*k*sin(0.5*tth)*cos(omega-0.5*tth);
+}
+#endif
+
+#ifdef CSTYLE
 void compute_result(double lambda,const array_type &omega,const array_type &tth,
                     array_type qx,array_type &qz)
 {
@@ -43,11 +67,22 @@ void compute_result(double lambda,const array_type &omega,const array_type &tth,
         qz[index] = 2.*k*std::sin(0.5*tth[index])*std::cos(omega[index]-0.5*tth[index]);
     }
 }
+#endif 
 
 int main(int argc,char **argv)
 { 
     size_t nruns = 1;
     size_t nelements = 1024;
+#ifdef EXPTOPERATORS
+    std::cout<<"Using expression templates";
+#endif
+#ifdef CLASSICOPERATORS
+    std::cout<<"Using classic C++ operators";
+#endif
+#ifdef CSTYLE
+    std::cout<<"Using classic C loop approach";
+#endif
+    std::cout<<std::endl;
 
     if(argc>=2) nelements = std::atoi(argv[1]);
 
@@ -59,10 +94,9 @@ int main(int argc,char **argv)
 
     //generate input data
     auto start_time = clock_type::now();
-    for(size_t run=0;run<nruns;++run)
-    {
-        compute_result(lambda,omega,tth,qx,qz);
-    }
+
+    for(size_t run=0;run<nruns;++run) compute_result(lambda,omega,tth,qx,qz);
+
     auto stop_time = clock_type::now();
     auto delta = stop_time-start_time;
     auto elapsed_time =
@@ -73,5 +107,6 @@ int main(int argc,char **argv)
 
     std::cout<<qx[0]<<"\t"<<qz[0]<<std::endl;
     std::cout<<qx[100]<<"\t"<<qz[100]<<std::endl;
+
     return 0;
 }
