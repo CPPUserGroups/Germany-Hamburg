@@ -1,0 +1,162 @@
+%% ---------------------------------------------------------------------------
+%% This file is part of the "Flawed Egyptology" talk.
+%%
+%% Copyright 2014 by Eugen Wintersberger <eugen.wintersberger@gmail.com>
+%%
+%% This work is licensed under the Creative Commons
+%% Attribution-NonCommercial-ShareAlike 4.0 International License. To view 
+%% a copy of this license, visit 
+%% http://creativecommons.org/licenses/by-nc-sa/4.0/.
+%% ---------------------------------------------------------------------------
+\documentclass{beamer}
+\usepackage{tikz}
+\usepackage{pgfpages}
+\usepackage{todonotes}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{hyperref}
+\usepackage{copyrightbox}
+\usepackage{minted}
+\usepgflibrary{shapes.multipart}
+\usepgflibrary{shapes.symbols}
+\usetikzlibrary{positioning}
+\usetikzlibrary{calc}
+\usetikzlibrary{fit}
+
+
+\setbeamercolor{frametitle}{fg=black,bg=white}
+\setbeamerfont{frametitle}{series=\bfseries}
+\setbeamercolor{part page}{fg=black,bg=white}
+\setbeamerfont{part page}{series=\bfseries}
+\setbeamercolor{part title}{fg=black}
+\setbeamercolor{part subtitle}{fg=black}
+\setbeamercolor{author}{fg=white}
+\setbeamercolor{date}{fg=white}
+
+
+
+\setbeamercolor{title}{fg=black}
+\setbeamerfont{title}{series=\bfseries,size=\Huge}
+\setbeamercolor{subtitle}{fg=black}
+
+\setbeamercolor{item}{fg=black}
+
+
+%\setbeameroption{show notes on second screen}
+
+\title{{\Huge Expression Templates}}
+\subtitle{Making expressions iterable}
+\author{Eugen Wintersberger\\ \small{eugen.wintersberger@gmail.com}}
+\date{June 24, 2015}
+
+\begin{document}
+
+\frame{\titlepage}
+
+%%%===========================================================================
+\begin{frame}[fragile]{Motivation - why operators}
+    In math we have 
+    \begin{align}
+        I_{\mathrm{corrected}}=\frac{s\left(I-I_{\mathrm{background}}\right)}
+                                   {\tau_{\mathrm{exposure}}}
+                                   \nonumber
+    \end{align}
+
+    \vspace{0.05\textheight}
+    In Fortran we could have something like this
+    \begin{minted}[fontsize=\small]{fortran}
+real(kind=8),dimension(:),allocatable := intensity
+real(kind=8),dimension(:),allocatable := corr_intensity
+real(kind=8),dimension(:),allocatable := bg
+real(kind=8) := exp_time,s
+
+corr_intensity = s*(intensity-bg)/exp_time
+    \end{minted}
+   
+    \vspace{0.05\textheight}
+    Code looks quite similar to the formuls written on paper $\Rightarrow$
+    less errors!
+\end{frame}
+
+%%%---------------------------------------------------------------------------
+\begin{frame}[fragile]{The \texttt{C}-version}
+In plain \texttt{C}/\texttt{C++} we have to loop
+
+\vspace{0.05\textheight}
+\begin{minted}{cpp}
+typedef std::vector<doubel> array_type;
+
+array_type intensity,corr_intensity,bg;
+double exp_time,s;
+
+for(size_t i=0;i<intensity.size();i++)
+    corr_intensity[i]=s*(intensity[i]-bg[i])/exp_time;
+\end{minted}
+
+\vspace{0.05\textheight}
+Not very elegant.
+\end{frame}
+
+%%%---------------------------------------------------------------------------
+\begin{frame}[fragile]{Classic \texttt{C++}-operators}
+    \texttt{C++} introduced operator overload
+    \begin{minted}{cpp}
+typedef std::vector<double> array_type;
+
+array_type operator+(const array_type &lhs,
+                     const array_type &rhs)
+{
+    array_type temp(lhs);
+    for(size_t i=0;i<temp.size();++i)
+        temp[i] += rhs[i];
+
+    return temp;
+}
+    \end{minted}
+
+    The temporary is the problem!
+\end{frame}
+
+%%%---------------------------------------------------------------------------
+\begin{frame}[fragile]{How bad temporaries can get?}
+    Benchmark expression ($\mathbf{q}$-space conversion)
+    \begin{align}
+    k &= \frac{2\pi}{\lambda} \nonumber \\
+        q_x &= 2k\sin\left(\frac{\theta}{2}\right)\cos\left(\omega-\frac{\theta}{2}\right)
+        \nonumber \\
+        q_z &= 2k\sin\left(\frac{\theta}{2}\right)\sin\left(\omega-\frac{\theta}{2}\right)
+        \nonumber
+    \end{align}
+
+    \vspace{0.05\textheight}
+    \begin{center}
+        \begin{tabular}{lc}
+            \hline
+            program & runtime (ms) \\
+            \hline\hline
+            \texttt{ang2q\_cstyle} & $2649$ \\
+            \texttt{ang2q\_classic} & $8623$  \\
+            \hline
+        \end{tabular}
+    \end{center}
+
+\end{frame}
+
+%%%===========================================================================
+\begin{frame}[plain]
+    \begin{center}
+        \huge\textbf{Expression templates}
+    \end{center}
+\end{frame}
+
+%%%---------------------------------------------------------------------------
+\begin{frame}[fragile]{The basic concept}
+
+\end{frame}
+
+%%%===========================================================================
+
+%%%===========================================================================
+
+
+\end{document}
