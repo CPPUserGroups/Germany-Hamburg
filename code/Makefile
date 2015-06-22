@@ -4,11 +4,14 @@ all:
 	cd src && make $@
 	cd test && make $@
 
-.PHONY: clean test
+.PHONY: clean test benchmark
 
 clean:
 	cd src && make $@
 	cd test && make $@
+
+benchmark:
+	cd src && make $@
 
 test:
 	cd test && make $@
