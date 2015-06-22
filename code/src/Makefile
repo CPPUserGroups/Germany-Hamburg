@@ -23,7 +23,12 @@ ang2q_classic: ang2q.cpp
 ang2q_et: ang2q.cpp
 	c++ $(BMFLAGS) -DEXPTOPERATORS -o$@ $<
 
-.PHONY: clean all
+.PHONY: clean all benchmark
+
+benchmark:
+	./ang2q_cstyle `calc 1024*1024*100` 5
+	./ang2q_classic `calc 1024*1024*100` 5
+	./ang2q_et `calc 1024*1024*100` 5
 
 clean:
 	rm -rf *.o
