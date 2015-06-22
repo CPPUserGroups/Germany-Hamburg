@@ -17,27 +17,50 @@
 // Expression Templates Talk.  If not, see <http://www.gnu.org/licenses/>.
 //
 // ===========================================================================
-
 #include <iostream>
-#include <vector>
-#include <chrono>
-#include "../include/narray.hpp"
+#include "types.hpp"
+#ifdef CSTYLE
+#include <cstdlib>
+#include <cmath>
+#endif
+#ifdef CLASSICOPERATORS
+#include "../include/old_operators/functions.hpp"
+#elif EXPTOPERATORS
 #include "../include/exp_templates/functions.hpp"
+#endif
 
-typedef std::vector<double>   storage_type;
-typedef narray<storage_type> array_type;
-
-typedef std::chrono::high_resolution_clock clock_type;
-
+#if defined CLASSICOPERATORS || EXPTOPERATORS
 void compute_result(const array_type &args,array_type &result)
 {
-    result = et::sin(args);
+#ifdef EXPTOPERATORS
+    using namespace et;
+#endif
+    result = sin(args);
 }
+#endif
+
+#ifdef CSTYLE
+void compute_result(const array_type &args,array_type &result)
+{
+    size_t nelements = args.size();
+
+    for(size_t index=0;index<nelements;++index)
+        result[index] = std::sin(args[index]);
+}
+#endif
 
 int main(int argc,char **argv)
 { 
     size_t nruns = 1;
     size_t nelements = 1024;
+#ifdef CSTYLE
+    std::cout<<"Using C-style loops";
+#elif CLASSICOPERATORS
+    std::cout<<"Using classic C++ operators";
+#elif EXPTOPERATORS
+    std::cout<<"Using expression templates";
+#endif
+    std::cout<<std::endl;
 
     if(argc>=2)
         nelements = std::atoi(argv[1]);

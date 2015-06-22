@@ -2,23 +2,17 @@ F90=gfortran
 F90FLAGS=-O3 
 BMFLAGS=-std=c++11 -O3 -g -Wall -pedantic -Wextra
 
-all: fortran_test check_types bm_cstyle bm_classic bm_et \
-	ang2q_cstyle ang2q_classic ang2q_et
+all: sinbm_classic sinbm_cstyle sinbm_et \
+	 ang2q_cstyle ang2q_classic ang2q_et
 
-fortran_test:fortran_test.f90
-	$(F90) $(F90FLAGS) -o$@ $<
+sinbm_cstyle: sinbm.cpp
+	c++ $(BMFLAGS) -DCSTYLE -o$@ $<
 
-check_types:check_types.cpp
-	c++ -std=c++11 -O0 -g -o$@ $<
+sinbm_classic: sinbm.cpp
+	c++ $(BMFLAGS) -DCLASSICOPERATORS -o$@ $<
 
-bm_cstyle: bm_cstyle.cpp
-	c++ $(BMFLAGS) -o$@ $<
-
-bm_classic: bm_classic.cpp
-	c++ $(BMFLAGS) -o$@ $<
-
-bm_et:bm_et.cpp
-	c++ $(BMFLAGS) -o$@ $<
+sinbm_et:sinbm.cpp
+	c++ $(BMFLAGS) -DEXPTOPERATORS -o$@ $<
 
 ang2q_cstyle: ang2q.cpp
 	c++ $(BMFLAGS) -DCSTYLE -o$@ $<
@@ -29,15 +23,13 @@ ang2q_classic: ang2q.cpp
 ang2q_et: ang2q.cpp
 	c++ $(BMFLAGS) -DEXPTOPERATORS -o$@ $<
 
-.PHONY: clean
+.PHONY: clean all
 
 clean:
 	rm -rf *.o
-	rm -rf fortran_test
-	rm -rf check_types
-	rm -rf bm_cstyle
-	rm -rf bm_classic
-	rm -rf bm_et
+	rm -rf sinbm_cstyle
+	rm -rf sinbm_classic
+	rm -rf sinbm_et
 	rm -rf ang2q_cstyle
 	rm -rf ang2q_classic
 	rm -rf ang2q_et

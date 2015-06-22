@@ -1,8 +1,8 @@
 fortran_test
 *.swp
-bm_classic
-bm_cstyle
-bm_et
+sinbm_classic
+sinbm_cstyle
+sinbm_et
 ang2q_cstyle
 ang2q_classic
 ang2q_et

@@ -17,29 +17,13 @@
 // Expression Templates Talk.  If not, see <http://www.gnu.org/licenses/>.
 //
 // ===========================================================================
+#pragma once
 
 #include <vector>
+#include <chrono>
 #include "../include/narray.hpp"
-#include "../include/exp_templates/functions.hpp"
 
-typedef std::vector<double>   storage_type;
+typedef std::vector<double>  storage_type;
 typedef narray<storage_type> array_type;
 
-int main(int argc,char **argv)
-{
-    array_type a{1,2,3,4,5};
-
-    auto r1 = et::sin(a);
-
-    auto r2 = et::sin(array_type{1,2,3,4,5});
-
-    const array_type &r = a;
-    auto r3 = et::sin(r);
-
-    auto r4 = et::sin(1.2);
-
-    double s=10.2;
-    auto r5 = et::sin(s);
-
-    return 0;
-}
+typedef std::chrono::high_resolution_clock clock_type;
