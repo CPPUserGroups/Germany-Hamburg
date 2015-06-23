@@ -159,7 +159,16 @@ Hello world
 \begin{frame}[fragile]{Preliminary benchmark results}
     \begin{tikzpicture}
         \datavisualization[scientific axes=clean,
-        visualize as smooth line/.list={cstyle,classic}]
+            x axis={label = {number of elements}},
+            y axis={label = {runtime (ms)}},
+            style sheet=strong colors,
+        visualize as smooth line = cstyle,
+        visualize as smooth line = classic,
+        visualize as smooth line = exptemplates,
+        cstyle = {style=red,label in legend={text=C loops}},
+        classic={style=green,label in legend={text=Classic operators}},
+        exptemplates={style=blue,label in legend={text=expression templates}}
+        ]
         data[set=cstyle]{
             x,y
             1e+5,2
@@ -169,7 +178,18 @@ Hello world
             1e+7,199
             5e+7,982
             1e+8,2069
-        };
+        }
+        data[set=exptemplates]
+        {
+            x,y
+            1e+5,2
+            5e+5,8
+            1e+6,16
+            5e+6,84
+            1e+7,161
+            5e+7,803
+            1e+8,1662
+        }
         data[set=classic]{
             x,y
             1e+5,4
