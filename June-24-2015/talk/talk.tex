@@ -22,6 +22,7 @@
 \usetikzlibrary{positioning}
 \usetikzlibrary{calc}
 \usetikzlibrary{fit}
+\usetikzlibrary{datavisualization}
 
 
 \setbeamercolor{frametitle}{fg=black,bg=white}
@@ -151,10 +152,36 @@ array_type operator+(const array_type &lhs,
 
 %%%---------------------------------------------------------------------------
 \begin{frame}[fragile]{The basic concept}
-
+Hello world
 \end{frame}
 
 %%%===========================================================================
+\begin{frame}[fragile]{Preliminary benchmark results}
+    \begin{tikzpicture}
+        \datavisualization[scientific axes=clean,
+        visualize as smooth line/.list={cstyle,classic}]
+        data[set=cstyle]{
+            x,y
+            1e+5,2
+            5e+5,9
+            1e+6,18
+            5e+6,99
+            1e+7,199
+            5e+7,982
+            1e+8,2069
+        };
+        data[set=classic]{
+            x,y
+            1e+5,4
+            5e+5,27
+            1e+6,55
+            5e+6,405
+            1e+7,812
+            5e+7,3853
+            1e+8,8091        
+        };
+    \end{tikzpicture}
+\end{frame}
 
 %%%===========================================================================
 
