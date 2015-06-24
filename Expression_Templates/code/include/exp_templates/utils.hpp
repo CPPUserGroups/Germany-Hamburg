@@ -32,52 +32,15 @@ using remove_all = std::remove_reference<
                    typename std::remove_const<T>::type  
                    >;
 
-
-//----------------------------------------------------------------------------
-//!
-//! \ingroup exp_temp_utilities
-//! \brief reference type for arguments
-//! 
-//! This specialization is used when T is not an lvalue reference. In this case
-//! a copy of the object will be stored.
-//! 
-//! \tparam T argument type
-//! \tparam is_lref falg indicating that T is an lvalue reference
-//! 
-template<
-         typename T,
-         bool is_lref=false
-        >
-struct arg_ref_type
-{
-    typedef T type;
-};
-
-//----------------------------------------------------------------------------
-//!
-//! \ingroup exp_temp_utilities
-//! \brief reference type for arguments
-//! 
-//! This specialization is used when T is an lvalue reference. In this case
-//! a reference to the argument is stored.
-//! 
-//! \tparam T argument type
-//! \tparam is_lref falg indicating that T is an lvalue reference
-//! 
-template<typename T>
-struct arg_ref_type<T,true>
-{
-    typedef const T& type;
-};
-
 //----------------------------------------------------------------------------
 //!
 //! \ingroup exp_temp_utilities
 //! \brief get the reference type for an argument
 //! 
 template<typename T>
-using get_reference = arg_ref_type<typename remove_all<T>::type,
-                                   std::is_lvalue_reference<T>::value>;
+using get_reference = std::conditional<std::is_lvalue_reference<T>::value,
+                                       const typename remove_all<T>::type &,
+                                       typename remove_all<T>::type>;
 
 //----------------------------------------------------------------------------
 //! 

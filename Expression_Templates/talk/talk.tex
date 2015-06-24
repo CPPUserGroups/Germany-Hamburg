@@ -152,7 +152,76 @@ array_type operator+(const array_type &lhs,
 
 %%%---------------------------------------------------------------------------
 \begin{frame}[fragile]{The basic concept}
-Hello world
+    Make this
+    \vspace{0.05\textheight}
+    \begin{minted}[fontsize=\Large]{cpp}
+C=A+B;
+    \end{minted}
+    \vspace{0.05\textheight}
+    into
+    \vspace{0.05\textheight}
+    \begin{minted}[fontsize=\Large]{cpp}
+for(size_t i=0;i<C.size();++i)
+    C[i] = A[i] + B[i];
+    \end{minted}
+\end{frame}
+
+%%%---------------------------------------------------------------------------
+\begin{frame}[fragile]{Assignment is the key}
+    \begin{minted}{cpp}
+// numeric array template
+template<typename StorageT> class narray; 
+
+//expression array template
+template<typenmae ExpT> class earray;
+    \end{minted} 
+    \vspace{0.05\textheight}
+    Consider the copy assignment of the \texttt{narray} template
+    \begin{minted}{cpp}
+narray<StorageT> &
+    operator=(const earray<ExpT> &expression)
+    {
+        for(size_t i=0;i<this->size();++i)
+            (*this)[i] = expression[i];
+
+        return *this;
+    }
+    \end{minted}
+\end{frame}
+
+%%%---------------------------------------------------------------------------
+\begin{frame}[fragile]{How to get \texttt{earray<ExpT>}?}
+    Overloading the $+$-operator 
+    \vspace{0.05\textheight}
+    \begin{minted}{cpp}
+template<
+         typename ArgT1,
+         typename ArgT2
+        >
+earray<add_op<ArgT1,ArgT2>> 
+    operator+(ArgT1 &&lhs,ArgT2 &&rhs)
+{
+    typedef add_op<ArgT1,ArgT2> exp_type;
+    return earray<exp_type>(exp_type(lhs,rhs));
+}
+    \end{minted}
+\end{frame}
+
+%%%--------------------------------------------------------------------------
+\begin{frame}[fragile]{What is \texttt{add\_op}?}
+    \begin{minted}{cpp}
+template< typename ArgT1, typename ArgT2 >
+class add_op{
+    private:
+        reference_type<ArgT1>::type _lhs;
+        reference_type<ArgT2>::type _rhs;
+    public:
+
+        value_type operator[](size_t i) const {
+            return _lhs[i]+_rhs[i];
+        }
+}
+    \end{minted}
 \end{frame}
 
 %%%===========================================================================
