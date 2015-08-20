@@ -1,4 +1,4 @@
 Code and talks given during the meeting of the C++ User Group Hamburg, Germany.
 
 constexpr:
-19.08.2015: talk about constexpr and compile evaluation, see also https://github.com/valpo/sudoku.
+19.08.2015: talk about constexpr and compile time evaluation, see also https://github.com/valpo/sudoku.
