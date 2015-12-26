@@ -1,0 +1,13 @@
+*.swp
+talk.aux
+talk.fdb_latexmk
+talk.fls
+talk.log
+talk.nav
+talk.out
+talk.pdf
+talk.pyg
+talk.snm
+talk.toc
+talk.vrb
+
