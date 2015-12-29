@@ -19,23 +19,24 @@
 // ===========================================================================
 #pragma once
 
-#include "named_object.hpp"
+#include <string>
 
 namespace mcs{
-    class moveable : public named_object
+
+    class named_object
     {
+        private:
+            std::string _name;
+            std::string _unit;
         public:
-            moveable();
-            moveable(const std::string &n,const std::string &u);
+            named_object();
+            named_object(const std::string &n,const std::string &u);
 
-            virtual double upper_limit() const = 0;
-            virtual void upper_limit(double value) = 0;
-            virtual double lower_limit() const = 0;
-            virtual void lower_limit(double value) = 0;
-            virtual double position() const = 0;
-            virtual void position(double p) = 0;
+            std::string name() const;
+            void name(const std::string &n);
+
+            std::string unit() const;
+            void unit(const std::string &u);
+            
     };
-
-//end of namespace
 }
-

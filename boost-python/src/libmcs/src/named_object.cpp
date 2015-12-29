@@ -18,19 +18,43 @@
 //
 // ===========================================================================
 
-#include <mcs/moveable.hpp>
-
+#include <mcs/named_object.hpp>
 
 namespace mcs{
 
-     
-    moveable::moveable():named_object()
+    named_object::named_object():
+        _name(),
+        _unit()
     {}
 
     //------------------------------------------------------------------------
-    moveable::moveable(const std::string &n,const std::string &u):
-        named_object(n,u)
-    {}
+    named_object::named_object(const std::string &n,const std::string &u):
+        _name(n),
+        _unit(u)
+    { }
+
+    //------------------------------------------------------------------------
+    std::string named_object::name() const
+    {
+        return _name;
+    }
+
+    //------------------------------------------------------------------------
+    void named_object::name(const std::string &n)
+    {
+        _name = n;
+    }
+
+    //------------------------------------------------------------------------
+    std::string named_object::unit() const
+    {
+        return _unit;
+    }
+
+    //------------------------------------------------------------------------
+    void named_object::unit(const std::string &u)
+    {
+        _unit = u;
+    }
 
 }
-

@@ -17,25 +17,19 @@
 // along with libmcs.  If not, see <http://www.gnu.org/licenses/>.
 //
 // ===========================================================================
-#pragma once
 
-#include "named_object.hpp"
+#include <mcs/sensor.hpp>
+
 
 namespace mcs{
-    class moveable : public named_object
-    {
-        public:
-            moveable();
-            moveable(const std::string &n,const std::string &u);
 
-            virtual double upper_limit() const = 0;
-            virtual void upper_limit(double value) = 0;
-            virtual double lower_limit() const = 0;
-            virtual void lower_limit(double value) = 0;
-            virtual double position() const = 0;
-            virtual void position(double p) = 0;
-    };
+     
+    sensor::sensor():named_object()
+    {}
 
-//end of namespace
+    //------------------------------------------------------------------------
+    sensor::sensor(const std::string &n,const std::string &u):
+        named_object(n,u)
+    {}
+
 }
-
