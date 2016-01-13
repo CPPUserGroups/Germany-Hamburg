@@ -19,9 +19,9 @@
 // ===========================================================================
 #pragma once
 
-namespace mcs{
+namespace talk{
     
-    class limit_exceeded : public std::exception {};
+    class division_by_zero : public std::exception {};
 
 //end of namespace 
 }
