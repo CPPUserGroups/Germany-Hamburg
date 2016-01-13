@@ -1,0 +1,5 @@
+build
+dist
+talk.egg-info
+*.so
+*.pyc

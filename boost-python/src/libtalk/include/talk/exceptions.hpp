@@ -19,6 +19,8 @@
 // ===========================================================================
 #pragma once
 
+#include <iostream>
+
 namespace talk{
     
     class division_by_zero : public std::exception {};
