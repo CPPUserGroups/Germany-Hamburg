@@ -19,29 +19,9 @@
 // ===========================================================================
 #pragma once
 
-#include "named_object.hpp"
-
 namespace mcs{
-    class moveable : public named_object
-    {
-        public:
-            moveable();
-            moveable(const std::string &n,const std::string &u);
-            moveable(const moveable &m);
-            moveable(moveable &&m);
-            virtual ~moveable();
+    
+    class limit_exceeded : public std::exception {};
 
-            moveable &operator=(const moveable &m);
-            moveable &operator=(moveable &&m);
-
-            virtual double upper_limit() const = 0;
-            virtual void upper_limit(double value) = 0;
-            virtual double lower_limit() const = 0;
-            virtual void lower_limit(double value) = 0;
-            virtual double position() const = 0;
-            virtual void position(double p) = 0;
-    };
-
-//end of namespace
+//end of namespace 
 }
-

@@ -34,6 +34,42 @@ namespace mcs{
     { }
 
     //------------------------------------------------------------------------
+    named_object::named_object(const named_object &o):
+        _name(o._name),
+        _unit(o._unit)
+    {}
+
+    //------------------------------------------------------------------------
+    named_object::named_object(named_object &&o):
+        _name(std::move(o._name)),
+        _unit(std::move(o._unit))
+    {}
+
+    //------------------------------------------------------------------------
+    named_object::~named_object()
+    {}
+
+    //------------------------------------------------------------------------
+    named_object &named_object::operator=(const named_object &o)
+    {
+        if(&o == this) return *this;
+
+        _name = o._name;
+        _unit = o._unit;
+        return *this;
+    }
+
+    //------------------------------------------------------------------------
+    named_object &named_object::operator=(named_object &&o)
+    {
+        if(&o == this) return *this;
+
+        _name = std::move(o._name);
+        _unit = std::move(o._unit);
+        return *this;
+    }
+
+    //------------------------------------------------------------------------
     std::string named_object::name() const
     {
         return _name;

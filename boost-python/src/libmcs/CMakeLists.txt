@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 2.8)
 project(libmcs)
 enable_testing()
 include(GNUInstallDirs)
-add_definitions(-std=c++11 -O2)
+add_definitions(-std=c++11 -O2 -Wall -Wextra -pedantic)
 
 add_custom_target(check)
 include_directories(include)

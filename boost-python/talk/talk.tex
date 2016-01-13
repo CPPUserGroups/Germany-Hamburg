@@ -52,16 +52,35 @@
 
 \begin{document}
 
+%%%===========================================================================
 \frame{\titlepage}
+\part{Motivation}
+\section{Motivation}
+\input{tex/motivation.tex}
 
-\begin{frame}[fragile]{Motivation}
-   Why mixing Python and C++ at all?
+%%%===========================================================================
+\part{\texttt{boost::python}}
+\section{boost::python}
+\frame{\partpage}
+\input{tex/boost_python.tex}
 
-   \begin{itemize}
-        \item Pyth
-   \end{itemize}
+%%%===========================================================================
+\part{The odds and ends}
+\section{The odds and ends}
+\frame{\partpage}
+
+%%%---------------------------------------------------------------------------
+\begin{frame}[fragile]{Further reading}
+
+    \begin{itemize}
+        \item
+            \href{http://www.boost.org/doc/libs/1_60_0/libs/python/doc/html/index.html}
+            {Official Boost Python documentation}
+        \item 
+            \href{https://wiki.python.org/moin/boost.python}
+            {Boost Python Wiki}
+    \end{itemize}
+
 \end{frame}
-
-
 
 \end{document}

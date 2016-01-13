@@ -6,4 +6,9 @@ target_link_libraries(named_object_test
                       mcs ${Boost_UNIT_TEST_FRAMEWORK_LIBRARY})
 add_test(NAME "test::named_object" COMMAND named_object_test)
 
-add_dependencies(check named_object_test)
+add_executable(step_motor_test step_motor_test.cpp)
+target_link_libraries(step_motor_test 
+                      mcs ${Boost_UNIT_TEST_FRAMEWORK_LIBRARY})
+add_test(NAME "test::step_motor" COMMAND step_motor_test)
+
+add_dependencies(check named_object_test step_motor_test)

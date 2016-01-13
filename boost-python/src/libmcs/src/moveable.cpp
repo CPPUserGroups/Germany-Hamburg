@@ -32,5 +32,37 @@ namespace mcs{
         named_object(n,u)
     {}
 
+    //------------------------------------------------------------------------
+    moveable::moveable(const moveable &m):
+        named_object(m)
+    {}
+
+    //------------------------------------------------------------------------
+    moveable::moveable(moveable &&m):
+        named_object(std::move(m))
+    {}
+
+    //------------------------------------------------------------------------
+    moveable::~moveable()
+    {}
+
+    //------------------------------------------------------------------------
+    moveable &moveable::operator=(const moveable &m)
+    {
+        if(&m == this) return *this;
+        named_object::operator=(m);
+
+        return *this;
+    }
+
+    //------------------------------------------------------------------------
+    moveable &moveable::operator=(moveable &&m)
+    {
+        if(&m==this) return *this;
+        named_object::operator=(std::move(m));
+        return *this;
+    }
+
+
 }
 

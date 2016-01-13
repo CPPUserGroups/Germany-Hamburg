@@ -31,6 +31,12 @@ namespace mcs{
         public:
             named_object();
             named_object(const std::string &n,const std::string &u);
+            named_object(const named_object &o);
+            named_object(named_object &&o);
+            virtual ~named_object();
+
+            named_object &operator=(const named_object &o);
+            named_object &operator=(named_object &&o);
 
             std::string name() const;
             void name(const std::string &n);
