@@ -16,6 +16,12 @@ functions_ext = Extension("talk.functions",
                           language="c++",
                           extra_compile_args = extra_compile_args)
 
+test_exceptions_ext = Extension("talk.test.exceptions_test_module",
+                          ["src/exceptions_test_module.cpp"],
+                          libraries = ["talk",boost_python_lib],
+                          language="c++",
+                          extra_compile_args = extra_compile_args)
+
 setup(name="talk",
       author="Eugen Wintersberger",
       author_email="eugen.wintersberger@gmail.com",
@@ -24,9 +30,9 @@ setup(name="talk",
       maintainer_email = "eugen.wintersberger@gmail.com",
       license = "GPLv2",
       version = "1.0.0",
-      ext_modules=[functions_ext],
+      ext_modules=[functions_ext,test_exceptions_ext],
       packages = find_packages(),
-      test_suite="test",
+      test_suite="talk.test",
       test_loader = "unittest:TestLoader",
     )
 

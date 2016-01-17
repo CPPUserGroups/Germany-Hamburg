@@ -25,5 +25,7 @@ namespace talk{
     
     class division_by_zero : public std::exception {};
 
+    class talk_error : public std::exception {};
+
 //end of namespace 
 }

@@ -21,11 +21,24 @@
 #include <talk/functions.hpp>
 #include <talk/exceptions.hpp>
 
+extern "C"{
+#include <Python.h>
+}
+
 using namespace boost::python;
+
+static object TalkError;
+static char *TalkError_Doc = "Internal error in talk library";
+
 
 void division_by_zero_translator(const talk::division_by_zero &)
 {
     PyErr_SetString(PyExc_ZeroDivisionError,"only Chuck Norris can do this!");
+}
+
+void talk_error_translator(const talk::talk_error &)
+{
+    PyErr_SetString(TalkError.ptr(),"An internal error");
 }
 
 BOOST_PYTHON_FUNCTION_OVERLOADS(add_overloads,talk::add,2,2);
@@ -34,9 +47,15 @@ BOOST_PYTHON_FUNCTION_OVERLOADS(add_overloads,talk::add,2,2);
 BOOST_PYTHON_MODULE(functions)
 {
     def("div",talk::div);
+    
+    TalkError = object(handle<>(PyErr_NewExceptionWithDoc("talk.functions.TalkError",TalkError_Doc,
+                                                          nullptr,nullptr)));
+    scope().attr("TalkError")=TalkError;
 
     register_exception_translator<talk::division_by_zero>(division_by_zero_translator);
+    register_exception_translator<talk::talk_error>(talk_error_translator);
    
     def("add",(double (*)(double,double))2,add_overloads());
     def("add",(int (*)(int,int))2,add_overloads());
+
 }

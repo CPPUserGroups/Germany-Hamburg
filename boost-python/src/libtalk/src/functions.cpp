@@ -28,8 +28,6 @@ namespace talk{
     //------------------------------------------------------------------------
     double div(double a,double b)
     {
-        std::cout<<"Perform double division"<<std::endl;
-        
         if(std::abs(b)<1.e-9)
             throw division_by_zero();
 
@@ -39,16 +37,12 @@ namespace talk{
     //------------------------------------------------------------------------
     double add(double a,double b)
     {
-        std::cout<<"Perform double addition"<<std::endl;
-
         return a+b;
     }
 
     //------------------------------------------------------------------------
     int add(int a,int b)
     {
-        std::cout<<"Perform integer addition"<<std::endl;
-
         return a+b;
     }
 

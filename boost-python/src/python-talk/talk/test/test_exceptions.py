@@ -18,6 +18,16 @@
 # 
 # ===========================================================================
 
-from . functions import div
-from . functions import add
-from . functions import TalkError
+import unittest
+from .. import functions
+from .exceptions_test_module import throw_division_by_zero
+from .exceptions_test_module import throw_talk_error
+
+class exceptions_test(unittest.TestCase):
+
+    def test_division_by_zero(self):
+        self.assertRaises(ZeroDivisionError,throw_division_by_zero)
+
+    def test_talk_error(self):
+        self.assertRaises(functions.TalkError,throw_talk_error)
+
