@@ -1,4 +1,5 @@
 set(SOURCES functions.cpp 
+            sensor.cpp
             )
 
 

@@ -19,19 +19,18 @@
 // ===========================================================================
 #pragma once 
 
-#include "named_object.hpp"
-
-namespace mcs
+namespace talk
 {
-
-    class sensor : public named_object
+    class sensor 
     {
+        private:
+            double _value; 
         public:
             sensor();
-            sensor(const std::string &n,const std::string &u);
-        
-            virtual double value() const = 0;
+            sensor(double v);
 
+            double get_value() const;
+            void set_value(double v);
     };
 //end of namespace 
 }

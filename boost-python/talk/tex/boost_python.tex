@@ -41,14 +41,148 @@ $ python3 setup.py install --user
 
 %%%---------------------------------------------------------------------------
 \begin{frame}[fragile]{C++ functions to Python}
-    \todo[inline]{describe how to wrap functions to Python}
+    \begin{center}
+        \begin{tikzpicture}
+            \node (filename) {\texttt{talk/functions.hpp}};
+            \node[draw,black,rectangle,below = 0.2cm of filename]
+            (header file)
+            {
+                \begin{minipage}{0.4\linewidth}
+    \inputminted[fontsize=\tiny,firstline=23,firstnumber=23]{cpp}
+    {../src/libtalk/include/talk/functions.hpp}
+    \end{minipage}
+            };
+
+            \node[right = 1cm of filename]  (wrap simple) {wrapping unique function};
+            \node[draw,rectangle,below = 0.2cm of wrap simple]
+            {
+                \begin{minipage}{0.35\linewidth}
+                    \begin{minted}[fontsize=\tiny]{cpp}
+#include <boost/python.hpp>
+#include <talk/functions.hpp>
+
+using namespace boost::python;
+
+BOOST_PYTHON_MODULE(functions)
+{
+    def("div",talk::div);
+}
+                    \end{minted}
+                \end{minipage}
+            };
+
+            \node[below = 1cm of header file] (wrap overload) {wrapping overloaded functions};
+            \node[rectangle,draw,below = 0.2cm of wrap overload]
+            {
+                \begin{minipage}{0.7\linewidth}
+                    \begin{minted}[fontsize=\tiny]{cpp}
+#include <boost/python.hpp>
+#include <talk/functions.hpp>
+
+using namespace boost::python;
+
+BOOST_PYTHON_FUNCTION_OVERLOADS(add_overloads,talk::add,2,2);
+
+BOOST_PYTHON_MODULE(functions)
+{
+    def("add",(double (*)(double,double))2,add_overloads());
+    def("add",(int (*)(int,int))2,add_overloads());
+}
+                    \end{minted}
+                \end{minipage}
+            };
+        \end{tikzpicture}
+    \end{center}
 \end{frame}
 
 %%%---------------------------------------------------------------------------
 \begin{frame}[fragile]{Mapping of primitive data types}
-    
-    \todo[inline]{After functions we have to discuss how primitive C++ types 
-                  are mappedn upon Python types}
+    \begin{center}
+        {
+            \renewcommand{\arraystretch}{1.5}
+            \begin{tabular}{p{0.3\linewidth}|p{0.3\linewidth}}
+            \textbf{C++ type} & \textbf{Python type} \\
+            \hline
+            all integer types & \texttt{int} or \texttt{long} \\
+            \texttt{double} & \texttt{float} \\
+            \texttt{std::string} & Python string type  \\
+        \end{tabular}
+    }
+    \end{center}
+    \vspace{0.1\textheight}
+    For all other types converters are required!
+\end{frame}
+
+%%%---------------------------------------------------------------------------
+\begin{frame}[fragile]{Handling exceptions}
+    Two possibilities
+    \vspace{0.04\textheight}
+    \begin{enumerate}
+        \setlength{\itemsep}{0.04\textheight}
+        \item translate the C++ exception into an existing Python exception
+        \item create a new Python exception in the extension modules scope
+    \end{enumerate}
+    \vspace{0.1\textheight}
+    \begin{center}
+        \textbf{The first approach is recommended and should be used whenever
+        possible!}
+    \end{center}
+
+\end{frame}
+
+%%%---------------------------------------------------------------------------
+\begin{frame}[fragile]{Handling exceptions - translation}
+    A rather straight forward approach
+    \vspace{0.04\textheight}
+    \begin{minted}[fontsize=\tiny]{cpp}
+#include <boost/python.hpp>
+#include <talk/functions.hpp>
+#include <talk/exceptions.hpp>
+
+using namespace boost::python;
+
+void division_by_zero_translator(const talk::division_by_zero &)
+{
+    PyErr_SetString(PyExc_ZeroDivisionError,"only Chuck Norris can do this!");
+}
+
+BOOST_PYTHON_MODULE(functions)
+{
+    def("div",talk::div);
+    register_exception_translator<talk::division_by_zero>(division_by_zero_translator);
+}
+    \end{minted}
+\end{frame}
+
+%%%---------------------------------------------------------------------------
+\begin{frame}[fragile]{Handling exceptions - new exception}
+
+    \begin{minted}[fontsize=\tiny]{cpp}
+#include <boost/python.hpp>
+#include <talk/functions.hpp>
+#include <talk/exceptions.hpp>
+
+using namespace boost::python;
+
+static object TalkError;
+static char *TalkError_Doc = "Internal error in talk library";
+
+void talk_error_translator(const talk::talk_error &)
+{
+    PyErr_SetString(TalkError.ptr(),"An internal error");
+}
+
+//=================implementation of the python extension======================
+BOOST_PYTHON_MODULE(functions)
+{
+    TalkError = object(handle<>(PyErr_NewExceptionWithDoc("talk.functions.TalkError",TalkError_Doc,
+                                                          nullptr,nullptr)));
+    scope().attr("TalkError")=TalkError;
+
+    register_exception_translator<talk::talk_error>(talk_error_translator);
+   
+}
+    \end{minted}
 \end{frame}
 
 %%%---------------------------------------------------------------------------

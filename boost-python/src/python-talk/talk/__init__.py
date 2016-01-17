@@ -21,3 +21,5 @@
 from . functions import div
 from . functions import add
 from . functions import TalkError
+
+from . sensor import Sensor

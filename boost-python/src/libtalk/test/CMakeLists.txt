@@ -7,10 +7,10 @@ target_link_libraries(functions_test talk
 add_test(NAME "test::functions" COMMAND functions_test)
 add_dependencies(check functions_test)
 
-#add_executable(named_object_test named_object_test.cpp)
-#target_link_libraries(named_object_test 
-#                      mcs ${Boost_UNIT_TEST_FRAMEWORK_LIBRARY})
-#add_test(NAME "test::named_object" COMMAND named_object_test)
+add_executable(sensor_test sensor_test.cpp)
+target_link_libraries(sensor_test 
+                      talk ${Boost_UNIT_TEST_FRAMEWORK_LIBRARY})
+add_test(NAME "test::sensor" COMMAND sensor_test)
 #
 #add_executable(step_motor_test step_motor_test.cpp)
 #target_link_libraries(step_motor_test 

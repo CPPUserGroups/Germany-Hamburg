@@ -18,18 +18,30 @@
 //
 // ===========================================================================
 
-#include <mcs/sensor.hpp>
+#include <talk/sensor.hpp>
 
 
-namespace mcs{
+namespace talk{
 
-     
-    sensor::sensor():named_object()
+    //------------------------------------------------------------------------
+    sensor::sensor():
+        _value(0.0)
     {}
 
     //------------------------------------------------------------------------
-    sensor::sensor(const std::string &n,const std::string &u):
-        named_object(n,u)
-    {}
+    sensor::sensor(double v):
+        _value(v)
+    { }
 
+    //------------------------------------------------------------------------
+    double sensor::get_value() const
+    {
+        return _value;
+    }
+
+    //------------------------------------------------------------------------
+    void sensor::set_value(double v)
+    {
+        _value = v;
+    }
 }
