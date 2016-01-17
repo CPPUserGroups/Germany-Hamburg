@@ -33,12 +33,10 @@ BOOST_PYTHON_FUNCTION_OVERLOADS(add_overloads,talk::add,2,2);
 //=================implementation of the python extension======================
 BOOST_PYTHON_MODULE(functions)
 {
-
     def("div",talk::div);
 
     register_exception_translator<talk::division_by_zero>(division_by_zero_translator);
    
     def("add",(double (*)(double,double))2,add_overloads());
     def("add",(int (*)(int,int))2,add_overloads());
-    
 }

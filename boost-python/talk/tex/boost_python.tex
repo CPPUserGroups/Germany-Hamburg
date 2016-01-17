@@ -1,24 +1,42 @@
 
 %%%---------------------------------------------------------------------------
-\begin{frame}[fragile]{Initiate a Python module}
+\begin{frame}[fragile]{The most basic extension source file}
 Need an equivalent to the init-function in Pythons C-API.
 
-\todo[inline]{show here the most basic function}
+\inputminted[fontsize=\tiny,linenos,
+             firstline=20,
+             lastline=42]{cpp}{../src/python-talk/src/functions.cpp}
+
 \end{frame}
 
 %%%---------------------------------------------------------------------------
-\begin{frame}[fragile]{Building \texttt{boost::python} modules}
+\begin{frame}[fragile]{Building \texttt{boost::python} package}
+    Directory layout of a project
+    \begin{center}
+        \begin{tabular}{ll}
+            \texttt{setup.py} & script to finally run the build \\
+            \texttt{src/}     & directory with C++ source files \\
+            \texttt{test/}    & Python unit tests \\
+            \texttt{talk/}    & directory with Python code of the package \\
+        \end{tabular}
+    \end{center}
+    \vspace{0.05\textheight}
     \texttt{boost::python} modules are built like any other non-native 
-    Python module with \texttt{setup.py}
-    \todo[inline]{show here a minimal setup.py script}
-
+    Python package with C extensions by means of \texttt{setup.py}
+    \vspace{0.05\textheight}
     \begin{minted}{bash}
-$ python setup.py install --user
+$ python setup.py install --user 
     \end{minted}
     or 
     \begin{minted}{bash}
 $ python3 setup.py install --user
     \end{minted}
+\end{frame}
+
+%%%---------------------------------------------------------------------------
+\begin{frame}[fragile]{The \texttt{setup.py} file}
+    \inputminted[fontsize=\tiny,linenos]{python}
+    {../src/python-talk/setup.py}
 \end{frame}
 
 %%%---------------------------------------------------------------------------
