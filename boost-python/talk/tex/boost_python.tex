@@ -16,8 +16,8 @@ Need an equivalent to the init-function in Pythons C-API.
         \begin{tabular}{ll}
             \texttt{setup.py} & script to finally run the build \\
             \texttt{src/}     & directory with C++ source files \\
-            \texttt{test/}    & Python unit tests \\
             \texttt{talk/}    & directory with Python code of the package \\
+            \texttt{talk/test/}    & Python unit tests \\
         \end{tabular}
     \end{center}
     \vspace{0.05\textheight}
@@ -122,12 +122,16 @@ BOOST_PYTHON_MODULE(functions)
         \item translate the C++ exception into an existing Python exception
         \item create a new Python exception in the extension modules scope
     \end{enumerate}
-    \vspace{0.1\textheight}
+    \vspace{0.05\textheight}
     \begin{center}
         \textbf{The first approach is recommended and should be used whenever
         possible!}
     \end{center}
 
+    \begin{center}
+    \inputminted[fontsize=\tiny,firstline=24]{cpp}
+    {../src/libtalk/include/talk/exceptions.hpp}
+    \end{center}
 \end{frame}
 
 %%%---------------------------------------------------------------------------
@@ -157,7 +161,10 @@ BOOST_PYTHON_MODULE(functions)
 %%%---------------------------------------------------------------------------
 \begin{frame}[fragile]{Handling exceptions - new exception}
 
-    \begin{minted}[fontsize=\tiny]{cpp}
+\begin{tikzpicture}
+    \node{
+        \begin{minipage}{\linewidth}
+        \begin{minted}[fontsize=\tiny]{cpp}
 #include <boost/python.hpp>
 #include <talk/functions.hpp>
 #include <talk/exceptions.hpp>
@@ -172,7 +179,6 @@ void talk_error_translator(const talk::talk_error &)
     PyErr_SetString(TalkError.ptr(),"An internal error");
 }
 
-//=================implementation of the python extension======================
 BOOST_PYTHON_MODULE(functions)
 {
     TalkError = object(handle<>(PyErr_NewExceptionWithDoc("talk.functions.TalkError",TalkError_Doc,
@@ -182,17 +188,126 @@ BOOST_PYTHON_MODULE(functions)
     register_exception_translator<talk::talk_error>(talk_error_translator);
    
 }
-    \end{minted}
+        \end{minted}
+        \end{minipage}
+    };
+%    \node[draw,thick,text width=0.2\linewidth] (static variable) at (2cm,3cm) 
+%    {\small static variable for the new exception};
+%    \draw[black,thick] (-2.7,1.2) -- (static variable.west);
+%    
+%    \node[draw,thick,text width=0.2\linewidth] (docstring) at (4cm,1.5cm) 
+%    {\small doc string};
+\end{tikzpicture}
+\begin{enumerate}
+    \item static object for the new execption and its doc string
+    \item implement translation function
+    \item create exception object and register it in the modules' scope
+    \item register the translation function
+\end{enumerate}
 \end{frame}
 
 %%%---------------------------------------------------------------------------
 \begin{frame}[fragile]{C++ classes to Python}
-    \todo[inline]{how to wrap classes}
+    \begin{columns}[t]
+        \begin{column}{0.4\linewidth}
+            Consider a simple class 
+            \inputminted[fontsize=\tiny,firstline=22]{cpp}
+            {../src/libtalk/include/talk/sensor.hpp}
+        \end{column}
+        \hfill
+        \begin{column}{0.5\linewidth}
+            Wrapper code
+            \begin{minted}[fontsize=\tiny]{cpp}
+#include <boost/python.hpp>
+#include <talk/sensor.hpp>
+
+using namespace boost::python;
+
+BOOST_PYTHON_MODULE(sensor)
+{
+    class_<talk::sensor>("Sensor")
+        .def("get_value",&talk::sensor::get_value)
+        .def("set_value",&talk::sensor::set_value);
+}
+            \end{minted}
+        \end{column}
+    \end{columns}
+    \vspace{0.03\textheight}
+    In Python we finally get something like
+    \begin{minted}[fontsize=\tiny]{python}
+>>> from talk import Sensor
+>>> s = Sensor()
+>>> s.set_value(0.23)
+>>> print(s.get_value())
+0.23
+    \end{minted}
 \end{frame}
 
 %%%---------------------------------------------------------------------------
 \begin{frame}[fragile]{Dealing with constructors}
-    \todo[inline]{describe how to make constructors available}
+    The C++ class has more than one constructor.
+    \vspace{0.02\textheight}
+    \begin{minted}[fontsize=\tiny]{cpp}
+#include <boost/python.hpp>
+#include <talk/sensor.hpp>
+
+using namespace boost::python;
+
+BOOST_PYTHON_MODULE(sensor)
+{
+    class_<talk::sensor>("Sensor")
+        .def(init<>())
+        .def(init<double>())
+        .def("get_value",&talk::sensor::get_value)
+        .def("set_value",&talk::sensor::set_value);
+}
+    \end{minted}
+    \vspace{0.03\textheight}
+    Get in Python
+    \vspace{0.02\textheight}
+    \begin{minted}[fontsize=\tiny]{python}
+>>> from talk import Sensor
+>>> s = Sensor()
+>>> print(s.get_value())
+0.0
+>>> s = Sensor(2.3)
+>>> print(s.get_value())
+0.23
+    \end{minted}
+\end{frame}
+
+%%%---------------------------------------------------------------------------
+\begin{frame}[fragile]{Python properties}
+    Properties are an alternative way how to access the attributes of a Python
+    class 
+    \vspace{0.02\textheight}
+    \begin{minted}[fontsize=\tiny]{cpp}
+#include <boost/python.hpp>
+#include <talk/sensor.hpp>
+
+using namespace boost::python;
+
+BOOST_PYTHON_MODULE(sensor)
+{
+    class_<talk::sensor>("Sensor")
+        .def(init<>())
+        .def(init<double>())
+        .def("get_value",&talk::sensor::get_value)
+        .def("set_value",&talk::sensor::set_value)
+        .add_property("value",&talk::sensor::get_value,
+                          &talk::sensor::set_value); 
+}
+    \end{minted}
+    \vspace{0.03\textheight}
+    Get in Python
+    \vspace{0.02\textheight}
+    \begin{minted}[fontsize=\tiny]{python}
+>>> from talk import Sensor
+>>> s = Sensor()
+>>> s.value = 12.23
+>>> print(s.value)
+12.23
+    \end{minted}
 \end{frame}
 
 %%%---------------------------------------------------------------------------
@@ -201,8 +316,14 @@ BOOST_PYTHON_MODULE(functions)
 \end{frame}
 
 %%%---------------------------------------------------------------------------
-\begin{frame}[fragile]{Python properties}
-    \todo[inline]{how to do properties}
+\begin{frame}[fragile]{Virtual functions}
+    \todo[inline]{Virtual functions are only an issue if we want to overload
+    them in Python}
+\end{frame}
+
+%%%---------------------------------------------------------------------------
+\begin{frame}[fragile]{Pythons' special class methods}
+    \todo[inline]{Show here something about operator overloading}
 \end{frame}
 
 

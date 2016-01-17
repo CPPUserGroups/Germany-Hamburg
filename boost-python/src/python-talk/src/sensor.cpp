@@ -25,7 +25,11 @@ using namespace boost::python;
 BOOST_PYTHON_MODULE(sensor)
 {
     class_<talk::sensor>("Sensor")
+        .def(init<>())
+        .def(init<double>())
         .def("get_value",&talk::sensor::get_value)
-        .def("set_value",&talk::sensor::set_value);
+        .def("set_value",&talk::sensor::set_value)
+        .add_property("value",&talk::sensor::get_value,
+                          &talk::sensor::set_value); 
 }
 
