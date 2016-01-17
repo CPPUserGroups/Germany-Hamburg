@@ -21,10 +21,6 @@
 #include <talk/functions.hpp>
 #include <talk/exceptions.hpp>
 
-extern "C"{
-#include <Python.h>
-}
-
 using namespace boost::python;
 
 static object TalkError;
