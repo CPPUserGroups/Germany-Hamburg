@@ -23,3 +23,4 @@ from .add_test import *
 from .test_exceptions import *
 from .sensor_test import *
 from .motor_test import *
+from .step_motor_test import *

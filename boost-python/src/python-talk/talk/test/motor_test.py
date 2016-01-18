@@ -21,7 +21,7 @@
 import unittest
 from talk import Motor
 
-class sensor_test(unittest.TestCase):
+class motor_test(unittest.TestCase):
 
     def test_default_construction(self):
         s = Motor()
@@ -42,3 +42,7 @@ class sensor_test(unittest.TestCase):
         s = Motor()
         s.lower_limit = 10.34
         self.assertAlmostEqual(s.lower_limit,10.34,8)
+
+    def test_position(self):
+        m = Motor()
+        self.assertAlmostEqual(m.position,0.0,8)

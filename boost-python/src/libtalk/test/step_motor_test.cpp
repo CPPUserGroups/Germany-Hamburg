@@ -3,107 +3,96 @@
 //
 // This file is part of <PROJECT>.
 //
-// libmcs is free software: you can redistribute it and/or modify
+// libtalk is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 2 of the License, or
 // (at your option) any later version.
 //
-// libmcs is distributed in the hope that it will be useful,
+// libtalk is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with libmcs.  If not, see <http://www.gnu.org/licenses/>.
+// along with libtalk.  If not, see <http://www.gnu.org/licenses/>.
 // 
 // ===========================================================================
 #define BOOST_TEST_DYN_LINK
-#define BOOST_TEST_MODULE Testing base class step_motor
+#define BOOST_TEST_MODULE Testing class step_motor
 
 #include <boost/test/unit_test.hpp>
-#include <mcs/step_motor.hpp>
+#include <boost/test/floating_point_comparison.hpp>
+#include <talk/step_motor.hpp>
 
-using namespace mcs;
+using namespace talk;
 
 BOOST_AUTO_TEST_SUITE(step_motor_test)
 
     BOOST_AUTO_TEST_CASE(default_construction)
     {
-        step_motor o;
-        BOOST_CHECK(o.name().empty());
-        BOOST_CHECK(o.unit().empty());
+        step_motor m;
+        BOOST_CHECK_CLOSE_FRACTION(m.get_step_size(),0.0,1.e-8);
+        BOOST_CHECK_CLOSE_FRACTION(m.get_position(),0.0,1.e-8);
     }
 
     //------------------------------------------------------------------------
     BOOST_AUTO_TEST_CASE(standard_construction)
     {
-        step_motor o("motor","m");
-        BOOST_CHECK_EQUAL(o.name(),"motor");
-        BOOST_CHECK_EQUAL(o.unit(),"m");
+        step_motor m(0.001,12.3,-40.0,50.0);
+        BOOST_CHECK_CLOSE_FRACTION(m.get_step_size(),0.001,1.e-8);
+        BOOST_CHECK_CLOSE_FRACTION(m.get_position(),12.3,1.e-8);
+        BOOST_CHECK_CLOSE_FRACTION(m.get_upper_limit(),50.0,1.e-8);
+        BOOST_CHECK_CLOSE_FRACTION(m.get_lower_limit(),-40.0,1.e-8);
     }
 
     //------------------------------------------------------------------------
     BOOST_AUTO_TEST_CASE(copy_construction)
     {
-        step_motor o("motor","m");
-        step_motor o2(o);
-        BOOST_CHECK_EQUAL(o2.name(),"motor");
-        BOOST_CHECK_EQUAL(o2.unit(),"m");
+        step_motor m1(0.001,12.3,-40.0,50.0);
+        step_motor m2(m1);
+        BOOST_CHECK_CLOSE_FRACTION(m2.get_step_size(),
+                                   m1.get_step_size(),1.e-8);
+        BOOST_CHECK_CLOSE_FRACTION(m2.get_position(),
+                                   m1.get_position(),1.e-8);
+        BOOST_CHECK_CLOSE_FRACTION(m2.get_upper_limit(),
+                                   m1.get_upper_limit(),1.e-8);
+        BOOST_CHECK_CLOSE_FRACTION(m2.get_lower_limit(),
+                                   m1.get_lower_limit(),1.e-8);
     }
 
-    //------------------------------------------------------------------------
-    BOOST_AUTO_TEST_CASE(move_construction)
-    {
-        step_motor o("motor","m");
-        step_motor o2(std::move(o));
-        BOOST_CHECK_EQUAL(o2.name(),"motor");
-        BOOST_CHECK_EQUAL(o2.unit(),"m");
-        BOOST_CHECK(o.name().empty());
-        BOOST_CHECK(o.unit().empty());
-    }
 
     //------------------------------------------------------------------------
     BOOST_AUTO_TEST_CASE(copy_assignment)
     {
-        step_motor o("motor","m");
-        step_motor o2;
+        step_motor m1(0.001,12.3,-40.0,50.0);
+        step_motor m2;
 
-        o2 = o;
-
-        BOOST_CHECK_EQUAL(o2.name(),"motor");
-        BOOST_CHECK_EQUAL(o2.unit(),"m");
-        BOOST_CHECK_EQUAL(o.name(),"motor");
-        BOOST_CHECK_EQUAL(o.unit(),"m");
+        m2 = m1;
+        BOOST_CHECK_CLOSE_FRACTION(m2.get_step_size(),
+                                   m1.get_step_size(),1.e-8);
+        BOOST_CHECK_CLOSE_FRACTION(m2.get_position(),
+                                   m1.get_position(),1.e-8);
+        BOOST_CHECK_CLOSE_FRACTION(m2.get_upper_limit(),
+                                   m1.get_upper_limit(),1.e-8);
+        BOOST_CHECK_CLOSE_FRACTION(m2.get_lower_limit(),
+                                   m1.get_lower_limit(),1.e-8);
     }
 
     //------------------------------------------------------------------------
-    BOOST_AUTO_TEST_CASE(move_assignment)
+    BOOST_AUTO_TEST_CASE(test_set_step_size)
     {
-        step_motor o("motor","m");
-        step_motor o2;
-
-        o2 = std::move(o);
-
-        BOOST_CHECK_EQUAL(o2.name(),"motor");
-        BOOST_CHECK_EQUAL(o2.unit(),"m");
-        BOOST_CHECK(o.name().empty());
-        BOOST_CHECK(o.unit().empty());
-
+        step_motor m;
+        m.set_step_size(0.0023);
+        BOOST_CHECK_CLOSE_FRACTION(m.get_step_size(),0.0023,1.e-8);
     }
 
     //------------------------------------------------------------------------
-    BOOST_AUTO_TEST_CASE(test_name)
+    BOOST_AUTO_TEST_CASE(test_set_position)
     {
-        named_object o;
-        o.name("motor");
-        BOOST_CHECK_EQUAL(o.name(),"motor");
+        step_motor s(0.002,12.234,-40.,40.);
+
+        s.set_position(25.23);
+        BOOST_CHECK_CLOSE_FRACTION(s.get_position(),25.23,1.e-8);
     }
 
-    //------------------------------------------------------------------------
-    BOOST_AUTO_TEST_CASE(test_unit)
-    {
-        named_object o;
-        o.unit("mm");
-        BOOST_CHECK_EQUAL(o.unit(),"mm");
-    }
 BOOST_AUTO_TEST_SUITE_END()

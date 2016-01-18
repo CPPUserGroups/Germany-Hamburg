@@ -21,7 +21,7 @@
 
 #include "motor.hpp"
 
-namespace mcs{
+namespace talk{
 
     //!
     //! \brief step motor model 
@@ -31,21 +31,23 @@ namespace mcs{
     //! requires to reach its position is determined only by its resolution
     //! which is given in degrees/step and the velocity in steps/second. 
     //! 
-    //!
-    //! 
     class step_motor : public motor
     {
         private:
-            double _position;    //! current position of the motor
-            double _resolution;  //! degrees per step
+            double _step_size;   //! degrees per step
+            double _current_pos;
         public:
             step_motor();
+            step_motor(double s,double cpos,double ulimit,double llimit);
+            step_motor(const step_motor &m) = default;
+
+            step_motor &operator=(const step_motor& m) = default;
 
             virtual double get_position() const;
             virtual void set_position(double p);
 
-            double get_resolution() const;
-            void set_resolution(double r);
+            double get_step_size() const;
+            void set_step_size(double r);
     };
 }
 

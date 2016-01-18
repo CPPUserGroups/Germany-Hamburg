@@ -19,6 +19,7 @@
 
 #include <boost/python.hpp>
 #include <talk/motor.hpp>
+#include <talk/step_motor.hpp>
 
 using namespace boost::python;
 
@@ -31,7 +32,15 @@ BOOST_PYTHON_MODULE(motors)
                                     &talk::motor::set_upper_limit)
         .add_property("lower_limit",&talk::motor::get_lower_limit,
                                     &talk::motor::set_lower_limit)
-        .def("position",&talk::motor::get_position);
-                        
+        .add_property("position",&talk::motor::get_position);
+                       
+
+    class_<talk::step_motor,bases<talk::motor>>("StepMotor")
+        .def(init<>())
+        .def(init<double,double,double,double>())
+        .add_property("step_size",&talk::step_motor::get_step_size,
+                                  &talk::step_motor::set_step_size)
+        .add_property("position",&talk::step_motor::get_position,
+                                 &talk::step_motor::set_position);
 }
 

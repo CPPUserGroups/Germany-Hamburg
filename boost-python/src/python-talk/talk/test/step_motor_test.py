@@ -18,10 +18,27 @@
 # 
 # ===========================================================================
 
-from . functions import div
-from . functions import add
-from . functions import TalkError
+import unittest
+from talk import StepMotor
 
-from . sensor import Sensor
-from . motors import Motor
-from . motors import StepMotor
+class step_motor_test(unittest.TestCase):
+
+    def test_default_construction(self):
+        m = StepMotor()
+        self.assertAlmostEqual(m.upper_limit,0.0,8)
+        self.assertAlmostEqual(m.lower_limit,0.0,8)
+        self.assertAlmostEqual(m.position,0.0,8)
+        self.assertAlmostEqual(m.step_size,0.0,8)
+
+    def test_construction(self):
+        m = StepMotor(0.001,23.44,-90.0,90.0)
+
+        self.assertAlmostEqual(m.upper_limit,90.0)
+        self.assertAlmostEqual(m.lower_limit,-90.0)
+        self.assertAlmostEqual(m.position,23.44,8)
+        self.assertAlmostEqual(m.step_size,0.001,8)
+
+    def test_set_position(self):
+        m = StepMotor(0.001,23.44,-90.0,90.0)
+        m.position = 33.456
+        self.assertAlmostEqual(m.position,33.456,8)

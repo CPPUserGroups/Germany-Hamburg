@@ -17,6 +17,10 @@ target_link_libraries(motor_test
                       talk ${Boost_UNIT_TEST_FRAMEWORK_LIBRARY})
 add_test(NAME "test::motor" COMMAND motor_test)
 
+add_executable(step_motor_test step_motor_test.cpp)
+target_link_libraries(step_motor_test 
+                      talk ${Boost_UNIT_TEST_FRAMEWORK_LIBRARY})
+add_test(NAME "test::step_motor" COMMAND step_motor_test)
 #
 #add_executable(step_motor_test step_motor_test.cpp)
 #target_link_libraries(step_motor_test 
