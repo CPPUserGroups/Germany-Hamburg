@@ -19,33 +19,31 @@
 // ===========================================================================
 #pragma once
 
-#include "motor.hpp"
+namespace talk{
 
-namespace mcs{
-
-    //!
-    //! \brief step motor model 
-    //!
-    //! Model of a step motor (a moveable). The current model is rather simple
-    //! as it does not takes acceleration into account. The time the motor 
-    //! requires to reach its position is determined only by its resolution
-    //! which is given in degrees/step and the velocity in steps/second. 
-    //! 
-    //!
-    //! 
-    class step_motor : public motor
+    class motor 
     {
         private:
-            double _position;    //! current position of the motor
-            double _resolution;  //! degrees per step
+            double _upper_limit; 
+            double _lower_limit; 
         public:
-            step_motor();
+            motor();
+            motor(double llimit,double ulimit);
+            motor(const motor &m) = default;
+            virtual ~motor();
+
+            motor &operator=(const motor &m) = default;
 
             virtual double get_position() const;
             virtual void set_position(double p);
 
-            double get_resolution() const;
-            void set_resolution(double r);
+            double get_upper_limit() const;
+            void set_upper_limit(double limit);
+
+            double get_lower_limit() const;
+            void set_lower_limit(double limit);
     };
+
+//end of namespace
 }
 

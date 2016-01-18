@@ -23,3 +23,4 @@ from . functions import add
 from . functions import TalkError
 
 from . sensor import Sensor
+from . motors import Motor

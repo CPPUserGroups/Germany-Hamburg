@@ -1,6 +1,7 @@
 set(HEADERS functions.hpp
             exceptions.hpp
             sensor.hpp
+            motor.hpp
     )
 
 install(FILES ${HEADERS} 

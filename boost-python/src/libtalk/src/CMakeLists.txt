@@ -1,5 +1,6 @@
 set(SOURCES functions.cpp 
             sensor.cpp
+            motor.cpp
             )
 
 

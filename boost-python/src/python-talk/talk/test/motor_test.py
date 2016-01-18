@@ -18,8 +18,27 @@
 # 
 # ===========================================================================
 
-from .div_test import *
-from .add_test import *
-from .test_exceptions import *
-from .sensor_test import *
-from .motor_test import *
+import unittest
+from talk import Motor
+
+class sensor_test(unittest.TestCase):
+
+    def test_default_construction(self):
+        s = Motor()
+        self.assertAlmostEqual(s.upper_limit,0.0,8)
+        self.assertAlmostEqual(s.lower_limit,0.0,8)
+
+    def test_construction(self):
+        s = Motor(-90.0,90.0)
+        self.assertAlmostEqual(s.upper_limit,90.0)
+        self.assertAlmostEqual(s.lower_limit,-90.0)
+
+    def test_set_upper_limit(self):
+        s = Motor()
+        s.upper_limit = 230.0
+        self.assertAlmostEqual(s.upper_limit,230.0,8)
+
+    def test_set_lower_limit(self):
+        s = Motor()
+        s.lower_limit = 10.34
+        self.assertAlmostEqual(s.lower_limit,10.34,8)

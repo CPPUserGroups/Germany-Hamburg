@@ -21,74 +21,67 @@
 #define BOOST_TEST_MODULE Testing base class moveable
 
 #include <boost/test/unit_test.hpp>
-#include <mcs/moveable.hpp>
+#include <boost/test/floating_point_comparison.hpp>
+#include <talk/motor.hpp>
 
-using namespace mcs;
+using namespace talk;
 
-BOOST_AUTO_TEST_SUITE(named_object_test)
+BOOST_AUTO_TEST_SUITE(motor_test)
 
     BOOST_AUTO_TEST_CASE(default_construction)
     {
-        moveable o;
-        BOOST_CHECK(o.name().empty());
-        BOOST_CHECK(o.unit().empty());
+        motor m;
+        BOOST_CHECK_CLOSE_FRACTION(m.get_upper_limit(),0.0,1.e-12);
+        BOOST_CHECK_CLOSE_FRACTION(m.get_lower_limit(),0.0,1.e-12);
     }
 
     //------------------------------------------------------------------------
     BOOST_AUTO_TEST_CASE(standard_construction)
     {
-        moveable o("motor","m");
-        BOOST_CHECK_EQUAL(o.name(),"motor");
-        BOOST_CHECK_EQUAL(o.unit(),"m");
+        motor m(-4.3,50.23);
+        BOOST_CHECK_CLOSE_FRACTION(m.get_upper_limit(),50.23,1.e-12);
+        BOOST_CHECK_CLOSE_FRACTION(m.get_lower_limit(),-4.3,1.e-12);
     }
 
     //------------------------------------------------------------------------
     BOOST_AUTO_TEST_CASE(copy_construction)
     {
-        moveable o("motor","m");
-        moveable o2(o);
-        BOOST_CHECK_EQUAL(o2.name(),"motor");
-        BOOST_CHECK_EQUAL(o2.unit(),"m");
+        motor m1(-39.2,23.1);
+        motor m2(m1);
+        BOOST_CHECK_CLOSE_FRACTION(m2.get_upper_limit(),
+                                   m1.get_upper_limit(),1.e-12);
+        BOOST_CHECK_CLOSE_FRACTION(m2.get_lower_limit(),
+                                   m1.get_lower_limit(),1.e-12);
     }
-
-    //------------------------------------------------------------------------
-    BOOST_AUTO_TEST_CASE(move_construction)
-    {
-        moveable o("motor","m");
-        moveable o2(std::move(o));
-        BOOST_CHECK_EQUAL(o2.name(),"motor");
-        BOOST_CHECK_EQUAL(o2.unit(),"m");
-        BOOST_CHECK(o.name().empty());
-        BOOST_CHECK(o.unit().empty());
-    }
-
+    
     //------------------------------------------------------------------------
     BOOST_AUTO_TEST_CASE(copy_assignment)
     {
-        moveable o("motor","m");
-        moveable o2;
+        motor m1(-90,90);
+        motor m2;
 
-        o2 = o;
-
-        BOOST_CHECK_EQUAL(o2.name(),"motor");
-        BOOST_CHECK_EQUAL(o2.unit(),"m");
-        BOOST_CHECK_EQUAL(o.name(),"motor");
-        BOOST_CHECK_EQUAL(o.unit(),"m");
+        m2 = m1;
+        BOOST_CHECK_CLOSE_FRACTION(m2.get_upper_limit(),
+                                   m1.get_upper_limit(),1.e-12);
+        BOOST_CHECK_CLOSE_FRACTION(m2.get_lower_limit(),
+                                   m1.get_lower_limit(),1.e-12);
+    }
+    
+    //------------------------------------------------------------------------
+    BOOST_AUTO_TEST_CASE(set_upper_limit)
+    {
+        motor m;
+        m.set_upper_limit(100.2);
+        BOOST_CHECK_CLOSE_FRACTION(m.get_upper_limit(),100.2,1.e-12);
     }
 
     //------------------------------------------------------------------------
-    BOOST_AUTO_TEST_CASE(move_assignment)
+    BOOST_AUTO_TEST_CASE(set_lower_limit)
     {
-        moveable o("motor","m");
-        moveable o2;
-
-        o2 = std::move(o);
-
-        BOOST_CHECK_EQUAL(o2.name(),"motor");
-        BOOST_CHECK_EQUAL(o2.unit(),"m");
-        BOOST_CHECK(o.name().empty());
-        BOOST_CHECK(o.unit().empty());
-
+        motor m;
+        m.set_lower_limit(100.2);
+        BOOST_CHECK_CLOSE_FRACTION(m.get_lower_limit(),100.2,1.e-12);
     }
+
 
 BOOST_AUTO_TEST_SUITE_END()
