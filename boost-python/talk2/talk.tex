@@ -1,0 +1,69 @@
+%% ---------------------------------------------------------------------------
+%% This file is part of the "Boost Python" talk.
+%%
+%% Copyright 2015 by Eugen Wintersberger <eugen.wintersberger@gmail.com>
+%%
+%% This work is licensed under the Creative Commons
+%% Attribution-NonCommercial-ShareAlike 4.0 International License. To view 
+%% a copy of this license, visit 
+%% http://creativecommons.org/licenses/by-nc-sa/4.0/.
+%% ---------------------------------------------------------------------------
+\documentclass{beamer}
+\usepackage{tikz}
+\usepackage{pgfpages}
+\usepackage{todonotes}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{hyperref}
+\usepackage{copyrightbox}
+\usepackage{minted}
+\usepgflibrary{shapes.multipart}
+\usepgflibrary{shapes.symbols}
+\usetikzlibrary{positioning}
+\usetikzlibrary{calc}
+\usetikzlibrary{fit}
+\usetikzlibrary{datavisualization}
+
+
+\setbeamercolor{frametitle}{fg=black,bg=white}
+\setbeamerfont{frametitle}{series=\bfseries}
+\setbeamercolor{part page}{fg=black,bg=white}
+\setbeamerfont{part page}{series=\bfseries}
+\setbeamercolor{part title}{fg=black}
+\setbeamercolor{part subtitle}{fg=black}
+\setbeamercolor{author}{fg=white}
+\setbeamercolor{date}{fg=white}
+
+
+
+\setbeamercolor{title}{fg=black}
+\setbeamerfont{title}{series=\bfseries,size=\Huge}
+\setbeamercolor{subtitle}{fg=black}
+
+\setbeamercolor{item}{fg=black}
+
+
+%\setbeameroption{show notes on second screen}
+
+\title{{\Huge Boost Python}}
+\subtitle{From C++ to Python and back \\ Part II}
+\author{Eugen Wintersberger\\ \small{eugen.wintersberger@gmail.com}}
+\date{April 20, 2016}
+
+\begin{document}
+
+%%%===========================================================================
+\frame{\titlepage}
+
+%%%===========================================================================
+\part{\texttt{boost::python} - API}
+\section{boost::python - API}
+\frame{\partpage}
+
+%%%===========================================================================
+\part{Object ownership}
+\section{Object ownership}
+\frame{\partpage}
+
+
+\end{document}
