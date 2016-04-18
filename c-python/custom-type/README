@@ -1,0 +1,3 @@
+setup.py creates a module from a file cust.cpp. So to try one 
+of teh cust-*.cpp examples just copy the appropriate cust-*.cpp
+file to cust.cpp before building the python module. 

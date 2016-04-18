@@ -1,0 +1,18 @@
+create virtual environment:
+
+virtualenv -p python3 cpp
+
+activate virtual environment:
+
+source cpp/bin/activate
+which python # verify we are using the right python
+
+build and install extension:
+
+python setup.py install
+
+and finally using the extension:
+
+import cppsample
+cppsample.get_answer()
+help(cppsample.get_answer)
