@@ -18,18 +18,56 @@
 // ===========================================================================
 
 #include <boost/python.hpp>
+#include <boost/python/stl_iterator.hpp>
+#include <string>
 #include <talk/sensor.hpp>
+#include <talk/device.hpp>
+#include <talk/state.hpp>
 
 using namespace boost::python;
 
+
+dict create_sensors(list names)
+{
+    using iterator_type = stl_input_iterator<std::string>;
+    dict sensors;
+
+    iterator_type names_begin(names);
+    iterator_type names_end;
+
+    for(;names_begin!=names_end;++names_begin)
+    {
+        sensors[*names_begin] = talk::sensor(0.0);
+    }
+
+    return sensors;
+}
+
 BOOST_PYTHON_MODULE(sensor)
 {
-    class_<talk::sensor>("Sensor")
-        .def(init<>())
+    class_<talk::sensor>("Sensor",no_init)
         .def(init<double>())
         .def("get_value",&talk::sensor::get_value)
         .def("set_value",&talk::sensor::set_value)
         .add_property("value",&talk::sensor::get_value,
                           &talk::sensor::set_value); 
+
+
+    class_<talk::device>("Device",no_init)
+        .def("get_value",&talk::device::get_value)
+        .def("set_value",&talk::device::set_value)
+        .add_property("value",&talk::device::get_value,
+                          &talk::device::set_value); 
+
+    /*
+    def("create_device",talk::create_device,
+                        return_internal_reference<1>());
+                       */
+
+    def("create_sensors",create_sensors);
+
+    enum_<talk::system_state>("system_state")
+        .value("ONLINE",talk::system_state::ONLINE)
+        .value("OFFLINE",talk::system_state::OFFLINE);
 }
 

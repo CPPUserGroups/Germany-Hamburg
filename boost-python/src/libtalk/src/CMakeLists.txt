@@ -2,6 +2,7 @@ set(SOURCES functions.cpp
             sensor.cpp
             motor.cpp
             step_motor.cpp
+            device.cpp
             )
 
 

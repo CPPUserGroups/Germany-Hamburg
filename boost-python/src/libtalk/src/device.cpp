@@ -17,20 +17,31 @@
 // along with libmcs.  If not, see <http://www.gnu.org/licenses/>.
 //
 // ===========================================================================
-#pragma once 
 
-namespace talk
-{
-    class sensor 
+#include <talk/device.hpp>
+
+
+namespace talk{
+
+    //------------------------------------------------------------------------
+    device::device(sensor *s):
+        _sensor(s)
+    { }
+
+    //------------------------------------------------------------------------
+    double device::get_value() const
     {
-        private:
-            double _value; 
-        public:
-//            sensor();
-            sensor(double v);
+        return _sensor->get_value();
+    }
 
-            double get_value() const;
-            void set_value(double v);
-    };
-//end of namespace 
+    //------------------------------------------------------------------------
+    void device::set_value(double v)
+    {
+        _sensor->set_value(v);
+    }
+
+    device create_device(sensor *s)
+    {
+        return device(s);
+    }
 }

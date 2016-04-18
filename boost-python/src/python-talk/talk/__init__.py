@@ -25,3 +25,6 @@ from . functions import TalkError
 from . sensor import Sensor
 from . motors import Motor
 from . motors import StepMotor
+from . sensor import Device
+from . sensor import create_sensors
+from . sensor import system_state

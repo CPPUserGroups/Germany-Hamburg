@@ -1,0 +1,49 @@
+%% ---------------------------------------------------------------------------
+%% This file is part of the "Boost Python" talk.
+%%
+%% Copyright 2015 by Eugen Wintersberger <eugen.wintersberger@gmail.com>
+%%
+%% This work is licensed under the Creative Commons
+%% Attribution-NonCommercial-ShareAlike 4.0 International License. To view 
+%% a copy of this license, visit 
+%% http://creativecommons.org/licenses/by-nc-sa/4.0/.
+%% ---------------------------------------------------------------------------
+
+%%%===========================================================================
+\begin{frame}[fragile]{Enumerations in C++ and Python}
+
+    In C++ enumerations are defined either
+    \begin{minted}[fontsize=\small]{cpp}
+enum { ONLINE, OFFLINE };
+enum class system_state
+{ 
+   ONLINE, 
+   OFFLINE 
+};
+    \end{minted}
+
+    \vspace{0.1\textheight}
+    In Python enumerations are available since 3.4
+    \begin{minted}[fontsize=\small]{python}
+from enum import Enum
+
+class system_state(Enum):
+    OFFLINE = 1
+    ONLINE  = 2
+    \end{minted}
+\end{frame}
+
+%%%===========================================================================
+\begin{frame}[fragile]{The \texttt{enum\_} wrapper template}
+    \texttt{boost::python} provides a special wrapper for enumerations
+    \begin{minted}{cpp}
+enum_<system_state>("system_state")
+    .value("ONLINE",system_state::ONLINE)
+    .value("OFFLINE",system_state::OFFLINE);
+    \end{minted}
+\end{frame}
+
+%%%===========================================================================
+\begin{frame}[fragile]{Usage in Python}
+world
+\end{frame}

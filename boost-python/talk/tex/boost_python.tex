@@ -1,13 +1,4 @@
 
-%%%---------------------------------------------------------------------------
-\begin{frame}[fragile]{The most basic extension source file}
-Need an equivalent to the init-function in Pythons C-API.
-
-\inputminted[fontsize=\tiny,linenos,
-             firstline=20,
-             lastline=42]{cpp}{../src/python-talk/src/functions.cpp}
-
-\end{frame}
 
 %%%---------------------------------------------------------------------------
 \begin{frame}[fragile]{Building \texttt{boost::python} package}
@@ -35,8 +26,39 @@ $ python3 setup.py install --user
 
 %%%---------------------------------------------------------------------------
 \begin{frame}[fragile]{The \texttt{setup.py} file}
-    \inputminted[fontsize=\tiny,linenos]{python}
-    {../src/python-talk/setup.py}
+    \begin{minted}[fontsize=\tiny]{python}
+#setup script for python-talk
+from __future__ import print_function
+import sys
+import os
+from setuptools import setup, find_packages, Extension
+
+boost_python_lib = 'boost_python-py{version[0]}{version[1]}'.format(version=sys.version_info)
+
+extra_compile_args = ['-std=c++11','-Wall','-Wextra',
+                      '-fdiagnostics-show-option',
+                      '-Wno-strict-prototypes']
+
+functions_ext = Extension("talk.functions",
+                          ["src/functions.cpp"],
+                          libraries = ["talk",boost_python_lib],
+                          language="c++",
+                          extra_compile_args = extra_compile_args)
+
+setup(name="talk",
+      author="Eugen Wintersberger",
+      author_email="eugen.wintersberger@gmail.com",
+      description="Python wrapper for the talk library",
+      maintainer = "Eugen Wintersberger",
+      maintainer_email = "eugen.wintersberger@gmail.com",
+      license = "GPLv2",
+      version = "1.0.0",
+      ext_modules=[functions_ext,test_exceptions_ext,sensor_ext,motors_ext],
+      packages = find_packages(),
+      test_suite="talk.test",
+      test_loader = "unittest:TestLoader",
+    )
+    \end{minted}
 \end{frame}
 
 %%%---------------------------------------------------------------------------
@@ -53,6 +75,7 @@ $ python3 setup.py install --user
     \end{minipage}
             };
 
+            \onslide<2->
             \node[right = 1cm of filename]  (wrap simple) {wrapping unique function};
             \node[draw,rectangle,below = 0.2cm of wrap simple]
             {
@@ -70,7 +93,8 @@ BOOST_PYTHON_MODULE(functions)
                     \end{minted}
                 \end{minipage}
             };
-
+            
+            \onslide<3->
             \node[below = 1cm of header file] (wrap overload) {wrapping overloaded functions};
             \node[rectangle,draw,below = 0.2cm of wrap overload]
             {
@@ -312,19 +336,51 @@ BOOST_PYTHON_MODULE(sensor)
 
 %%%---------------------------------------------------------------------------
 \begin{frame}[fragile]{Dealing with inheritance}
-    \todo[inline]{how to manage inheritance}
+    \only<1>{
+    C++ base class
+    \inputminted[fontsize=\tiny,firstline=24,lastline=45]{cpp}
+{../src/libtalk/include/talk/motor.hpp}
+}
+
+\only<2>{
+    C++ derived class
+    \inputminted[fontsize=\tiny,firstline=26,lastline=43]{cpp}
+{../src/libtalk/include/talk/step_motor.hpp}
+}
 \end{frame}
 
-%%%---------------------------------------------------------------------------
-\begin{frame}[fragile]{Virtual functions}
-    \todo[inline]{Virtual functions are only an issue if we want to overload
-    them in Python}
+\begin{frame}[fragile]{Dealing with inheritance}
+    Wrapper 
+    \begin{minted}[fontsize=\tiny]{cpp}
+#include <boost/python.hpp>
+#include <talk/motor.hpp>
+#include <talk/step_motor.hpp>
+
+using namespace boost::python;
+
+BOOST_PYTHON_MODULE(motors)
+{
+    class_<talk::motor>("Motor")
+        .def(init<>())
+        .def(init<double,double>())
+        .add_property("upper_limit",&talk::motor::get_upper_limit,
+                                    &talk::motor::set_upper_limit)
+        .add_property("lower_limit",&talk::motor::get_lower_limit,
+                                    &talk::motor::set_lower_limit)
+        .add_property("position",&talk::motor::get_position);
+                       
+
+    class_<talk::step_motor,bases<talk::motor>>("StepMotor")
+        .def(init<>())
+        .def(init<double,double,double,double>())
+        .add_property("step_size",&talk::step_motor::get_step_size,
+                                  &talk::step_motor::set_step_size)
+        .add_property("position",&talk::step_motor::get_position,
+                                 &talk::step_motor::set_position);
+}
+    \end{minted}
 \end{frame}
 
-%%%---------------------------------------------------------------------------
-\begin{frame}[fragile]{Pythons' special class methods}
-    \todo[inline]{Show here something about operator overloading}
-\end{frame}
 
 
 

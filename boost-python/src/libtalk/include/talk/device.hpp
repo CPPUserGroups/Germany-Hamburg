@@ -1,5 +1,5 @@
 //
-// (c) Copyright 2015 Eugen Wintersberger <eugen.wintersberger@gmail.com>
+// (c) Copyright 2016 Eugen Wintersberger <eugen.wintersberger@gmail.com>
 //
 // This file is part of libmcs.
 //
@@ -19,18 +19,21 @@
 // ===========================================================================
 #pragma once 
 
+#include "sensor.hpp"
+
 namespace talk
 {
-    class sensor 
+    class device 
     {
         private:
-            double _value; 
+            sensor *_sensor;
         public:
-//            sensor();
-            sensor(double v);
+            device(sensor *s);
 
             double get_value() const;
             void set_value(double v);
     };
+
+    device create_device(sensor *s);
 //end of namespace 
 }

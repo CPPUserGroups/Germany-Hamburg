@@ -27,3 +27,8 @@ add_test(NAME "test::step_motor" COMMAND step_motor_test)
 #                      mcs ${Boost_UNIT_TEST_FRAMEWORK_LIBRARY})
 #add_test(NAME "test::step_motor" COMMAND step_motor_test)
 
+add_executable(device_test device_test.cpp)
+target_link_libraries(device_test 
+                      talk ${Boost_UNIT_TEST_FRAMEWORK_LIBRARY})
+add_test(NAME "test::device" COMMAND device_test)
+

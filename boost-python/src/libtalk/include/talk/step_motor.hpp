@@ -23,31 +23,23 @@
 
 namespace talk{
 
-    //!
-    //! \brief step motor model 
-    //!
-    //! Model of a step motor (a moveable). The current model is rather simple
-    //! as it does not takes acceleration into account. The time the motor 
-    //! requires to reach its position is determined only by its resolution
-    //! which is given in degrees/step and the velocity in steps/second. 
-    //! 
-    class step_motor : public motor
-    {
-        private:
-            double _step_size;   //! degrees per step
-            double _current_pos;
-        public:
-            step_motor();
-            step_motor(double s,double cpos,double ulimit,double llimit);
-            step_motor(const step_motor &m) = default;
+class step_motor : public motor
+{
+    private:
+        double _step_size;   //! degrees per step
+        double _current_pos;
+    public:
+        step_motor();
+        step_motor(double s,double cpos,double ulimit,double llimit);
+        step_motor(const step_motor &m) = default;
 
-            step_motor &operator=(const step_motor& m) = default;
+        step_motor &operator=(const step_motor& m) = default;
 
-            virtual double get_position() const;
-            virtual void set_position(double p);
+        virtual double get_position() const;
+        virtual void set_position(double p);
 
-            double get_step_size() const;
-            void set_step_size(double r);
-    };
+        double get_step_size() const;
+        void set_step_size(double r);
+};
 }
 

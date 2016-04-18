@@ -21,16 +21,11 @@
 
 namespace talk
 {
-    class sensor 
-    {
-        private:
-            double _value; 
-        public:
-//            sensor();
-            sensor(double v);
 
-            double get_value() const;
-            void set_value(double v);
+    enum class system_state
+    {
+        ONLINE,
+        OFFLINE
     };
 //end of namespace 
 }

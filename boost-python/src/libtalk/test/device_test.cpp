@@ -1,5 +1,5 @@
 //
-// (c) Copyright 2015 Eugen Wintersberger <eugen.wintersberger@gmail.com>
+// (c) Copyright 2016 Eugen Wintersberger <eugen.wintersberger@gmail.com>
 //
 // This file is part of libtalk.
 //
@@ -15,35 +15,30 @@
 //
 // You should have received a copy of the GNU General Public License
 // along with libtalk.  If not, see <http://www.gnu.org/licenses/>.
-//
+// 
 // ===========================================================================
-#pragma once
+#define BOOST_TEST_DYN_LINK
+#define BOOST_TEST_MODULE Testing device
 
-namespace talk{
+#include <boost/test/unit_test.hpp>
+#include <boost/test/floating_point_comparison.hpp>
+#include <talk/device.hpp>
 
-class motor 
-{
-    private:
-        double _upper_limit; 
-        double _lower_limit; 
-    public:
-        motor();
-        motor(double llimit,double ulimit);
-        motor(const motor &m) = default;
-        virtual ~motor();
+using namespace talk;
 
-        motor &operator=(const motor &m) = default;
+BOOST_AUTO_TEST_SUITE(device_test)
 
-        virtual double get_position() const;
-        virtual void set_position(double p);
+    BOOST_AUTO_TEST_CASE(test_constructor)
+    {
+        device d(new sensor(1.43));
+        BOOST_CHECK_CLOSE_FRACTION(d.get_value(),1.43,1.e-10);
+    }
 
-        double get_upper_limit() const;
-        void set_upper_limit(double limit);
+    BOOST_AUTO_TEST_CASE(test_set_value)
+    {
+       // sensor s;
+        //s.set_value(4.32);
+        //BOOST_CHECK_CLOSE_FRACTION(s.get_value(),4.32,1.e-10);
+    }
 
-        double get_lower_limit() const;
-        void set_lower_limit(double limit);
-};
-
-//end of namespace
-}
-
+BOOST_AUTO_TEST_SUITE_END()

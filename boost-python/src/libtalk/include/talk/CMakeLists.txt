@@ -3,6 +3,8 @@ set(HEADERS functions.hpp
             sensor.hpp
             motor.hpp
             step_motor.hpp
+            device.hpp
+            state.hpp
     )
 
 install(FILES ${HEADERS} 
