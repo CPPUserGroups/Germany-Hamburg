@@ -25,6 +25,21 @@
     \end{itemize}
 \end{frame}
 
+\begin{frame}[fragile]{Create native Python objects}
+    \texttt{boost::python} provides native implementations for 
+    \begin{itemize}
+        \item lists \texttt{boost::python::list}
+        \item tuples \texttt{boost::python::tuple}
+        \item dictionaries \texttt{boost::python::dict}
+    \end{itemize}
+    \vspace{0.05\textheight}
+    \begin{center}
+        \input{pics/python_objects.tex}
+    \end{center}
+    \vspace{0.05\textheight}
+    \texttt{boost::python::object} acts as the base class to all of these.
+\end{frame}
+
 
 \section{Iterators}
 \begin{frame}{Iterators}

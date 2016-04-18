@@ -21,6 +21,7 @@
 from . functions import div
 from . functions import add
 from . functions import TalkError
+from . functions import mysin
 
 from . sensor import Sensor
 from . motors import Motor

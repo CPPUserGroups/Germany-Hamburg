@@ -20,6 +20,7 @@
 #include <boost/python.hpp>
 #include <talk/functions.hpp>
 #include <talk/exceptions.hpp>
+#include <cmath>
 
 using namespace boost::python;
 
@@ -39,6 +40,11 @@ void talk_error_translator(const talk::talk_error &)
 
 BOOST_PYTHON_FUNCTION_OVERLOADS(add_overloads,talk::add,2,2);
 
+double mysin(double t,double amplitude,double omega=1.0)
+{
+    return amplitude*std::sin(omega*t);
+}
+
 //=================implementation of the python extension======================
 BOOST_PYTHON_MODULE(functions)
 {
@@ -53,5 +59,6 @@ BOOST_PYTHON_MODULE(functions)
    
     def("add",(double (*)(double,double))2,add_overloads());
     def("add",(int (*)(int,int))2,add_overloads());
+    def("mysin",mysin,(arg("t"),arg("amplitude")=1.0,arg("omega")=1.0));
 
 }
