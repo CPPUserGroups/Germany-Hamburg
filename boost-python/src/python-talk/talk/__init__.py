@@ -22,7 +22,12 @@ from . functions import div
 from . functions import add
 from . functions import TalkError
 from . functions import mysin
+from . functions import create_string
+from . functions import print_string
+from . functions import create_tuple
+from . functions import create_list
 
+from . import sensor
 from . sensor import Sensor
 from . motors import Motor
 from . motors import StepMotor

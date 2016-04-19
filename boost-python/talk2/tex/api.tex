@@ -11,26 +11,25 @@
 
 \section{Creating Python objects}
 \begin{frame}{A short overview}
+    \texttt{boost::python} provides support for some of the native 
+    Python objects
     \begin{itemize}
-        \item Python objects: 
-            \begin{itemize}
-                \item \texttt{object}
-                \item \texttt{list}
-                \item \texttt{tuple}
-                \item \texttt{dictionary}
-                \item \texttt{str}
-            \end{itemize}
-        \item iterator protocols
-        \item \texttt{slices}
+        \item \texttt{object}
+        \item \texttt{list}
+        \item \texttt{tuple}
+        \item \texttt{dictionary}
+        \item \texttt{str}
     \end{itemize}
 \end{frame}
 
+%%%===========================================================================
 \begin{frame}[fragile]{Create native Python objects}
     \texttt{boost::python} provides native implementations for 
     \begin{itemize}
         \item lists \texttt{boost::python::list}
         \item tuples \texttt{boost::python::tuple}
         \item dictionaries \texttt{boost::python::dict}
+        \item strings \texttt{boost::python::str}
     \end{itemize}
     \vspace{0.05\textheight}
     \begin{center}
@@ -40,14 +39,25 @@
     \texttt{boost::python::object} acts as the base class to all of these.
 \end{frame}
 
+%%%===========================================================================
+\begin{frame}[fragile]{Creating lists and tuples}
+    Creating lists
+    \begin{minted}{cpp}
+list l;
+l.append(1);
+l.append("hello");
+    \end{minted}
 
-\section{Iterators}
-\begin{frame}{Iterators}
+    Creating tuples
+    \begin{minted}{cpp}
+tuple t = make_tuple(1,32,"hello");
+    \end{minted}
+\end{frame}
 
+%%%===========================================================================
+\begin{frame}[fragile]{Strings in Python 2 and 3}
+    \todo[inline]{Show here how to deal with strings in Python 2 and 3
+                  from a C++ point of view}
 \end{frame}
 
 
-\section{Slices}
-\begin{frame}{Slice objects}
-
-\end{frame}

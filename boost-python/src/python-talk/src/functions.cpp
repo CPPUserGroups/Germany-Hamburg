@@ -20,7 +20,9 @@
 #include <boost/python.hpp>
 #include <talk/functions.hpp>
 #include <talk/exceptions.hpp>
+#include <boost/python/stl_iterator.hpp>
 #include <cmath>
+#include <string>
 
 using namespace boost::python;
 
@@ -45,6 +47,31 @@ double mysin(double t,double amplitude,double omega=1.0)
     return amplitude*std::sin(omega*t);
 }
 
+str create_string()
+{
+    return "hello world";
+}
+
+void print_string(const std::string &s)
+{
+    std::cout<<s<<std::endl;
+}
+
+tuple create_tuple()
+{
+    return make_tuple(1,2,"hello",43.2);
+}
+
+list create_list()
+{
+    list l;
+    l.append(1);
+    l.append(2);
+    l.append("hello");
+    l.append(43.2);
+    return l;
+}
+
 //=================implementation of the python extension======================
 BOOST_PYTHON_MODULE(functions)
 {
@@ -60,5 +87,9 @@ BOOST_PYTHON_MODULE(functions)
     def("add",(double (*)(double,double))2,add_overloads());
     def("add",(int (*)(int,int))2,add_overloads());
     def("mysin",mysin,(arg("t"),arg("amplitude")=1.0,arg("omega")=1.0));
+    def("create_string",create_string);
+    def("print_string",print_string);
+    def("create_tuple",create_tuple);
+    def("create_list",create_list);
 
 }

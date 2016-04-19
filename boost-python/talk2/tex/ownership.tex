@@ -9,21 +9,28 @@
 %% http://creativecommons.org/licenses/by-nc-sa/4.0/.
 %% ---------------------------------------------------------------------------
 
+\begin{frame}[fragile]{The Problem}
+    We would like to deal with Python objects only as instances of
+    \texttt{object}, however
+    \begin{enumerate}
+        \item sometimes we need to create objects with the C-API
+        \item need to deal with borrowed references
+        \item have to return a pointer to an object to the C-API
+    \end{enumerate}
+\end{frame}
+
 %%%===========================================================================
-\section{Reference counting}
-\begin{frame}{Creating new objects}
-    Wee need to talk about 
-    \begin{itemize}
-        \item \texttt{object}
-        \item \texttt{PyObject*}
-        \item \texttt{handle}
-    \end{itemize}
+\begin{frame}[fragile]{Create numpy arrays}
+    \todo[inline]{Show how to create a numpy array}
 \end{frame}
 
 
 %%%===========================================================================
-\section{Call policies}
+\begin{frame}[fragile]{Borrowed references}
+    \todo[inline]{Deal with borrowed references}
+\end{frame}
 
-\begin{frame}{The problem}
-    We need to tell \texttt{boost::python} about object dependencies
+%%%===========================================================================
+\begin{frame}[fragile]{Returning \texttt{PyObject*}}
+    \todo[inline]{Need to return \texttt{PyObject*}}
 \end{frame}
