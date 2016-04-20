@@ -26,7 +26,7 @@ namespace talk
         private:
             double _value; 
         public:
-//            sensor();
+            sensor();
             sensor(double v);
 
             double get_value() const;

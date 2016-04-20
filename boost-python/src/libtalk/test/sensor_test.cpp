@@ -30,8 +30,8 @@ BOOST_AUTO_TEST_SUITE(sensor_test)
 
     BOOST_AUTO_TEST_CASE(test_default_constructor)
     {
- //       sensor s;
-  //      BOOST_CHECK_CLOSE_FRACTION(s.get_value(),0.0,1.e-10);
+       sensor s;
+       BOOST_CHECK_CLOSE_FRACTION(s.get_value(),0.0,1.e-10);
     }
 
     BOOST_AUTO_TEST_CASE(test_constructor)

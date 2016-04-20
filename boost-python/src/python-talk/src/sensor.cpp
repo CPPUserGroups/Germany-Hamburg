@@ -45,7 +45,7 @@ dict create_sensors(list names)
 
 BOOST_PYTHON_MODULE(sensor)
 {
-    object class_sensor = class_<talk::sensor>("Sensor",no_init)
+    object class_sensor = class_<talk::sensor>("Sensor")
         .def(init<double>())
         .def("get_value",&talk::sensor::get_value)
         .def("set_value",&talk::sensor::set_value)
