@@ -1,0 +1,55 @@
+%% ---------------------------------------------------------------------------
+%% This file is part of the "Boost Python" talk.
+%%
+%% Copyright 2016 by Eugen Wintersberger <eugen.wintersberger@gmail.com>
+%%
+%% This work is licensed under the Creative Commons
+%% Attribution-NonCommercial-ShareAlike 4.0 International License. To view 
+%% a copy of this license, visit 
+%% http://creativecommons.org/licenses/by-nc-sa/4.0/.
+%% ---------------------------------------------------------------------------
+
+%%%===========================================================================
+\begin{frame}[fragile]{Motivation}
+
+    \begin{columns}[t]
+        \begin{column}{0.49\linewidth}
+            Consider the following class 
+            \inputminted[fontsize=\tiny,firstline=26,lastline=36]{cpp}{../src/libtalk/include/talk/device.hpp}
+        \end{column}
+        \begin{column}{0.49\linewidth}
+    And a naiv wrapper
+    \begin{minted}[fontsize=\tiny]{cpp}
+class_<talk::device>("Device",no_init)
+    .def("get_value",&talk::device::get_value)
+    .def("set_value",&talk::device::set_value)
+    .def("get_sensor",&talk::device::get_sensor)
+    .add_property("value",&talk::device::get_value,
+                      &talk::device::set_value);
+    \end{minted}
+        \end{column}
+    \end{columns}
+    \vspace{0.1\textheight}
+    This will cause troubles
+    \begin{minted}[fontsize=\small]{python}
+>>> d = make_device(Sensor(0.23))
+>>> s = d.get_sensor()
+>>> del d
+>>> s.value #this will fail
+    \end{minted}
+\end{frame}
+
+%%%===========================================================================
+\begin{frame}[fragile]{Solution: call policies}
+    \inputminted[fontsize=\small,firstline=59,lastline=65]{cpp}{../src/python-talk/src/sensor.cpp}
+
+    \vspace{0.05\textheight}
+    We are using here: \texttt{return\_internal\_reference<>()}
+    \begin{itemize}
+        \item tells \texttt{boost::python} that the function returns an
+            internal reference of an argument
+        \item argument index is the first template parameter (default is $1$)
+        \item in the case of a class member function the first argument is the
+            class instance
+    \end{itemize}
+\end{frame}

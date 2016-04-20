@@ -33,4 +33,7 @@ from . motors import Motor
 from . motors import StepMotor
 from . sensor import Device
 from . sensor import create_sensors
+from . sensor import create_device1
 from . sensor import system_state
+
+from . import array

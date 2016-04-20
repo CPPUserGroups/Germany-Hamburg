@@ -1,0 +1,56 @@
+%% ---------------------------------------------------------------------------
+%% This file is part of the "Boost Python" talk.
+%%
+%% Copyright 2015 by Eugen Wintersberger <eugen.wintersberger@gmail.com>
+%%
+%% This work is licensed under the Creative Commons
+%% Attribution-NonCommercial-ShareAlike 4.0 International License. To view 
+%% a copy of this license, visit 
+%% http://creativecommons.org/licenses/by-nc-sa/4.0/.
+%% ---------------------------------------------------------------------------
+
+
+\begin{frame}[fragile]{From Python to C++}
+    Consider the following function 
+    \vspace{0.1\textheight}
+    \begin{minted}{cpp}
+void add_to_registry(const object &o)
+{
+    talk::device &d = ??????;
+
+}
+    \end{minted}
+    \vspace{0.1\textheight}
+    How to obtain a C++ type from a Python \texttt{object}?
+\end{frame}
+
+%%%============================================================================
+\begin{frame}[fragile]{Implicit conversion}
+    The quick and dirty way
+    \vspace{0.1\textheight}
+    \begin{minted}{cpp}
+void add_to_registry(const object &o)
+{
+    add_to_device_registry(extract<talk::device&>(o));
+}
+    \end{minted}
+    \vspace{0.1\textheight}
+    If the conversion is not possible a \texttt{TypeError} exception will be
+    thrown.
+\end{frame}
+
+%%%============================================================================
+\begin{frame}[fragile]{Explicit conversion}
+    \begin{minted}{cpp}
+void add_to_registry(const object &o)
+{
+    extract<talk::device&> device_extract(o);
+    extract<talk::sensor&> sensor_extract(o);
+
+    if(device_extract.check())
+        add_to_device_registry(device_extract());
+    else if(sensor_extract.check())
+        add_to_sensor_registry(sensor_extract());
+}
+    \end{minted}
+\end{frame}

@@ -39,7 +39,14 @@ namespace talk{
     {
         _sensor->set_value(v);
     }
+    
+    //------------------------------------------------------------------------
+    sensor &device::get_sensor()
+    {
+        return *_sensor;
+    }
 
+    //------------------------------------------------------------------------
     device create_device(sensor *s)
     {
         return device(s);

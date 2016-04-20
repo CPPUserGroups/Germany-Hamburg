@@ -12,7 +12,9 @@
 \begin{frame}[fragile]{The Problem}
     We would like to deal with Python objects only as instances of
     \texttt{object}, however
+    \vspace{0.1\textheight}
     \begin{enumerate}
+        \setlength{\itemsep}{0.05\textheight}
         \item sometimes we need to create objects with the C-API
         \item need to deal with borrowed references
         \item have to return a pointer to an object to the C-API
@@ -21,16 +23,70 @@
 
 %%%===========================================================================
 \begin{frame}[fragile]{Create numpy arrays}
-    \todo[inline]{Show how to create a numpy array}
+    \inputminted[fontsize=\tiny,firstline=53,lastline=72]{cpp}{../src/python-talk/src/array.cpp}
+\end{frame}
+
+%%%===========================================================================
+\begin{frame}[fragile]{Returning \texttt{PyObject*}}
+    \onslide<1->
+    What if \texttt{create\_array} would have to return a \texttt{PyObject *}?  \\
+    \vspace{0.02\textheight}
+    Naiv approach
+    \begin{minted}[fontsize=\tiny]{cpp}
+PyObject *create_array_ptr(const tuple &shape,double fill_value=0.0)
+{
+    // here, everything remains the same 
+    return array.ptr();
+}
+    \end{minted}
+    \onslide<2->
+    \vspace{0.02\textheight}
+    Leads to
+    \begin{minted}[fontsize=\tiny]{bash}
+In [1]: import talk                                                                                                                                    
+
+In [2]: a = talk.array.create_array_ptr((2,3),fill_value=2.3)
+*** Error in `python3': double free or corruption (fasttop): 0x000000000204d280 ***
+Aborted
+    \end{minted}
+    \onslide<3->
+    \vspace{0.02\textheight}
+    A simple solution would be
+    \begin{minted}[fontsize=\tiny]{cpp}
+PyObject *create_array_ptr2(const tuple &shape,double fill_value=0.0)
+{
+    // here, everything remains the same 
+    return incref(array.ptr());
+}
+    \end{minted}
 \end{frame}
 
 
 %%%===========================================================================
 \begin{frame}[fragile]{Borrowed references}
-    \todo[inline]{Deal with borrowed references}
+    An alternative approach to solve the above problem would be to use a 
+    \emph{borrowed} reference
+    \vspace{0.1\textheight}
+    \begin{minted}[fontsize=\tiny]{cpp}
+PyObject *create_array_ptr3(const tuple &shape,double fill_value=0.0)
+{
+    //as before
+
+    //create the array
+    handle<> h(borrowed(reinterpret_cast<PyObject*>(
+               PyArray_SimpleNew(len(shape),array_shape.data(),NPY_FLOAT64)
+               )));
+    object array(h);
+   
+    // as before
+
+    return array.ptr();
+}
+    \end{minted}
+
+    \vspace{0.1\textheight}
+    \texttt{object} does not own the reference $\Rightarrow$  the object is not
+    garbage collected when \texttt{object} is destroyed!
+    
 \end{frame}
 
-%%%===========================================================================
-\begin{frame}[fragile]{Returning \texttt{PyObject*}}
-    \todo[inline]{Need to return \texttt{PyObject*}}
-\end{frame}

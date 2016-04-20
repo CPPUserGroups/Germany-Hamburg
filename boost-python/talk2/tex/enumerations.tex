@@ -35,15 +35,25 @@ class system_state(Enum):
 
 %%%===========================================================================
 \begin{frame}[fragile]{The \texttt{enum\_} wrapper template}
+    \onslide<1->
     \texttt{boost::python} provides a special wrapper for enumerations
+    \vspace{0.025\textheight}
     \begin{minted}{cpp}
 enum_<system_state>("system_state")
     .value("ONLINE",system_state::ONLINE)
     .value("OFFLINE",system_state::OFFLINE);
     \end{minted}
+    \onslide<2->
+    \vspace{0.1\textheight}
+    Python usage
+    \vspace{0.025\textheight}
+    \begin{minted}{python}
+from talk import system_state
+
+d = {system_state.ONLINE:"System is online", \
+     system_state.OFFLINE:"System is offline"}
+    \end{minted}
+
+
 \end{frame}
 
-%%%===========================================================================
-\begin{frame}[fragile]{Usage in Python}
-world
-\end{frame}

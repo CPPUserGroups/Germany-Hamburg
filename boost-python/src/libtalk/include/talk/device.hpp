@@ -32,6 +32,7 @@ namespace talk
 
             double get_value() const;
             void set_value(double v);
+            sensor &get_sensor();
     };
 
     device create_device(sensor *s);

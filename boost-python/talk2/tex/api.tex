@@ -9,36 +9,73 @@
 %% http://creativecommons.org/licenses/by-nc-sa/4.0/.
 %% ---------------------------------------------------------------------------
 
+\newcommand{\pyobject}{\texttt{object}}
+\newcommand{\pylist}{\texttt{list}}
+\newcommand{\pytuple}{\texttt{tuple}}
+\newcommand{\pydict}{\texttt{dict}}
+\newcommand{\pystr}{\texttt{str}}
+\newcommand{\pyscope}{\texttt{scope}}
+\newcommand{\bpyobject}{\texttt{boost::python::object}}
+\newcommand{\bpylist}{\texttt{boost::python::list}}
+\newcommand{\bpytuple}{\texttt{boost::python::tuple}}
+\newcommand{\bpydict}{\texttt{boost::python::dict}}
+\newcommand{\bpystr}{\texttt{boost::python::str}}
+\newcommand{\bpyscope}{\texttt{boost::python::scope}}
+
 \section{Creating Python objects}
 \begin{frame}{A short overview}
     \texttt{boost::python} provides support for some of the native 
     Python objects
+    \vspace{0.1\textheight}
     \begin{itemize}
-        \item \texttt{object}
-        \item \texttt{list}
-        \item \texttt{tuple}
-        \item \texttt{dictionary}
-        \item \texttt{str}
+        \setlength{\itemsep}{0.05\textheight}
+        \item \pyobject, \pylist, \pytuple, \pydict
+        \item working with strings
+        \item \pyscope() - managing the current namespace
     \end{itemize}
 \end{frame}
 
 %%%===========================================================================
-\begin{frame}[fragile]{Create native Python objects}
+\begin{frame}[fragile]{Class hierarchy}
     \texttt{boost::python} provides native implementations for 
     \begin{itemize}
-        \item lists \texttt{boost::python::list}
-        \item tuples \texttt{boost::python::tuple}
-        \item dictionaries \texttt{boost::python::dict}
-        \item strings \texttt{boost::python::str}
+        \item lists \bpylist
+        \item tuples \bpytuple
+        \item dictionaries \bpydict
+        \item strings \bpystr
     \end{itemize}
-    \vspace{0.05\textheight}
+    \vspace{0.025\textheight}
     \begin{center}
         \input{pics/python_objects.tex}
     \end{center}
-    \vspace{0.05\textheight}
+    \vspace{0.025\textheight}
     \texttt{boost::python::object} acts as the base class to all of these.
 \end{frame}
 
+%%%===========================================================================
+\begin{frame}[fragile]{The almighty \pyobject}
+    \onslide<1->
+    \begin{itemize}
+        \setlength{\itemsep}{0.05\textheight}
+        \item base class for all Python objects
+        \item provides access to virtually all functions of a type
+    \end{itemize}
+    \onslide<2->
+    \vspace{0.1\textheight}
+    \begin{minted}[fontsize=\small]{cpp}
+void function(const object &o)
+{
+    o();                       //if object is callable
+    o.attr("size");            //accessing an attribute
+    o.attr("set_value")(2.13); //calling a method
+    o[1] = "hell yeah";        //object list-like
+    o["name"] = "Mustermann";  //object is map-like
+
+    PyObject *ptr = o.ptr();   //access to Python pointer
+
+}
+    \end{minted}
+\end{frame}
 %%%===========================================================================
 \begin{frame}[fragile]{Creating lists and tuples}
     Creating lists
@@ -46,8 +83,13 @@
 list l;
 l.append(1);
 l.append("hello");
+l.append(3.2);
+std::cout<<len(l)<<std::endl;
+l.insert(2,"world");
+std::cout<<len(l)<<std::endl;
     \end{minted}
-
+    
+    \vspace{0.1\textheight}
     Creating tuples
     \begin{minted}{cpp}
 tuple t = make_tuple(1,32,"hello");
@@ -55,9 +97,32 @@ tuple t = make_tuple(1,32,"hello");
 \end{frame}
 
 %%%===========================================================================
-\begin{frame}[fragile]{Strings in Python 2 and 3}
-    \todo[inline]{Show here how to deal with strings in Python 2 and 3
-                  from a C++ point of view}
+\begin{frame}[fragile]{Create instance on module level}
+    \onslide<1->
+    A class is just another object
+    \begin{minted}[fontsize=\small]{cpp}
+object class_sensor = class_<talk::sensor>("Sensor")
+    .def(init<double>())
+    .def("get_value",&talk::sensor::get_value)
+    .def("set_value",&talk::sensor::set_value)
+    .add_property("value",&talk::sensor::get_value,
+                      &talk::sensor::set_value); 
+    \end{minted}
+    \onslide<2->
+    \vspace{0.05\textheight} 
+    \texttt{scope()} provides access to the current namespace
+    \vspace{0.025\textheight}
+    \begin{minted}[fontsize=\small]{cpp}
+scope().attr("s2") = class_sensor(2.3);
+    \end{minted}
+    \vspace{0.05\textheight}
+    \onslide<3->
+    In Python we get
+    \begin{minted}[fontsize=\small]{python}
+import talk
+print(talk.sensor.s2.value)
+#output: 2.3
+    \end{minted}
 \end{frame}
 
 

@@ -10,6 +10,7 @@
 %% ---------------------------------------------------------------------------
 
 \begin{frame}[fragile]{The Problem}
+    \onslide<1->
     In C++ we may have a function like this 
     \begin{minted}{cpp}
 double mysin(double t,double amplitude=1.0,
@@ -18,6 +19,7 @@ double mysin(double t,double amplitude=1.0,
     return amplitude*std::sin(omega*t);
 }
     \end{minted}
+    \onslide<2->
     \vspace{0.05\textheight}
     In Python we would like to have something like 
     \begin{minted}{python}
@@ -52,17 +54,26 @@ BOOST_PYTHON_MODULE(functions)
 \end{frame}
 
 %%%===========================================================================
-\begin{frame}{\texttt{boost::python::arg} allows for ...}
+\begin{frame}[fragile]{\texttt{boost::python::arg} conclusion}
+    \onslide<1->
+    \begin{minted}[fontsize=\small]{cpp}
+def("mysin",mysin,("t",arg("amplitude")=1.0,arg("omega")=1.0));
+    \end{minted}
     \begin{itemize}
-        \item handling default arguments as keyword arguments
-        \item introduce new keyword arguments
-    \end{itemize}
-    \vspace{0.1\textheight}
-    Restrictions
-    \begin{itemize}
+        \setlength{\itemsep}{0.05\textheight}
         \item the number of arguments between \texttt{()} must match that of
             the original function
         \item the order of the arguments must match that of the original
             function
     \end{itemize}
+    \onslide<2->
+    \vspace{0.1\textheight}
+    With \texttt{boost::python::arg} we can
+    \vspace{0.05\textheight}
+    \begin{itemize}
+        \setlength{\itemsep}{0.05\textheight}
+        \item handling default arguments as keyword arguments
+        \item introduce new keyword arguments
+    \end{itemize}
+    
 \end{frame}

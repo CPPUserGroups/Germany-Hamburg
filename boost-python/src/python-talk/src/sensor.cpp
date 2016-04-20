@@ -43,6 +43,7 @@ dict create_sensors(list names)
     return sensors;
 }
 
+
 BOOST_PYTHON_MODULE(sensor)
 {
     object class_sensor = class_<talk::sensor>("Sensor")
@@ -52,19 +53,19 @@ BOOST_PYTHON_MODULE(sensor)
         .add_property("value",&talk::sensor::get_value,
                           &talk::sensor::set_value); 
 
-    object s2 = class_sensor(2.3);
+    scope().attr("s2") = class_sensor(2.3);
 
 
     class_<talk::device>("Device",no_init)
         .def("get_value",&talk::device::get_value)
         .def("set_value",&talk::device::set_value)
+        .def("get_sensor",&talk::device::get_sensor,
+                          return_internal_reference<>())
         .add_property("value",&talk::device::get_value,
                           &talk::device::set_value); 
 
-    /*
-    def("create_device",talk::create_device,
-                        return_internal_reference<1>());
-                       */
+    
+    def("create_device1",talk::create_device);
 
     def("create_sensors",create_sensors);
 
