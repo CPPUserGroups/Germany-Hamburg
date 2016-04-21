@@ -77,22 +77,31 @@ void function(const object &o)
     \end{minted}
 \end{frame}
 %%%===========================================================================
-\begin{frame}[fragile]{Creating lists and tuples}
+\begin{frame}[fragile]{Creating lists, tuples, dictionaries}
+    \onslide<1->
     Creating lists
     \begin{minted}{cpp}
 list l;
 l.append(1);
 l.append("hello");
 l.append(3.2);
-std::cout<<len(l)<<std::endl;
 l.insert(2,"world");
-std::cout<<len(l)<<std::endl;
     \end{minted}
     
-    \vspace{0.1\textheight}
+    \onslide<2->
+    \vspace{0.05\textheight}
     Creating tuples
     \begin{minted}{cpp}
 tuple t = make_tuple(1,32,"hello");
+    \end{minted}
+    
+    \onslide<3->
+    \vspace{0.05\textheight}
+    Creating dictionaries
+    \begin{minted}{cpp}
+dict d;
+d["name"] = "Eugen";
+d["number"] = 1.23;
     \end{minted}
 \end{frame}
 
