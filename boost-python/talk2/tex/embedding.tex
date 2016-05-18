@@ -1,0 +1,55 @@
+%% ---------------------------------------------------------------------------
+%% This file is part of the "Boost Python" talk.
+%%
+%% Copyright 2016 by Eugen Wintersberger <eugen.wintersberger@gmail.com>
+%%
+%% This work is licensed under the Creative Commons
+%% Attribution-NonCommercial-ShareAlike 4.0 International License. To view 
+%% a copy of this license, visit 
+%% http://creativecommons.org/licenses/by-nc-sa/4.0/.
+%% ---------------------------------------------------------------------------
+
+\begin{frame}[fragile]{Motivation}
+    \begin{itemize}
+        \setlength{\itemsep}{0.1\textheight}
+        \item scripting language for an application
+        \item extend the functionality of an application
+    \end{itemize}
+\end{frame}
+
+%%%===========================================================================
+\begin{frame}[fragile]{Basic concept}
+Boost Python provides not the entire functionality - need some things from the 
+Python API.
+\vspace{0.1\textheight}
+\inputminted[fontsize=\tiny]{cpp}{../src/embedding/src/main.cpp}
+\end{frame}
+
+%%%===========================================================================
+\begin{frame}[fragile]{Executing Python code}
+    Boost Python provides three functions
+    \vspace{0.025\textheight}
+    \begin{minted}[fontsize=\small]{cpp} 
+object eval(str expression, object globals = object(), 
+                            object locals = object())
+
+object exec(str code, object globals = object(), 
+                      object locals = object())
+
+object exec_file(str filename, object globals = object(), 
+                               object locals = object())
+    \end{minted}
+    \vspace{0.05\textheight}
+    Importing modules
+    \vspace{0.025\textheight}
+    \begin{minted}[fontsize=\small]{cpp}
+object import(str name)
+    \end{minted}
+    \vspace{0.05\textheight}
+    \textbf{Attention: \texttt{str = boost::python::str}!}
+\end{frame}
+
+%%%===========================================================================
+\begin{frame}[fragile]{A simple Python shell}
+\inputminted[fontsize=\tiny]{cpp}{../src/embedding/src/pyshell2.cpp}
+\end{frame}

@@ -14,6 +14,21 @@ int main(int argc,char **argv)
 
     object main_module = import("__main__");
     object main_namespace = main_module.attr("__dict__");
-    exec("print(\"hello world\")",main_namespace);
+    
+    std::string line_buffer;
+    while(!std::cin.eof())
+    {
+        std::cout<<"$> ";
+        std::getline(std::cin,line_buffer,'\n');
+
+        try
+        {
+            exec(str(line_buffer),main_namespace);
+        }
+        catch(error_already_set const &error)
+        {
+            PyErr_Print();
+        }
+    }
     return 0;
 }
