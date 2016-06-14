@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Basic bindings</title>
+		<link rel="stylesheet" href="styles.css">
+	</head>
+	<body>
+		<nav class="back">
+			<a href="javascript:javascript:history.go(-1)">Back</a>
+		</nav>
+		<ul>
+			<li>
+				Create module:
+				<samp>PYBIND11_PLUGIN( mymodule ) {
+	py::module m( "mymodule", "pybind example plugin" ); // Has to be named mymodule.so</samp>
+			</li>
+			<li>
+				Create submodule:
+				<samp>auto submodule = rootModule.def_submodule( "sububub" );</samp>
+			</li>
+			<li>
+				Binding classes:
+				<samp>py::class< MyClass >( pyParent, "PythonClassName" )
+	.def( "myfunction", &MyClass::aFunction )
+	.def_property( "myProperty", []() {
+		return 65;
+	} )
+	;</samp>
+			</li> 
+		</ul>
+	</body>
+</html>

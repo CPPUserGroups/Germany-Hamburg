@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Type interaction</title>
+		<link rel="stylesheet" href="styles.css">
+	</head>
+	<body>
+		<nav class="back">
+			<a href="javascript:javascript:history.go(-1)">Back</a>
+		</nav>
+		<ul>
+			<li>
+				<header><code>py::class_</code></header> Class declaration
+			</li>
+			<li>
+				<header><code>py::enum_</code></header> Enum declaration
+				<details>
+					<summary>Derives from <code>py::class_</code></summary>
+					Example:<samp>py::enum< MyEnum >( pyParent, "PythonEnumName" )
+	.value( "wonder_woo", MyEnum::WONDER_WOO )
+	.value( "baabaa", MyEnum::BAABAA )
+	.export_values()
+	;</samp>
+				</details>
+			</li>
+			<li>
+				<header><code>py::handle</code></header> Arbitrary wrapping <code>PyObject</code>
+				<details><summary>Does not handle ref counting</summary></details>
+			</li>
+			<li>
+				<header><code>py::object</code></header> Arbitrary wrapping <code>PyObject</code>
+				<details><summary>Does handle ref counting</summary></details>
+			</li>
+		</ul>
+	</body>
+</html>

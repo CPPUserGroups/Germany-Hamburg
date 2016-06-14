@@ -1,0 +1,41 @@
+
+:root {
+	--main-code-color: gray;
+	font-size: 2em;
+	font-family: sans-serif;
+}
+
+li {
+	margin-bottom: 0.5em;
+}
+
+li li {
+	margin-bottom: initial;
+}
+
+code {
+	color: var(--main-code-color);
+}
+
+samp {
+	display: block;
+	white-space: pre;
+	color: var(--main-code-color);
+}
+
+a {
+	color: lightsalmon;
+	text-decoration: inherit;
+}
+
+.back {
+	position: fixed;
+	right: 0px;
+	top: 0px;
+	width: 100%;
+	direction: rtl;
+	font-variant: small-caps;
+	background-color: white;
+	opacity: 0.7;
+}
+

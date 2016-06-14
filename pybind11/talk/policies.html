@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Policies</title>
+		<link rel="stylesheet" href="styles.css">
+		<style>
+			:root {
+				--index0-color-hue: 120;
+				--index0-color-saturation: 73%;
+				--index1-color-hue: 0;
+				--index1-color-saturation: 25%;
+				--index2-color-hue: 51;
+				--index2-color-saturation: 100%;
+				--index3-color-hue: 43;
+				--index3-color-saturation: 100%;
+				--index-saturation: 100%;
+				--index-lightness: 70%;
+				--bg-alpha: 0.5;
+			}
+
+			.bgcolorIndex0 {
+				background-color: hsla(var(--index0-color-hue), var(--index0-color-saturation), var(--index-lightness), var(--bg-alpha));
+			}
+
+			.bgcolorIndex1 {
+				background-color: hsla(var(--index1-color-hue), var(--index1-color-saturation), var(--index-lightness), var(--bg-alpha));
+			}
+
+			.bgcolorIndex2 {
+				background-color: hsla(var(--index2-color-hue), var(--index2-color-saturation), var(--index-lightness), var(--bg-alpha));
+			}
+
+			.bgcolorIndex3 {
+				background-color: hsla(var(--index3-color-hue), var(--index3-color-saturation), var(--index-lightness), var(--bg-alpha));
+			}
+
+			.colorIndex0 {
+				color: hsl(var(--index0-color-hue), var(--index0-color-saturation), var(--index-lightness));
+			}
+
+			.colorIndex1 {
+				color: hsl(var(--index1-color-hue), var(--index1-color-saturation), var(--index-lightness));
+			}
+
+			.colorIndex2 {
+				color: hsl(var(--index2-color-hue), var(--index2-color-saturation), var(--index-lightness));
+			}
+
+			.colorIndex3 {
+				color: hsl(var(--index3-color-hue), var(--index3-color-saturation), var(--index-lightness));
+			}
+
+			.colorImportant {
+				color: red;
+			}
+		</style>
+	</head>
+	<body>
+		<nav class="back">
+			<a href="javascript:javascript:history.go(-1)">Back</a>
+		</nav>
+		<ul>
+			<li>
+				Return value policies
+				<!--<iframe src="https://github.com/pybind/pybind11/blob/master/docs/advanced.rst#return-value-policies" style="width: 100%; height: 10em;" allowfullscreen sandbox="allow-scripts" referrerpolicy="unsafe-url">-->
+			</li>
+			<li>
+				(Extending) Object lifetime relations
+				<table style="width: 100%; text-align: center;">
+					<colgroup>
+						<col class="bgcolorIndex0">
+						<col class="bgcolorIndex1">
+						<col class="bgcolorIndex2">
+						<col class="bgcolorIndex3">
+					</colgroup>
+					<tr>
+						<td>0</td>
+						<td>1</td>
+						<td>2</td>
+						<td>3</td>
+					</tr>
+					<tr>
+						<td>return value</td>
+						<td>self (this)</td>
+						<td>first argument</td>
+						<td>second argument</td>
+					</tr>
+				</table>
+				<p>
+					Examples:
+					<ul>
+						<li>
+							Lifetime bound temporary objects
+							<samp>
+// Bindings 
+struct Foo {
+	int _folderOffset;
+	int _folderSize;
+};
+
+// Anonymous bind struct
+struct FooFolder {
+	FooFolder( Foo& foo);
+	int& offset;
+	int& size;
+};
+
+py::class_< Foo >( parent, "Foo" )
+	.def_property( "folder", []( Foo& foo ) -> FooFolder {
+		return {foo};
+	}, <span class="colorImportant">py::keep_alive< <span class="colorIndex0">0</span>, <span class="colorIndex1">1</span> >()</span> )
+;</samp>
+						</li>
+						<li>
+						</li>
+				</p>
+			</li>
+		</ul>
+	</body>
+</html>

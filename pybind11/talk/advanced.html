@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Advanced usages</title>
+		<link rel="stylesheet" href="styles.css">
+	</head>
+	<body>
+		<nav class="back">
+			<a href="javascript:javascript:history.go(-1)">Back</a>
+		</nav>
+		<ul>
+			<li>
+				<header>Enum sequences</header>
+				<details>
+					<summary>Task is to enable iterating as a sequence.</summary>
+					<samp>enum Foo {
+	FOO1,
+	FOO_FRONT = FOO1,
+	FOO2,
+	FOOD,
+	FOO_BACK = FOOD,
+	FOO_SIZE
+};
+auto myEnum = py::enum_< Foo >( mymodule, "Foo" )
+	.value("foo1", FOO1)
+	.value("foo2", FOO2)
+	.value("food", FOOD)
+	;
+	
+myEnum.export_values();</samp>
+				</details>
+			</li>
+		</ul>
+	</body>
+</html>

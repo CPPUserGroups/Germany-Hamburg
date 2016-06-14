@@ -1,4 +1,7 @@
 Code and talks given during the meeting of the C++ User Group Hamburg, Germany.
 
+pybind11:
+2015-07-15: Talk about pybind11
+
 constexpr:
 19.08.2015: talk about constexpr and compile time evaluation, see also https://github.com/valpo/sudoku.
