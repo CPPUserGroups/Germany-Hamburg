@@ -25,9 +25,27 @@ auto myEnum = py::enum_< Foo >( mymodule, "Foo" )
 	.value("foo1", FOO1)
 	.value("foo2", FOO2)
 	.value("food", FOOD)
-	;
+;
 	
-myEnum.export_values();</samp>
+myEnum
+	.export_values();
+myEnum
+	.def("__getitem__", [](py::object const& object, size_t i) -> py::int_ {
+		if (i >= FOO_SIZE)
+			throw py::index_error();
+		return FOO_FRONT() + i;
+	})
+	.def("__len__", [](py::object const&) -> py::int_ {
+		return FOO_SIZE;
+	})
+	.def("__contains__", []( py::object const&, py::int_ const& value) -> py::bool_ {
+		auto const intValue = static_cast<std::int32_t>(value);
+		if( intValue < FOO_FRONT || intValue > FOO_BACK )
+			return false;
+		return true;
+	})
+;
+</samp>
 				</details>
 			</li>
 		</ul>

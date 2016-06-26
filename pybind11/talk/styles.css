@@ -5,6 +5,10 @@
 	font-family: sans-serif;
 }
 
+header {
+	font-weight: bold;
+}
+
 li {
 	margin-bottom: 0.5em;
 }
@@ -26,6 +30,10 @@ samp {
 a {
 	color: lightsalmon;
 	text-decoration: inherit;
+}
+
+body > header {
+	text-align: center;
 }
 
 .back {
