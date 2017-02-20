@@ -7,5 +7,6 @@ Code and talks given during the meeting of the C++ User Group Hamburg, Germany.
 | 2016-08-16 | Ranges                                | Matthias Waack    |                                | [ranges](ranges)
 | 2016-07-13 | Clean code                            | Arne Mertz        |                                |                        |                                 |
 | 2016-06-15 | pybind11: Python to C++ bindings      | Andreas Bergmeier | [pybind11/talk](pybind11/talk) |                        |                                 |
+| 2026-03-22 | CMake Workshop                        | Andreas Bergmeier | | | Dos and Don'ts in CMake |
 | 2015-08-19 | constexpr and compile time evaluation | Matthias Waack    | [constexpr/doc](constexpr/doc/constexpr.odp) | [constexpr](constexpr) | https://github.com/valpo/sudoku |
  
