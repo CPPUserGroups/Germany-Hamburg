@@ -1,0 +1,45 @@
+
+<link rel="stylesheet" href="../styles.css">
+<title>"Static" policies</title>
+
+<p>
+	Policies that are known at compile time<a href="#N4505-2.8"><span class="ref"></span></a>.
+</p>
+<style>
+	#pol_tab tr td:first-child {
+		text-align: end;
+	}
+</style>
+<table id="pol_tab">
+	<tr>
+		<th>Policy Tag class</th>
+		<th>Constexpr instance</th>
+		<th>Description</th>
+	</tr>
+	<tr>
+		<td><code>sequential_execution_policy</code></td>
+		<td><code><var>seq</var></code></td>
+		<td>Sequential execution policy</td>
+	</tr>
+	<tr>
+		<td><code>parallel_execution_policy</code></td>
+		<td><code><var>par</var></code></td>
+		<td>Parallel execution policy</td>
+	</tr>
+	<tr>
+		<td><code>parallel_vector_execution_policy</code></td>
+		<td><code><var>par_vec</var></code></td>
+		<td>Parallel + Vector execution policy. Function execution <important>may</important> interleave in the <important>same</important> thread</td>
+	</tr>
+</table>
+
+<p>
+	Example:
+	<samp>std::sort(std::parallel::par, std::begin(sort_me), std::end(sort_me));</samp>
+</p>
+
+<footer class="refs">
+	<ol>
+		<li><cite><a name="N4505-2.8" href="https://raw.githubusercontent.com/cplusplus/parallelism-ts/master/parallelism-ts.pdf">N4505 2.8</a></cite></li>
+	</ol>
+</footer>

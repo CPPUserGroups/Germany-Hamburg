@@ -1,0 +1,56 @@
+
+<link rel="stylesheet" href="../styles.css">
+<title>Available Implementations</title>
+
+<p>
+Current state described by <q>The Parallelism TS Should be Standardized</q><a href="#P0024R2"><span class="ref"></span></a>.<br>
+In detail:
+	<style>
+		#impl {
+			margin-left: 2em;
+			border: none;
+		}
+
+		#impl td {
+			border: none;
+		}
+
+		#impl label::before {
+			content: attr(for);
+		}
+
+		#impl td:last-child {
+			text-align: left;
+		}
+	</style>
+	<table id="impl">
+		<tr>
+			<td><label for="libstdc++"></label></td>
+			<td><input id="libstdc++" type="checkbox" disabled><a href="#libstdc++201z"><span class="ref"></span></a></td>
+		</tr>
+		<tr>
+			<td><label for="libc++"></label></td>
+			<td><input id="libc++" type="checkbox" disabled><a href="#libc++"><span class="ref"></span></a></td>
+		</tr>
+		<tr>
+			<td><label for="MSVC"></label></td>
+			<td><input id="MSVC" type="checkbox" checked disabled><a href="#parallelstl"><span class="ref"></span></a></td>
+		</tr>
+		<tr>
+			<td><label for="icc"><label></td>
+			<td><input id="icc" type="checkbox" disabled></td>
+		</tr>
+	</table>
+</p>
+
+<footer class="refs">
+	<ol>
+		<li><a name="P0024R2" href="https://isocpp.org/files/papers/P0024R2.html"><cite>P0024R2</cite></a></li>
+		<li><a name="libstdc++201z" href="https://gcc.gnu.org/onlinedocs/libstdc++/manual/status.html#status.iso.201z"><cite>libstdc++201z status</cite></a></li>
+		<li><a name="libc++" href="http://libcxx.llvm.org/cxx1z_status.html"><cite>libc++ C++1z Status</cite></a></li>
+		<li><a name="parallelstl" href="https://parallelstl.codeplex.com/"><cite>Parallel STL</cite></a></li>
+	</ol>
+</footer>
+
+
+

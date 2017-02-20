@@ -1,0 +1,34 @@
+
+<link rel="stylesheet" href="../styles.css">
+<title>Dynamic policies</title>
+
+<p>
+	Policies that are determined at run time.
+	<br>
+	Not supported for C++201z.
+</p>
+<!--
+<code>execution_policy</code>
+<br>
+Can be constructed with <code><var>seq</var></code>, <code><var>par</var></code> or <code><var>par_vec</var></code>.
+
+<p>
+	Example:
+	<code class="code_example">
+using namespace std::parallel;
+auto exec = [&]() -> execution_policy {
+	if(sort_me.size() > threshold)
+		return {par};
+	else
+		return {seq};
+}();
+
+std::sort(exec, std::begin(sort_me), std::end(sort_me));
+	</code>
+
+</p>
+
+-->
+
+<footer class="refs">
+</footer>

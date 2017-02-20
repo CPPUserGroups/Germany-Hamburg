@@ -1,0 +1,41 @@
+<!doctype html>
+<link rel="stylesheet" href="../styles.css">
+<title>Exceptions</title>
+<style>
+	#ex_behavior tr td, #ex_behavior tr td * {
+		text-decoration: line-through;
+	}
+</style>
+
+
+<p>
+	perhaps...
+	<table id="ex_behavior">
+		<tr>
+			<th>Tag class</th>
+			<th>Behavior</th>
+		</tr>
+		<tr>
+			<td><code>sequential_execution_policy</code></td>
+		</tr>
+		<tr>
+			<td><code>parallel_execution_policy</code></td>
+			<td>All uncaught exceptions get added to an <code>exception_list</code>.</td>
+		</tr>
+		<tr>
+			<td><code>parallel_vector_execution_policy</code></td>
+			<td>Exits with <code>std::terminate</code></td>
+		</tr>
+	</table>
+</p>
+<pre>
+...actually:
+	<p style="color: white; background-color: black; text-align: center">
+terminates
+(no unwind)
+	</p>
+</pre>
+
+<footer class="refs">
+</footer>
+

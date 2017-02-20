@@ -1,0 +1,44 @@
+
+<link rel="stylesheet" href="../styles.css">
+<title>Execution Policies</title>
+
+<p>
+	"Policies" control algorithm execution. Execution Policy can be chosen via tag types. 
+	<blockquote>
+		<style>
+			table tr td:nth-child(2) {
+				text-align: end;
+				padding-right: 20%;
+			}
+		</style>
+		<table style="width: 100%;">
+			<tr style="border-bottom: 2em;">
+				<th>N4505<a href="#N4505"><span class="ref"></span></a> Paragraph</th>
+				<th>Tag class</th>
+			</tr>
+			<tr>
+				<td>2.4</td>
+				<td><code>sequential_execution_policy</code></td>
+			</tr>
+			<tr>
+				<td>2.5</td>
+				<td><code>parallel_execution_policy</code></td>
+			</tr>
+			<tr>
+				<td>2.6</td>
+				<td><code>parallel_vector_execution_policy</code></td>
+				
+			</tr>
+			<tr>
+				<td>2.7</td>
+				<td><code>execution_policy</code></td>
+			</tr>
+		</table>
+	</blockquote>
+	Template testable with: <code>is_execution_policy</code>
+</p>
+<footer class="refs">
+	<ol>
+		<li><cite><a name="N4505" href="https://raw.githubusercontent.com/cplusplus/parallelism-ts/master/parallelism-ts.pdf">N4505</a></cite></li>
+	</ol>
+</footer>

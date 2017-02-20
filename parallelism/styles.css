@@ -1,0 +1,134 @@
+
+head {
+	display: block;
+	border-bottom-style: ridge;
+	margin-bottom: 1em;
+}
+
+title {
+	display: block;
+	margin-left: 0.5em;
+}
+
+:root {
+	--main-namespace-color: green;
+	--main-code-color: gray;
+	--main-code-block-background: seashell;
+	font-family: sans-serif;
+}
+
+:root, input {
+	font-size: 2em;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table td {
+	border: solid;
+}
+
+table label {
+	font-size: 1.5em;
+}
+
+tr td {
+	text-align: center;
+}
+
+input[type="checkbox"] {
+	zoom: 3;
+}
+
+header {
+	font-weight: bold;
+}
+
+li {
+	margin-bottom: 0.5em;
+}
+
+li li {
+	margin-bottom: initial;
+}
+
+code {
+	color: var(--main-code-color);
+}
+
+samp {
+	display: block;
+	white-space: pre;
+	color: var(--main-code-color);
+}
+
+a {
+	color: lightsalmon;
+	text-decoration: inherit;
+}
+
+body {
+	counter-reset: refs;
+	padding-left: 1em;
+}
+
+body > header {
+	text-align: center;
+}
+
+blockquote {
+	font-style: italic;
+	background-color: seashell;
+}
+
+footer {
+	font-size: small;
+}
+
+.ref::before {
+	counter-increment: refs;
+	content: "[" counter(refs);
+}
+.ref::after {
+	content: "]";
+}
+
+.ref {
+	font-style: initial;
+	vertical-align: super;
+	font-size: smaller;
+}
+
+.refs {
+	border-top-style: ridge;
+}
+
+.refs::before {
+	content: "References:";
+}
+
+.back {
+	position: fixed;
+	right: 0px;
+	top: 0px;
+	width: 100%;
+	direction: rtl;
+	font-variant: small-caps;
+	background-color: white;
+	opacity: 0.7;
+}
+
+.selected {
+	color: red;
+	margin-top: 2em;
+	margin-bottom: 2em;
+}
+
+.code_example {
+	display: block;
+	background-color: var(--main-code-block-background);
+	white-space: pre;
+}
+
+

@@ -1,0 +1,33 @@
+<title>task_block</title>
+<link rel="stylesheet" href="../styles.css">
+Introduces a new <code>std::parallel::task_block</code>.
+<samp>
+namespace std{ namespace experimental{ namespace parallel{
+
+  class task_block
+  {
+  private:
+      ~task_block();
+
+  public:
+      task_block(const task_block&) = delete;
+      task_block& operator=(const task_block&) = delete;
+      void operator&() const = delete;
+      template&lt;class F>
+        void run(F&& f);
+      void wait();
+  };
+
+  template&lt;class F>
+  void define_task_block(F&& f);
+
+  template&lt;class F>
+  void define_task_block_restore_thread(F&& f);
+
+}}}
+
+</samp>
+
+<footer class="refs">
+</footer>
+
