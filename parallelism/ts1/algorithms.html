@@ -9,13 +9,14 @@
 		<description>If it synchronizes with another function invocation and if it is not a memory allocation or deallocation
 function.</description>
 	</legend>
-<code>parallel_vector_execution_policy</code> may not invoke vectorization-unsafe <a href="#N4505-4.1.2.4"><span class="ref"></span></a>
+<code>parallel_unsequenced_policy</code> may not invoke vectorization-unsafe <a href="#N4505-4.1.2.4"><span class="ref"></span></a>
 
 
 	<ul>
 		<li>adjacent_difference</li>
 		<li>adjacent_find</li>
-		<li>all_of any_of</li>
+		<li>all_of</li>
+		<li>any_of</li>
 		<li>copy</li>
 		<li>copy_if</li>
 		<li>copy_n</li>

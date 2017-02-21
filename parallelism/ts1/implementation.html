@@ -12,33 +12,42 @@ In detail:
 		}
 
 		#impl td {
-			border: none;
+			padding-left: 0.5em;
+			padding-right: 0.5em;
 		}
 
 		#impl label::before {
 			content: attr(for);
 		}
 
-		#impl td:last-child {
+		#impl td:nth-child(2), #impl td:last-child {
 			text-align: left;
 		}
 	</style>
 	<table id="impl">
 		<tr>
+			<th>Product</th>
+			<th>Functionality</th>
+			<th>API</th>
+		<tr>
 			<td><label for="libstdc++"></label></td>
 			<td><input id="libstdc++" type="checkbox" disabled><a href="#libstdc++201z"><span class="ref"></span></a></td>
+			<td><input type="checkbox" disabled></td>
 		</tr>
 		<tr>
 			<td><label for="libc++"></label></td>
 			<td><input id="libc++" type="checkbox" disabled><a href="#libc++"><span class="ref"></span></a></td>
+			<td><input type="checkbox" disabled></td>
 		</tr>
 		<tr>
 			<td><label for="MSVC"></label></td>
 			<td><input id="MSVC" type="checkbox" checked disabled><a href="#parallelstl"><span class="ref"></span></a></td>
+			<td><input type="checkbox" disabled></td>
 		</tr>
 		<tr>
 			<td><label for="icc"><label></td>
 			<td><input id="icc" type="checkbox" disabled></td>
+			<td><input type="checkbox" disabled></td>
 		</tr>
 	</table>
 </p>

@@ -3,7 +3,7 @@
 <title>"Static" policies</title>
 
 <p>
-	Policies that are known at compile time<a href="#N4505-2.8"><span class="ref"></span></a>.
+	Policies that are known at compile time<a href="#N4505-2.8"><span class="ref"></span></a>. All life in <code>std::execution</code> namespace.
 </p>
 <style>
 	#pol_tab tr td:first-child {
@@ -17,25 +17,25 @@
 		<th>Description</th>
 	</tr>
 	<tr>
-		<td><code>sequential_execution_policy</code></td>
+		<td><code>sequenced_policy</code></td>
 		<td><code><var>seq</var></code></td>
 		<td>Sequential execution policy</td>
 	</tr>
 	<tr>
-		<td><code>parallel_execution_policy</code></td>
+		<td><code>parallel_policy</code></td>
 		<td><code><var>par</var></code></td>
 		<td>Parallel execution policy</td>
 	</tr>
 	<tr>
-		<td><code>parallel_vector_execution_policy</code></td>
-		<td><code><var>par_vec</var></code></td>
-		<td>Parallel + Vector execution policy. Function execution <important>may</important> interleave in the <important>same</important> thread</td>
+		<td><code>parallel_unsequenced_policy</code></td>
+		<td><code><var>par_unseq</var></code></td>
+		<td>Parallel + "Vector" execution policy. Function execution <important>may</important> interleave in the <important>same</important> thread</td>
 	</tr>
 </table>
 
 <p>
 	Example:
-	<samp>std::sort(std::parallel::par, std::begin(sort_me), std::end(sort_me));</samp>
+	<samp>std::sort(std::execution::par, std::begin(sort_me), std::end(sort_me));</samp>
 </p>
 
 <footer class="refs">
