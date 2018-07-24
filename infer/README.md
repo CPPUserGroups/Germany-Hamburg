@@ -33,7 +33,7 @@ cmake .. -DCMAKE_EXPORT_COMPILE_COMMANDS=TRUE
 infer capture make all
 
 # Or using compile_commands.json
-infer capture --compile-database compile_commands.json
+infer capture --compilation-database compile_commands.json
 ```
 
 ## Examples
