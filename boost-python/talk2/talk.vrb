@@ -1,0 +1,2 @@
+\frametitle{Python iterators for C++ objects}
+\todo[inline]{Implementation of the Python iterator protcoll for an object}

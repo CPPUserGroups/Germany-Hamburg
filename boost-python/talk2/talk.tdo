@@ -1,0 +1,5 @@
+\contentsline {todo}{Show how to create a numpy array}
+\contentsline {todo}{Deal with borrowed references}
+\contentsline {todo}{Need to return \texttt {PyObject*}}
+\contentsline {todo}{Show \texttt {boost::python::stl\_input\_iterator}}
+\contentsline {todo}{Implementation of the Python iterator protcoll for an object}
