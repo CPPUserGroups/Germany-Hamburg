@@ -22,7 +22,7 @@ int main(int argc,char **argv)
 	{
 		icu::UnicodeString buffer;
 		input>>buffer;
-		line_buffer += buffer;
+		line_buffer += buffer+" ";
 	}
 
 	std::cout<<"Entire line:"<<std::endl;
