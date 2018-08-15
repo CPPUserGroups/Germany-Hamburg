@@ -9,6 +9,11 @@
 
 int main(int argc,char **argv)
 {
+	if(argc<2)
+	{
+		std::cerr<<"Missing input file!"<<std::endl;
+		return 1;
+	}
 	std::ifstream input(argv[1]);
 
 	icu::UnicodeString line_buffer;

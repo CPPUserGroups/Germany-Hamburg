@@ -1,2 +1,6 @@
 workspace
 *.odp#
+/build/
+.cproject
+.project
+.settings
